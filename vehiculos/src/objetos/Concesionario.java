@@ -8,25 +8,23 @@ public class Concesionario {
     private HashMap<String,Cliente> clientes;
 
     public Concesionario() {
-        this.vendedores = new HashMap<>();
-        this.clientes = new HashMap<>();
+        this.vendedores = new HashMap<String,Vendedor>();
+        this.clientes = new HashMap<String,Cliente>();
     }
 
-    public void agregarVendedor(Vendedor vendedor){
-        vendedores.put(vendedor.getDni(),vendedor);
-    }
-    public void eliminarVendedor(String dni) {
-        vendedores.remove(dni);
-    }
-    public HashMap<String,Vendedor> listarVendedores(){
+    public HashMap<String, Vendedor> getVendedores() {
         return vendedores;
     }
 
-    public void agregarCliente(Cliente cliente){
-        clientes.put(cliente.getDni(), cliente);
+    public void setVendedores(HashMap<String, Vendedor> vendedores) {
+        this.vendedores = vendedores;
     }
-    public void eliminarCliente(Cliente cliente) {
-        clientes.remove(cliente.getDni());
+
+    public HashMap<String, Cliente> getClientes() {
+        return clientes;
     }
-    public HashMap<String,Cliente> listarClientes() { return clientes;}
+
+    public void setClientes(HashMap<String, Cliente> clientes) {
+        this.clientes = clientes;
+    }
 }

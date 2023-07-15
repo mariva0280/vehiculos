@@ -9,15 +9,15 @@ public class ProyectoConcesionario {
     private static final Concesionario concesionario = new Concesionario();
 
     static int opcion;
-    private static OperacionesClientes opClientes = new OperacionesClientes(concesionario);
-    private OperacionesConcesionario opConcesionario = new OperacionesConcesionario();
-    private OperacionesDirector opDirector = new OperacionesDirector();
-    private OperacionesExposicion opExposicion = new OperacionesExposicion();
-    private OperacionesInformes opInformes = new OperacionesInformes();
-    private OperacionesReparacion opReparacion = new OperacionesReparacion();
-    private OperacionesReservas opReservas = new OperacionesReservas();
-    private static OperacionesVendedores opVendedores = new OperacionesVendedores(concesionario);
-    private OperacionesVentas opVentas = new OperacionesVentas();
+    private static OperacionesClientes opClientes;
+    private OperacionesConcesionario opConcesionario;
+    private OperacionesDirector opDirector;
+    private OperacionesExposicion opExposicion;
+    private OperacionesInformes opInformes;
+    //private OperacionesReparacion opReparacion = new OperacionesReparacion();
+    private OperacionesReservas opReservas;
+    private static OperacionesVendedores opVendedores;
+    private OperacionesVentas opVentas;
 
 
 
@@ -50,9 +50,11 @@ public class ProyectoConcesionario {
                 case (1):
                     break;
                 case (2):
+                    opVendedores = new OperacionesVendedores(concesionario);
                     opVendedores.menuVendedores();
                     break;
                 case (3):
+                    opClientes = new OperacionesClientes(concesionario);
                     opClientes.menuClientes();
                     break;
                 case (4):
