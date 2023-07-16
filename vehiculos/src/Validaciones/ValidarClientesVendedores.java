@@ -5,8 +5,7 @@ import operaciones.OperacionesConcesionario;
 
 import java.util.HashMap;
 
-public class ValidarClientes {
-
+public class ValidarClientesVendedores {
     public static OperacionesConcesionario opConcesionario;
 
     public static boolean validateName(String nombre){
@@ -21,7 +20,7 @@ public class ValidarClientes {
         }
         return true;
     }
-    public static boolean validateDni(String dni,OperacionesConcesionario opConcesionario) {
+    public static boolean validateDni(String dni) {
         if(dni == null || dni.length() != 9) {
             return false;
         }
@@ -29,27 +28,14 @@ public class ValidarClientes {
         if(!dni.matches(regex)){
             return false;
         }
-        HashMap<String, Cliente> clientes = opConcesionario.listarClientes();
-        for(Cliente cliente : clientes.values()){
-            if(cliente.getDni().equals(dni)){
-                return false;
-            }
-        }
-
         return true;
     }
-    public static boolean validateTelefono(String telefono, OperacionesConcesionario opConcesionario) {
+    public static boolean validateTelefono(String telefono) {
         if(telefono == null || telefono.length() != 9) {
             return false;
         }
         for(char c : telefono.toCharArray()) {
             if(!Character.isDigit(c)){
-                return false;
-            }
-        }
-        HashMap<String, Cliente> clientes = opConcesionario.listarClientes();
-        for (Cliente cliente : clientes.values()){
-            if(String.valueOf(cliente.getTelefono()).equals(telefono)){
                 return false;
             }
         }

@@ -1,7 +1,7 @@
 package operaciones;
 
 
-import Validaciones.ValidarClientes;
+import Validaciones.ValidarClientesVendedores;
 import objetos.Concesionario;
 import objetos.Cliente;
 
@@ -63,31 +63,38 @@ public class OperacionesClientes {
         try {
             System.out.println("Introduzca el nombre del cliente: ");
             String nombre = (scan.nextLine());
-            if(!ValidarClientes.validateName(nombre)){
+            if(!ValidarClientesVendedores.validateName(nombre)){
                 throw new Exception("Nombre invcorrecto.");
             }
             cliente.setNombre(nombre);
 
             System.out.println("Introduzca la direccion del cliente: ");
             String direccion = (scan.nextLine());
-            if(!ValidarClientes.validateDireccion(direccion)){
+            if(!ValidarClientesVendedores.validateDireccion(direccion)){
                 throw new Exception("Dirección incorrecta.");
             }
             cliente.setDireccion(direccion);
 
             System.out.println("Introduzca el DNI del cliente: ");
             String dni =(scan.nextLine());
-            if(!ValidarClientes.validateDni(dni,opConcesionario)){
+            if(!ValidarClientesVendedores.validateDni(dni)){
                 throw new Exception("DNI incorrecto.");
+            }
+            if(verificarDniRep(dni)){
+                throw new Exception("DNI duplicado.");
             }
             cliente.setDni(dni);
 
             System.out.println("Introduzca el telefono del cliente: ");
-            String telefono =(scan.nextLine());
-            if(!ValidarClientes.validateTelefono(telefono,opConcesionario)){
+            String telefonoStr =scan.nextLine();
+            if(!ValidarClientesVendedores.validateTelefono(telefonoStr)){
                 throw new  Exception("Teléfono incorrecto.");
             }
-            cliente.setTelefono(Integer.parseInt(telefono));
+            int telefono = Integer.parseInt(telefonoStr);
+            if(verificarTlfRep(telefono)){
+                throw new Exception("Teléfono duplicado.");
+            }
+            cliente.setTelefono(telefono);
 
             opConcesionario.agregarCliente(cliente);
             System.out.println("Cliente agregado correctamente.");
@@ -178,7 +185,7 @@ public class OperacionesClientes {
                         case (1):
                             System.out.print("Nuevo nombre: ");
                             String nuevoNombre = scan.nextLine();
-                            if (!ValidarClientes.validateName(nuevoNombre)) {
+                            if (!ValidarClientesVendedores.validateName(nuevoNombre)) {
                                 throw new Exception("Nombre incorrecto.");
                             }
                             cliente.setNombre(nuevoNombre);
@@ -186,7 +193,7 @@ public class OperacionesClientes {
                         case (2):
                             System.out.print("Nueva dirección: ");
                             String nuevaDireccion = scan.nextLine();
-                            if (!ValidarClientes.validateDireccion(nuevaDireccion)) {
+                            if (!ValidarClientesVendedores.validateDireccion(nuevaDireccion)) {
                                 throw new Exception("Dirección incorrecta.");
                             }
                             cliente.setDireccion(nuevaDireccion);
@@ -194,10 +201,14 @@ public class OperacionesClientes {
                         case (3):
                             System.out.print("Indique nuevo teléfono: ");
                             String nuevoTelefono = scan.nextLine();
-                            if (!ValidarClientes.validateTelefono(nuevoTelefono,opConcesionario)) {
+                            if (!ValidarClientesVendedores.validateTelefono(nuevoTelefono)) {
                                 throw new Exception("Teléfono incorrecto.");
                             }
-                            cliente.setTelefono(Integer.parseInt(nuevoTelefono));
+                            int telefonoNuevo = Integer.parseInt(nuevoTelefono);
+                            if(verificarTlfRep(telefonoNuevo)){
+                                throw new Exception("Teléfono duplicado");
+                            }
+                            cliente.setTelefono(telefonoNuevo);
                             break;
                     }
                 }
@@ -206,7 +217,7 @@ public class OperacionesClientes {
             }
 
         } catch (Exception ex) {
-            System.out.println("Opcion incorrecta!!");
+            System.out.println("Eroor: " + ex.getMessage());
             modificar();
         }
     }
@@ -241,5 +252,23 @@ public class OperacionesClientes {
             }
         }
         System.out.println("");
+    }
+    private boolean verificarDniRep(String dni){
+        HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
+        for(Cliente cliente : clientes.values()){
+            if(cliente.getDni().equals(dni)){
+                return true;
+            }
+        }
+        return false;
+    }
+    private boolean verificarTlfRep(int telefono){
+        HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
+        for(Cliente cliente : clientes.values()){
+            if(cliente.getTelefono() == telefono){
+                return true;
+            }
+        }
+        return false;
     }
 }
