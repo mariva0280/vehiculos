@@ -1,6 +1,7 @@
 package operaciones;
 
 import objetos.Cliente;
+import objetos.Coche;
 import objetos.Concesionario;
 import objetos.Vendedor;
 
@@ -47,4 +48,20 @@ public class OperacionesConcesionario {
         concesionario.setClientes(listaClientes);
     }
     public HashMap listarClientes() { return concesionario.getClientes();}
+    public void agregarCoche (Coche coche) {
+        HashMap<String, Coche> listaCoches = concesionario.getCoches();
+        listaCoches.put(coche.getMatricula(),coche);
+        concesionario.setCoches(listaCoches);
+    }
+    public void eliminarCoche (Coche coche) {
+        HashMap<String, Coche> listarCoches = concesionario.getCoches();
+        listarCoches.remove(coche.getMatricula(),coche);
+        concesionario.setCoches(listarCoches);
+    }
+    public void modificarCoche (Coche coche) {
+        HashMap<String,Coche> listaCoches = concesionario.getCoches();
+        listaCoches.replace(coche.getMatricula(),coche);
+        concesionario.setCoches(listaCoches);
+    }
+    public HashMap<String,Coche> listarCoches(){ return concesionario.getCoches();}
 }

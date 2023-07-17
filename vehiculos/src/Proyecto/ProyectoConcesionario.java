@@ -10,6 +10,7 @@ public class ProyectoConcesionario {
 
     static int opcion;
     private static OperacionesClientes opClientes;
+    private static OperacionesCoches opCoches;
     private OperacionesConcesionario opConcesionario;
     private OperacionesDirector opDirector;
     private OperacionesExposicion opExposicion;
@@ -58,6 +59,8 @@ public class ProyectoConcesionario {
                     opClientes.menuClientes();
                     break;
                 case (4):
+                    opCoches = new OperacionesCoches(concesionario);
+                    opCoches.menuCoches();
                     break;
             }
         }

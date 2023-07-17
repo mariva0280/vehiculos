@@ -1,7 +1,7 @@
 package operaciones;
 
 
-import Validaciones.ValidarClientesVendedores;
+import Validaciones.Validar;
 import objetos.Concesionario;
 import objetos.Cliente;
 
@@ -63,21 +63,21 @@ public class OperacionesClientes {
         try {
             System.out.println("Introduzca el nombre del cliente: ");
             String nombre = (scan.nextLine());
-            if(!ValidarClientesVendedores.validateName(nombre)){
+            if(!Validar.validateName(nombre)){
                 throw new Exception("Nombre invcorrecto.");
             }
             cliente.setNombre(nombre);
 
             System.out.println("Introduzca la direccion del cliente: ");
             String direccion = (scan.nextLine());
-            if(!ValidarClientesVendedores.validateDireccion(direccion)){
+            if(!Validar.validateDireccion(direccion)){
                 throw new Exception("Dirección incorrecta.");
             }
             cliente.setDireccion(direccion);
 
             System.out.println("Introduzca el DNI del cliente: ");
             String dni =(scan.nextLine());
-            if(!ValidarClientesVendedores.validateDni(dni)){
+            if(!Validar.validateDni(dni)){
                 throw new Exception("DNI incorrecto.");
             }
             if(verificarDniRep(dni)){
@@ -87,7 +87,7 @@ public class OperacionesClientes {
 
             System.out.println("Introduzca el telefono del cliente: ");
             String telefonoStr =scan.nextLine();
-            if(!ValidarClientesVendedores.validateTelefono(telefonoStr)){
+            if(!Validar.validateTelefono(telefonoStr)){
                 throw new  Exception("Teléfono incorrecto.");
             }
             int telefono = Integer.parseInt(telefonoStr);
@@ -185,7 +185,7 @@ public class OperacionesClientes {
                         case (1):
                             System.out.print("Nuevo nombre: ");
                             String nuevoNombre = scan.nextLine();
-                            if (!ValidarClientesVendedores.validateName(nuevoNombre)) {
+                            if (!Validar.validateName(nuevoNombre)) {
                                 throw new Exception("Nombre incorrecto.");
                             }
                             cliente.setNombre(nuevoNombre);
@@ -193,7 +193,7 @@ public class OperacionesClientes {
                         case (2):
                             System.out.print("Nueva dirección: ");
                             String nuevaDireccion = scan.nextLine();
-                            if (!ValidarClientesVendedores.validateDireccion(nuevaDireccion)) {
+                            if (!Validar.validateDireccion(nuevaDireccion)) {
                                 throw new Exception("Dirección incorrecta.");
                             }
                             cliente.setDireccion(nuevaDireccion);
@@ -201,7 +201,7 @@ public class OperacionesClientes {
                         case (3):
                             System.out.print("Indique nuevo teléfono: ");
                             String nuevoTelefono = scan.nextLine();
-                            if (!ValidarClientesVendedores.validateTelefono(nuevoTelefono)) {
+                            if (!Validar.validateTelefono(nuevoTelefono)) {
                                 throw new Exception("Teléfono incorrecto.");
                             }
                             int telefonoNuevo = Integer.parseInt(nuevoTelefono);
