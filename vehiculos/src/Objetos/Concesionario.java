@@ -48,8 +48,4 @@ public class Concesionario {
     public void setClientes(HashMap<String, Cliente> clientes) {
         this.clientes = clientes;
     }
-
-    public void agregarVendedor(Vendedor vendedor) {
-        vendedores.put(vendedor.getDni(), vendedor);
-    }
 }

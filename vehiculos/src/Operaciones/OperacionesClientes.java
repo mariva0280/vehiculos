@@ -1,7 +1,7 @@
-package operaciones;
+package Operaciones;
 
 
-import Validaciones.ValidarClientesVendedores;
+import Validaciones.Validar;
 import Objetos.Concesionario;
 import Objetos.Cliente;
 
@@ -9,16 +9,18 @@ import Objetos.Cliente;
 import java.util.*;
 
 public class OperacionesClientes {
-    int opcion;
-    private final Concesionario concesionario;
+
+    private Concesionario concesionario;
     private OperacionesConcesionario opConcesionario;
 
     public OperacionesClientes(Concesionario concesionario) {
+
         this.concesionario = concesionario;
+        this.opConcesionario = new OperacionesConcesionario(concesionario);
     }
     public void menuClientes(){
+        int opcion = 0;
         Scanner scan = new Scanner(System.in);
-        System.out.println("");
         System.out.println("");
         while (opcion != 5) {
             System.out.println("*****MENU CLIENTES*****");
@@ -61,23 +63,23 @@ public class OperacionesClientes {
         Cliente cliente = new Cliente();
         Scanner scan = new Scanner(System.in);
         try {
-            System.out.println("Introduzca el nombre del cliente: ");
+            System.out.print("Introduzca el nombre del cliente: ");
             String nombre = (scan.nextLine());
-            if(!ValidarClientesVendedores.validateName(nombre)){
+            if(!Validar.validateName(nombre)){
                 throw new Exception("Nombre invcorrecto.");
             }
             cliente.setNombre(nombre);
 
-            System.out.println("Introduzca la direccion del cliente: ");
+            System.out.print("Introduzca la direccion del cliente: ");
             String direccion = (scan.nextLine());
-            if(!ValidarClientesVendedores.validateDireccion(direccion)){
+            if(!Validar.validateDireccion(direccion)){
                 throw new Exception("Dirección incorrecta.");
             }
             cliente.setDireccion(direccion);
 
-            System.out.println("Introduzca el DNI del cliente: ");
+            System.out.print("Introduzca el DNI del cliente: ");
             String dni =(scan.nextLine());
-            if(!ValidarClientesVendedores.validateDni(dni)){
+            if(!Validar.validateDni(dni)){
                 throw new Exception("DNI incorrecto.");
             }
             if(verificarDniRep(dni)){
@@ -85,9 +87,9 @@ public class OperacionesClientes {
             }
             cliente.setDni(dni);
 
-            System.out.println("Introduzca el telefono del cliente: ");
+            System.out.print("Introduzca el telefono del cliente: ");
             String telefonoStr =scan.nextLine();
-            if(!ValidarClientesVendedores.validateTelefono(telefonoStr)){
+            if(!Validar.validateTelefono(telefonoStr)){
                 throw new  Exception("Teléfono incorrecto.");
             }
             int telefono = Integer.parseInt(telefonoStr);
@@ -131,13 +133,10 @@ public class OperacionesClientes {
                 if(cliente.getCochesReservados().isEmpty() && cliente.getCochesComprados().isEmpty()) {
                     //opConcesionario.eliminarCliente(cliente);
                     System.out.println("");
-                    System.out.println("");
                     System.out.println("Cliente eliminado correctamente!!");
                     System.out.println("");
                 }else {
-                    System.out.println("");
                     System.out.println("No se puede eliminar el cliente. Tiene coches reservados o comprados");
-                    System.out.println("");
                 }
                 eliminar();
             }
@@ -172,7 +171,6 @@ public class OperacionesClientes {
                 System.out.println("");
                 while (opcion != 4) {
                     System.out.println("");
-                    System.out.println("");
                     System.out.println("1 - Modificar nombre");
                     System.out.println("2 - Modificar dirección");
                     System.out.println("3 - Modificar teléfono");
@@ -185,7 +183,7 @@ public class OperacionesClientes {
                         case (1):
                             System.out.print("Nuevo nombre: ");
                             String nuevoNombre = scan.nextLine();
-                            if (!ValidarClientesVendedores.validateName(nuevoNombre)) {
+                            if (!Validar.validateName(nuevoNombre)) {
                                 throw new Exception("Nombre incorrecto.");
                             }
                             cliente.setNombre(nuevoNombre);
@@ -193,7 +191,7 @@ public class OperacionesClientes {
                         case (2):
                             System.out.print("Nueva dirección: ");
                             String nuevaDireccion = scan.nextLine();
-                            if (!ValidarClientesVendedores.validateDireccion(nuevaDireccion)) {
+                            if (!Validar.validateDireccion(nuevaDireccion)) {
                                 throw new Exception("Dirección incorrecta.");
                             }
                             cliente.setDireccion(nuevaDireccion);
@@ -201,7 +199,7 @@ public class OperacionesClientes {
                         case (3):
                             System.out.print("Indique nuevo teléfono: ");
                             String nuevoTelefono = scan.nextLine();
-                            if (!ValidarClientesVendedores.validateTelefono(nuevoTelefono)) {
+                            if (!Validar.validateTelefono(nuevoTelefono)) {
                                 throw new Exception("Teléfono incorrecto.");
                             }
                             int telefonoNuevo = Integer.parseInt(nuevoTelefono);
@@ -224,24 +222,18 @@ public class OperacionesClientes {
 
     private void indicesClientes(ArrayList<Cliente> lista) {
         System.out.println("");
-        System.out.println("");
-        System.out.println("-----------------------------------------------");
         System.out.println("------------LISTA CLIENTES-------------------");
-        System.out.println("-----------------------------------------------");
-        //HashMap<String, Cliente> clientes = concesionario.listarClientes();
+        System.out.println("");
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
-            System.out.println("-----------------------------------------------");
         }
         System.out.println(lista.size() + 1 + " - Salir");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
         System.out.println("");
     }
     private void listarClientes() {
         System.out.println("");
-        System.out.println("");
-        System.out.println("-----------------------------------------------");
         System.out.println("------------LISTA CLIENTES-------------------");
-        System.out.println("-----------------------------------------------");
+        System.out.println("");
         HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
         if (clientes.isEmpty()) {
             System.out.println("No hay vendedores registrados.");

@@ -60,8 +60,6 @@ public class Exposicion {
     public void setCochesExposicion(ArrayList<Coche> cochesExposicion) {
         this.cochesExposicion = cochesExposicion;
     }
-
-
     @Override
     public String toString() {
         return "Exposicion{" +
