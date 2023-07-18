@@ -28,14 +28,14 @@ public class ProyectoConcesionario {
                 System.out.println("1 - Director");
                 System.out.println("2 - Vendedor");
                 System.out.println("3 - Cliente");
-                System.out.println("4 - Mecanico");
+                System.out.println("4 - Mecánico");
                 System.out.println("5 - Salir");
                 System.out.println(" ");
-                System.out.print("Eliga la opcion: ");
+                System.out.print("Eliga la opción: ");
                 opcion = scanner.nextInt();
 
                 if (opcion > 5) {
-                    System.out.println("La opcion no  es valida");
+                    System.out.println("La opción no  es valida");
                     mostrarMenu();
                 } else if (opcion < 5) {
                     switch (opcion) {

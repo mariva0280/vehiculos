@@ -66,11 +66,11 @@ public class OperacionesClientes {
             System.out.print("Introduzca el nombre del cliente: ");
             String nombre = (scan.nextLine());
             if(!Validar.validateName(nombre)){
-                throw new Exception("Nombre invcorrecto.");
+                throw new Exception("Nombre incorrecto.");
             }
             cliente.setNombre(nombre);
 
-            System.out.print("Introduzca la direccion del cliente: ");
+            System.out.print("Introduzca la dirección del cliente: ");
             String direccion = (scan.nextLine());
             if(!Validar.validateDireccion(direccion)){
                 throw new Exception("Dirección incorrecta.");
@@ -87,7 +87,7 @@ public class OperacionesClientes {
             }
             cliente.setDni(dni);
 
-            System.out.print("Introduzca el telefono del cliente: ");
+            System.out.print("Introduzca el teléfono del cliente: ");
             String telefonoStr =scan.nextLine();
             if(!Validar.validateTelefono(telefonoStr)){
                 throw new  Exception("Teléfono incorrecto.");
@@ -119,7 +119,7 @@ public class OperacionesClientes {
         }
         //PASAMOS ARRAYLIST AL METODO INDICECLIENTES Y REUTILIZAR CODIGO
         indicesClientes(lista);
-        System.out.print("Elija el cliente a eliminar: ");
+        System.out.print("Elija el número del cliente a eliminar: ");
         try {
             opcion = scan.nextInt();
             if (opcion > (lista.size() + 1)) {   // Si la opcion es mayor que lista.size + 1 significa que nos salimos de las posibles opciones del menu
@@ -157,7 +157,7 @@ public class OperacionesClientes {
             lista.add(item);
         }
         indicesClientes(lista);
-        System.out.print("Elija el cliente a modificar: ");
+        System.out.print("Elija el número del cliente a modificar: ");
 
         try {
             opcion = scan.nextInt();
@@ -170,7 +170,6 @@ public class OperacionesClientes {
                 Cliente cliente = lista.get(opcion - 1);
                 System.out.println("");
                 while (opcion != 4) {
-                    System.out.println("");
                     System.out.println("1 - Modificar nombre");
                     System.out.println("2 - Modificar dirección");
                     System.out.println("3 - Modificar teléfono");
