@@ -1,14 +1,14 @@
-package operaciones;
+package Operaciones;
 
-import objetos.Cliente;
-import objetos.Coche;
-import objetos.Concesionario;
-import objetos.Vendedor;
+import Objetos.Cliente;
+import Objetos.Coche;
+import Objetos.Concesionario;
+import Objetos.Vendedor;
 
 import java.util.HashMap;
 
 public class OperacionesConcesionario {
-    private final Concesionario concesionario;
+    private Concesionario concesionario;
     public OperacionesConcesionario(Concesionario concesionario) {
         this.concesionario = concesionario;
     }

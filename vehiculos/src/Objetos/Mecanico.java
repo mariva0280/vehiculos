@@ -1,4 +1,4 @@
-package objetos;
+package Objetos;
 
 public class Mecanico extends Persona{
     public Mecanico() {

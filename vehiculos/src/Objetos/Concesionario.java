@@ -1,6 +1,7 @@
-package objetos;
+package Objetos;
 
-import java.util.ArrayList;
+import Proyecto.ProyectoConcesionario;
+
 import java.util.HashMap;
 
 public class Concesionario {
@@ -13,6 +14,7 @@ public class Concesionario {
         this.clientes = new HashMap<String,Cliente>();
         this.coches = new HashMap<String, Coche>();
     }
+
 
     public HashMap<String, Vendedor> getVendedores() {
         return vendedores;

@@ -1,13 +1,4 @@
-package operaciones;
-
-import objetos.Coche;
-import objetos.Concesionario;
-import objetos.Reparacion;
-import objetos.TipoReparacion;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Scanner;
+package Operaciones;
 
 /*public class OperacionesReparacion {
     private final Concesionario concesionario;

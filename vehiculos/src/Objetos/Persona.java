@@ -1,4 +1,4 @@
-package objetos;
+package Objetos;
 
 public class Persona {
     private String nombre;

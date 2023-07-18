@@ -1,29 +1,30 @@
-package operaciones;
+package Operaciones;
 
 import Validaciones.Validar;
-import objetos.Coche;
-import objetos.Concesionario;
-import objetos.Estado;
-import objetos.TipoVehiculo;
+import Objetos.Coche;
+import Objetos.Concesionario;
+import Objetos.Estado;
+import Objetos.TipoVehiculo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Scanner;
 
 public class OperacionesCoches {
-    int opcion;
-    private final Concesionario concesionario;
+    private Concesionario concesionario;
     private OperacionesConcesionario opConcesionario;
 
     public OperacionesCoches(Concesionario concesionario) {
+
         this.concesionario = concesionario;
+        this.opConcesionario = new OperacionesConcesionario(concesionario);
     }
     public void menuCoches() {
+        int opcion = 0;
         Scanner scan = new Scanner(System.in);
         System.out.println("");
-        System.out.println("");
         while (opcion != 5) {
-            System.out.println("MENU GESTION COCHES");
+            System.out.println("*****MENU GESTION COCHES*****");
             System.out.println("1 - Dar de alta");
             System.out.println("2 - Dar de baja");
             System.out.println("3 - Modificar");
@@ -70,14 +71,14 @@ public class OperacionesCoches {
             }
             coche.setMarca(marca);
 
-            System.out.println("Introduzca el modelo del coche: ");
+            System.out.print("Introduzca el modelo del coche: ");
             String modelo = scan.nextLine();
             if(!Validar.validateModelo(modelo)){
                 throw new Exception("Modelo incorrecto no admite campos nulos.");
             }
             coche.setModelo(modelo);
 
-            System.out.println("Introduzca la matricula del coche: ");
+            System.out.print("Introduzca la matricula del coche: ");
             String matricula = scan.nextLine();
             if(!Validar.validarMatricula(matricula)){
                 throw new Exception("Matricula incorrecta.");
@@ -88,21 +89,21 @@ public class OperacionesCoches {
 
             coche.setMatricula(matricula);
 
-            System.out.println("Introduzca el precio de compra del coche: ");
+            System.out.print("Introduzca el precio de compra del coche: ");
             double precioCompra = scan.nextDouble();
             if(!Validar.validarPrecioCompra(precioCompra)){
                 throw new Exception("El precio de compra no puede ser 0");
             }
             coche.setPrecioCompra(precioCompra);
 
-            System.out.println("Introduzca el precio de venta del coche: ");
+            System.out.print("Introduzca el precio de venta del coche: ");
             double precioVenta = scan.nextDouble();
             if(!Validar.validarPrecioVenta(precioCompra,precioVenta)){
                 throw new Exception("El precio de venta no puede ser 0 ni inferior al precio de compra");
             }
             coche.setPrecioVenta(precioVenta);
 
-            System.out.println("Introduzca el tipo de coche: ");
+            System.out.print("Introduzca el tipo de coche: ");
             String tipoCocheStr = scan.next();
             TipoVehiculo tipoCoche = TipoVehiculo.valueOf(tipoCocheStr.toUpperCase());
             if(!Validar.validarTipoVehiculo(tipoCoche)){
@@ -111,7 +112,7 @@ public class OperacionesCoches {
             coche.setTipoVehiculo(tipoCoche);
 
 
-            System.out.println("Introduca el estado del coche: ");
+            System.out.print("Introduca el estado del coche: ");
             String estadoStr = scan.next();
             Estado estado = Estado.valueOf(estadoStr.toUpperCase());
             if(!Validar.validarEstado(estado)){
@@ -127,8 +128,6 @@ public class OperacionesCoches {
             System.out.println("Error: " + ex.getMessage());
             agregar();
         }
-        System.out.println("");
-        System.out.println("");
     }
 
     private void eliminar() {
@@ -144,7 +143,7 @@ public class OperacionesCoches {
         }
         //PASAMOS ARRALIST AL METODO LISTARVENDEDORES Y REUTILIZAR CODIGO
         indicesCoches(indices);
-        System.out.println("Elija el coche a eliminar: ");
+        System.out.print("Elija el coche a eliminar: ");
         //System.out.println("Si no desea eliminar vendedor pulse 3 para salir: ");
         try{
             opcion = scan.nextInt();
@@ -155,7 +154,6 @@ public class OperacionesCoches {
 
             } else {
                 opConcesionario.eliminarCoche(indices.get(opcion - 1)); // Pasamos al metodo eliminarVendedor del concesionario, el vendedor elegido en la lista
-                System.out.println("");
                 System.out.println("");
                 System.out.println("Coche eliminado correctamente!!");
                 System.out.println("");
@@ -178,7 +176,7 @@ public class OperacionesCoches {
             indices.add(coche);
         }
         indicesCoches(indices);
-        System.out.println("Elija el coche a modificar: ");
+        System.out.print("Elija el coche a modificar: ");
         try {
             opcion = scan.nextInt();
             if(opcion > (indices.size() + 1)){
@@ -190,7 +188,6 @@ public class OperacionesCoches {
                 Coche coche = indices.get(opcion - 1);
                 System.out.println("");
                 while(opcion !=8){
-                    System.out.println("");
                     System.out.println("");
                     System.out.println("1 - Modificar marca. ");
                     System.out.println("2 - Modificar modelo.");
@@ -205,7 +202,7 @@ public class OperacionesCoches {
                     scan = new Scanner(System.in);
                     switch (opcion){
                         case 1:
-                            System.out.println("Nueva marca: ");
+                            System.out.print("Nueva marca: ");
                             String nuevaMarca = scan.nextLine();
                             if(!Validar.validateMarca(nuevaMarca)){
                                 throw new Exception("Nueva marca incorrecta.");
@@ -213,7 +210,7 @@ public class OperacionesCoches {
                             coche.setMarca(nuevaMarca);
                             break;
                         case 2:
-                            System.out.println("Nuevo modelo: ");
+                            System.out.print("Nuevo modelo: ");
                             String nuevoModelo = scan.nextLine();
                             if(!Validar.validateModelo(nuevoModelo)){
                                 throw new Exception("Nuevo modelo incorrecto.");
@@ -221,7 +218,7 @@ public class OperacionesCoches {
                             coche.setModelo(nuevoModelo);
                             break;
                         case 3:
-                            System.out.println("Nueva matrícula: ");
+                            System.out.print("Nueva matrícula: ");
                             String nuevaMatricula = scan.nextLine();
                             if(!Validar.validarMatricula(nuevaMatricula)){
                                 throw new Exception("Matrícula incorrecta");
@@ -232,7 +229,7 @@ public class OperacionesCoches {
                             coche.setMatricula(nuevaMatricula);
                             break;
                         case 4:
-                            System.out.println("Nuevo precio de compra: ");
+                            System.out.print("Nuevo precio de compra: ");
                             double nuevoPrecioCompra = scan.nextDouble();
                             if(!Validar.validarPrecioCompra(nuevoPrecioCompra)){
                                 throw new Exception("Precio de compra no puede ser 0");
@@ -240,7 +237,7 @@ public class OperacionesCoches {
                             coche.setPrecioCompra(nuevoPrecioCompra);
                             break;
                         case 5:
-                            System.out.println("Nuevo precio de venta: ");
+                            System.out.print("Nuevo precio de venta: ");
                             double nuevoPrecioVenta = scan.nextDouble();
                             if(!Validar.validarPrecioVenta(coche.getPrecioCompra(),nuevoPrecioVenta)){
                                 throw new Exception("Precio de venta no puede ser 0, ni menos que el precio de compra");
@@ -248,7 +245,7 @@ public class OperacionesCoches {
                             coche.setPrecioVenta(nuevoPrecioVenta);
                             break;
                         case 6:
-                            System.out.println("Nuevo tipo de vehículo: ");
+                            System.out.print("Nuevo tipo de vehículo: ");
                             String nuevoTipoStr = scan.next();
                             TipoVehiculo nuevoTipo = TipoVehiculo.valueOf(nuevoTipoStr.toUpperCase());
                             if(!Validar.validarTipoVehiculo(nuevoTipo)){
@@ -257,7 +254,7 @@ public class OperacionesCoches {
                             coche.setTipoVehiculo(nuevoTipo);
                             break;
                         case 7:
-                            System.out.println("Nuevo estado del vehiculo");
+                            System.out.print("Nuevo estado del vehiculo");
                             String nuevoEstadoStr = scan.next();
                             Estado nuevoEstado = Estado.valueOf(nuevoEstadoStr.toUpperCase());
                             if(!Validar.validarEstado(nuevoEstado)){
@@ -280,23 +277,18 @@ public class OperacionesCoches {
 
     private void indicesCoches(ArrayList<Coche> indices){
         System.out.println("");
-        System.out.println("");
-        System.out.println("----------------------------");
         System.out.println("-------LISTA COCHES-----");
-        System.out.println("----------------------------");
+        System.out.println("");
         for(int i = 0; i < indices.size(); i++){
             System.out.println((i + 1) + " - " + indices.get(i).toString());
-            System.out.println("---------------------------------------------");
         }
         System.out.println(indices.size() + 1 + " - Salir");
         System.out.println("");
     }
     private void listarCoches() {
         System.out.println("");
-        System.out.println("");
-        System.out.println("-----------------------------------------------");
         System.out.println("------------LISTA COCHES-------------------");
-        System.out.println("-----------------------------------------------");
+        System.out.println("");
         HashMap<String, Coche> coches = opConcesionario.listarCoches();
         if (coches.isEmpty()) {
             System.out.println("No hay coches registrados.");

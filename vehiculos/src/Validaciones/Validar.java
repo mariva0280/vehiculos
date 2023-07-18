@@ -1,9 +1,9 @@
 package Validaciones;
 
-import operaciones.OperacionesConcesionario;
+import Operaciones.OperacionesConcesionario;
 
 public class Validar {
-    public static OperacionesConcesionario opConcesionario;
+    public OperacionesConcesionario opConcesionario;
 
     public static boolean validateName(String nombre){
         if(nombre == null || nombre.isEmpty()){

@@ -1,23 +1,22 @@
-package operaciones;
+package Operaciones;
 
 import Validaciones.Validar;
-import objetos.Concesionario;
-import objetos.Vendedor;
+import Objetos.Concesionario;
+import Objetos.Vendedor;
 
 import java.util.*;
 
 public class OperacionesVendedores {
-
-    int opcion;
-    private final Concesionario concesionario;
+    private Concesionario concesionario;
     private OperacionesConcesionario opConcesionario;
     public OperacionesVendedores(Concesionario concesionario) {
 
         this.concesionario = concesionario;
+        this.opConcesionario = new OperacionesConcesionario(concesionario);
     }
     public void menuVendedores(){
+        int opcion = 0;
         Scanner scan = new Scanner(System.in);
-        System.out.println("");
         System.out.println("");
         while (opcion != 5) {
             System.out.println("*****MENU VENDEDORES*****");
@@ -67,14 +66,14 @@ public class OperacionesVendedores {
             }
             vendedor.setNombre(nombre);
 
-            System.out.println("Introduzca la direccion del vendedor: ");
+            System.out.print("Introduzca la direccion del vendedor: ");
             String direccion = scan.nextLine();
             if(!Validar.validateDireccion(direccion)){
                 throw new Exception("Dirección incorrecta.");
             }
             vendedor.setDireccion(direccion);
 
-            System.out.println("Introduzca el DNI del vendedor: ");
+            System.out.print("Introduzca el DNI del vendedor: ");
             String dni = scan.nextLine();
             if(!Validar.validateDni(dni)){
                 throw new Exception("DNI incorrecto.");
@@ -84,7 +83,7 @@ public class OperacionesVendedores {
             }
             vendedor.setDni(dni);
 
-            System.out.println("Introduzca el telefono del vendedor: ");
+            System.out.print("Introduzca el telefono del vendedor: ");
             String telefonoStr = scan.nextLine();
             if(!Validar.validateTelefono(telefonoStr)){
                 throw new Exception("Teléfono incorrecto.");
@@ -100,8 +99,6 @@ public class OperacionesVendedores {
             System.out.println("Error: " + ex.getMessage());
             agregar();
         }
-        System.out.println("");
-        System.out.println("");
     }
 
     private void eliminar() {
@@ -127,7 +124,6 @@ public class OperacionesVendedores {
 
             } else {
                 opConcesionario.eliminarVendedor(lista.get(opcion - 1));// Pasamos al metodo eliminarVendedor del concesionario, el vendedor elegido en la lista
-                System.out.println("");
                 System.out.println("");
                 System.out.println("Vendedor eliminado correctamente!!");
                 System.out.println("");
@@ -163,7 +159,6 @@ public class OperacionesVendedores {
                 Vendedor vendedor = lista.get(opcion - 1);
                 System.out.println("");
                 while (opcion != 4) {
-                    System.out.println("");
                     System.out.println("");
                     System.out.println("1 - Modificar nombre");
                     System.out.println("2 - Modificar dirección");
@@ -215,23 +210,18 @@ public class OperacionesVendedores {
     }
     private void indicesVendedores(ArrayList<Vendedor> lista) {
         System.out.println("");
-        System.out.println("");
-        System.out.println("-----------------------------------------------");
         System.out.println("------------LISTA VENDEDORES-------------------");
-        System.out.println("-----------------------------------------------");
+        System.out.println("");
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
-            System.out.println("-----------------------------------------------");
         }
         System.out.println(lista.size() + 1 + " - Salir");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
         System.out.println("");
     }
     private void listarVendedores() {
         System.out.println("");
-        System.out.println("");
-        System.out.println("-----------------------------------------------");
         System.out.println("------------LISTA VENDEDORES-------------------");
-        System.out.println("-----------------------------------------------");
+        System.out.println("");
         HashMap<String, Vendedor> vendedores = opConcesionario.listarVendedores();
 
         if (vendedores.isEmpty()) {

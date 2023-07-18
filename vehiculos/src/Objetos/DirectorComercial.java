@@ -1,4 +1,4 @@
-package objetos;
+package Objetos;
 
 public class DirectorComercial extends Persona{
     public DirectorComercial() {
