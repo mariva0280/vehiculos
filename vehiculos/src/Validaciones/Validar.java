@@ -17,6 +17,18 @@ public class Validar {
         }
         return true;
     }
+    public static boolean validarNumero (int numero){
+        if (numero < 1 || numero > 99) return true;
+        else return false;
+    }
+    public static boolean validateCiudad(String ciudad) {
+        for (char caracter : ciudad.toCharArray()) {
+            if (Character.isDigit(caracter)) {
+                return false;
+            }
+        }
+        return true;
+    }
     public static boolean validateDni(String dni) {
         if(dni == null || dni.length() != 9) {
             return false;
