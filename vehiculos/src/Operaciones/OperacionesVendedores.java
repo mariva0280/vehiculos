@@ -1,22 +1,23 @@
-package Operaciones;
+package operaciones;
 
-import Validaciones.Validar;
+import Validaciones.ValidarClientesVendedores;
 import Objetos.Concesionario;
 import Objetos.Vendedor;
 
 import java.util.*;
 
 public class OperacionesVendedores {
-    private Concesionario concesionario;
+
+    int opcion;
+    private final Concesionario concesionario;
     private OperacionesConcesionario opConcesionario;
     public OperacionesVendedores(Concesionario concesionario) {
 
         this.concesionario = concesionario;
-        this.opConcesionario = new OperacionesConcesionario(concesionario);
     }
     public void menuVendedores(){
-        int opcion = 0;
         Scanner scan = new Scanner(System.in);
+        System.out.println("");
         System.out.println("");
         while (opcion != 5) {
             System.out.println("*****MENU VENDEDORES*****");
@@ -61,21 +62,21 @@ public class OperacionesVendedores {
         try {
             System.out.print("Introduzca el nombre del vendedor: ");
             String nombre = scan.nextLine();
-            if(!Validar.validateName(nombre)){
+            if(!ValidarClientesVendedores.validateName(nombre)){
                 throw new Exception("Nombre incorrecto.");
             }
             vendedor.setNombre(nombre);
 
-            System.out.print("Introduzca la direccion del vendedor: ");
+            System.out.println("Introduzca la direccion del vendedor: ");
             String direccion = scan.nextLine();
-            if(!Validar.validateDireccion(direccion)){
+            if(!ValidarClientesVendedores.validateDireccion(direccion)){
                 throw new Exception("Dirección incorrecta.");
             }
             vendedor.setDireccion(direccion);
 
-            System.out.print("Introduzca el DNI del vendedor: ");
+            System.out.println("Introduzca el DNI del vendedor: ");
             String dni = scan.nextLine();
-            if(!Validar.validateDni(dni)){
+            if(!ValidarClientesVendedores.validateDni(dni)){
                 throw new Exception("DNI incorrecto.");
             }
             if(verificarDniRep(dni)){
@@ -83,9 +84,9 @@ public class OperacionesVendedores {
             }
             vendedor.setDni(dni);
 
-            System.out.print("Introduzca el telefono del vendedor: ");
+            System.out.println("Introduzca el telefono del vendedor: ");
             String telefonoStr = scan.nextLine();
-            if(!Validar.validateTelefono(telefonoStr)){
+            if(!ValidarClientesVendedores.validateTelefono(telefonoStr)){
                 throw new Exception("Teléfono incorrecto.");
             }
             int telefono = Integer.parseInt(telefonoStr);
@@ -99,6 +100,8 @@ public class OperacionesVendedores {
             System.out.println("Error: " + ex.getMessage());
             agregar();
         }
+        System.out.println("");
+        System.out.println("");
     }
 
     private void eliminar() {
@@ -124,6 +127,7 @@ public class OperacionesVendedores {
 
             } else {
                 opConcesionario.eliminarVendedor(lista.get(opcion - 1));// Pasamos al metodo eliminarVendedor del concesionario, el vendedor elegido en la lista
+                System.out.println("");
                 System.out.println("");
                 System.out.println("Vendedor eliminado correctamente!!");
                 System.out.println("");
@@ -160,6 +164,7 @@ public class OperacionesVendedores {
                 System.out.println("");
                 while (opcion != 4) {
                     System.out.println("");
+                    System.out.println("");
                     System.out.println("1 - Modificar nombre");
                     System.out.println("2 - Modificar dirección");
                     System.out.println("3 - Modificar teléfono");
@@ -172,7 +177,7 @@ public class OperacionesVendedores {
                         case (1):
                             System.out.print("Nuevo nombre: ");
                             String nuevoNombre = scan.nextLine();
-                            if(!Validar.validateName(nuevoNombre)){
+                            if(!ValidarClientesVendedores.validateName(nuevoNombre)){
                                 throw new Exception("Nombre incorrecto.");
                             }
                             vendedor.setNombre(nuevoNombre);
@@ -180,7 +185,7 @@ public class OperacionesVendedores {
                         case (2):
                             System.out.print("Nueva dirección: ");
                             String nuevaDireccion = scan.nextLine();
-                            if(!Validar.validateDireccion(nuevaDireccion)){
+                            if(!ValidarClientesVendedores.validateDireccion(nuevaDireccion)){
                                 throw new Exception("Dirección incorrecta.");
                             }
                             vendedor.setDireccion(nuevaDireccion);
@@ -188,7 +193,7 @@ public class OperacionesVendedores {
                         case (3):
                             System.out.print("Indique nuevo teléfono: ");
                             String nuevoTelefono = scan.nextLine();
-                            if(!Validar.validateTelefono(nuevoTelefono)){
+                            if(!ValidarClientesVendedores.validateTelefono(nuevoTelefono)){
                                 throw new Exception("Teléfono incorrecto.");
                             }
                             int telefonoNuevo = Integer.parseInt(nuevoTelefono);
@@ -210,18 +215,23 @@ public class OperacionesVendedores {
     }
     private void indicesVendedores(ArrayList<Vendedor> lista) {
         System.out.println("");
-        System.out.println("------------LISTA VENDEDORES-------------------");
         System.out.println("");
+        System.out.println("-----------------------------------------------");
+        System.out.println("------------LISTA VENDEDORES-------------------");
+        System.out.println("-----------------------------------------------");
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
+            System.out.println("-----------------------------------------------");
         }
         System.out.println(lista.size() + 1 + " - Salir");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
         System.out.println("");
     }
     private void listarVendedores() {
         System.out.println("");
-        System.out.println("------------LISTA VENDEDORES-------------------");
         System.out.println("");
+        System.out.println("-----------------------------------------------");
+        System.out.println("------------LISTA VENDEDORES-------------------");
+        System.out.println("-----------------------------------------------");
         HashMap<String, Vendedor> vendedores = opConcesionario.listarVendedores();
 
         if (vendedores.isEmpty()) {

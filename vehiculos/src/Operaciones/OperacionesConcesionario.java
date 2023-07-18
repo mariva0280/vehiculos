@@ -1,14 +1,12 @@
-package Operaciones;
+package operaciones;
 
-import Objetos.Cliente;
-import Objetos.Coche;
-import Objetos.Concesionario;
-import Objetos.Vendedor;
+import Objetos.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class OperacionesConcesionario {
-    private Concesionario concesionario;
+    private final Concesionario concesionario;
     public OperacionesConcesionario(Concesionario concesionario) {
         this.concesionario = concesionario;
     }
@@ -63,5 +61,15 @@ public class OperacionesConcesionario {
         listaCoches.replace(coche.getMatricula(),coche);
         concesionario.setCoches(listaCoches);
     }
-    public HashMap<String,Coche> listarCoches(){ return concesionario.getCoches();}
+    public void agregarExposicion (Exposicion exposicion){
+        HashMap<Integer, Exposicion> exposiciones = concesionario.getExposiciones();
+        exposiciones.put(exposicion.getNumeroExposicion(), exposicion);
+        concesionario.setExposiciones(exposiciones);
+    }
+    public void removerExposicion (Exposicion exposicion){
+        HashMap<Integer, Exposicion> listarExposiciones = concesionario.getExposiciones();
+        listarExposiciones.remove(exposicion.getNumeroExposicion());
+        concesionario.setExposiciones(listarExposiciones);
+    }
+    public HashMap<String, Coche> listarCoches(){ return concesionario.getCoches();}
 }

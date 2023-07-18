@@ -1,9 +1,9 @@
 package Validaciones;
 
-import Operaciones.OperacionesConcesionario;
+import operaciones.OperacionesConcesionario;
 
 public class Validar {
-    public OperacionesConcesionario opConcesionario;
+    public static OperacionesConcesionario opConcesionario;
 
     public static boolean validateName(String nombre){
         if(nombre == null || nombre.isEmpty()){
@@ -14,6 +14,14 @@ public class Validar {
     public static boolean validateDireccion(String direccion) {
         if(direccion == null || direccion.isEmpty()){
             return false;
+        }
+        return true;
+    }
+    public static boolean validateCiudad(String ciudad) {
+        for (char caracter : ciudad.toCharArray()) {
+            if (Character.isDigit(caracter)) {
+                return false;
+            }
         }
         return true;
     }
@@ -71,5 +79,9 @@ public class Validar {
     }
     public static boolean validarEstado(Enum estado) {
         return estado != null;
+    }
+    public static boolean validarNumero (int numero){
+        if (numero < 1 || numero > 99) return true;
+        else return false;
     }
 }

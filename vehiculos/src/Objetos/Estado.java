@@ -8,4 +8,3 @@ public enum Estado {
     RESERVADO,
     EN_EXPOSICION
 }
-
