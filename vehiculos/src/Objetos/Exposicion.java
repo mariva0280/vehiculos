@@ -5,21 +5,20 @@ import java.util.ArrayList;
 public class Exposicion {
     private int numeroExposicion;
     private String direccion;
-    private int telefono;
+    private String telefono;
     private String ciudad;
-    private boolean estado;
     private ArrayList<Coche> cochesExposicion;
 
     public Exposicion() {
     }
 
-    public Exposicion(int numeroExposicion, String direccion, int telefono, String ciudad, ArrayList<Coche> cochesExposicion,boolean estado) {
+    public Exposicion(int numeroExposicion, String direccion, String telefono, String ciudad) {
         this.numeroExposicion = numeroExposicion;
         this.direccion = direccion;
         this.telefono = telefono;
         this.ciudad = ciudad;
-        this.cochesExposicion = cochesExposicion;
-        this.estado = estado;
+        this.cochesExposicion = new ArrayList<>();
+
     }
 
     public int getNumeroExposicion() {
@@ -38,11 +37,11 @@ public class Exposicion {
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -60,14 +59,6 @@ public class Exposicion {
 
     public void setCochesExposicion(ArrayList<Coche> cochesExposicion) {
         this.cochesExposicion = cochesExposicion;
-    }
-
-    public boolean isEstado() {
-        return estado;
-    }
-
-    public void setEstado(boolean estado) {
-        this.estado = estado;
     }
 
     @Override

@@ -1,9 +1,6 @@
 package Operaciones;
 
-import Objetos.Cliente;
-import Objetos.Coche;
-import Objetos.Concesionario;
-import Objetos.Vendedor;
+import Objetos.*;
 
 import java.util.HashMap;
 
@@ -64,4 +61,26 @@ public class OperacionesConcesionario {
         concesionario.setCoches(listaCoches);
     }
     public HashMap<String,Coche> listarCoches(){ return concesionario.getCoches();}
+    public void agregarExposicion(Exposicion exposicion) {
+        HashMap<Integer, Exposicion> listaExposiciones = concesionario.getExposiciones();
+        listaExposiciones.put(exposicion.getNumeroExposicion(), exposicion);
+        concesionario.setExposiciones(listaExposiciones);
+    }
+
+    public void removerExposicion(Exposicion exposicion) {
+        HashMap<Integer, Exposicion> listaExposiciones = concesionario.getExposiciones();
+        listaExposiciones.remove(exposicion.getNumeroExposicion(), exposicion);
+        concesionario.setExposiciones(listaExposiciones);
+
+    }
+    public void modificarExposicion(Exposicion exposicion){
+        HashMap<Integer, Exposicion> listaExposiciones = concesionario.getExposiciones();
+        listaExposiciones.replace(exposicion.getNumeroExposicion(), exposicion);
+        concesionario.setExposiciones(listaExposiciones);
+    }
+
+
+    public HashMap<Integer,Exposicion> listarExposiciones(){
+        return concesionario.getExposiciones();
+    }
 }

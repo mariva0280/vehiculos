@@ -72,4 +72,16 @@ public class Validar {
     public static boolean validarEstado(Enum estado) {
         return estado != null;
     }
+    public static boolean validarNumero (int numero){
+        if (numero < 1 || numero > 99) return true;
+        else return false;
+    }
+    public static boolean validateCiudad(String ciudad) {
+        for (char caracter : ciudad.toCharArray()) {
+            if (Character.isDigit(caracter)) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

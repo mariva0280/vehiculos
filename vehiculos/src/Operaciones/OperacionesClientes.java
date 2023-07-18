@@ -4,6 +4,7 @@ package Operaciones;
 import Validaciones.Validar;
 import Objetos.Concesionario;
 import Objetos.Cliente;
+import Exception.EinvalidPropertyException;
 
 
 import java.util.*;
@@ -66,41 +67,41 @@ public class OperacionesClientes {
             System.out.print("Introduzca el nombre del cliente: ");
             String nombre = (scan.nextLine());
             if(!Validar.validateName(nombre)){
-                throw new Exception("Nombre incorrecto.");
+                throw new EinvalidPropertyException("Nombre incorrecto.");
             }
             cliente.setNombre(nombre);
 
             System.out.print("Introduzca la dirección del cliente: ");
             String direccion = (scan.nextLine());
             if(!Validar.validateDireccion(direccion)){
-                throw new Exception("Dirección incorrecta.");
+                throw new EinvalidPropertyException("Dirección incorrecta.");
             }
             cliente.setDireccion(direccion);
 
             System.out.print("Introduzca el DNI del cliente: ");
             String dni =(scan.nextLine());
             if(!Validar.validateDni(dni)){
-                throw new Exception("DNI incorrecto.");
+                throw new EinvalidPropertyException("DNI incorrecto.");
             }
             if(verificarDniRep(dni)){
-                throw new Exception("DNI duplicado.");
+                throw new EinvalidPropertyException("DNI duplicado.");
             }
             cliente.setDni(dni);
 
             System.out.print("Introduzca el teléfono del cliente: ");
             String telefonoStr =scan.nextLine();
             if(!Validar.validateTelefono(telefonoStr)){
-                throw new  Exception("Teléfono incorrecto.");
+                throw new EinvalidPropertyException("Teléfono incorrecto.");
             }
             int telefono = Integer.parseInt(telefonoStr);
             if(verificarTlfRep(telefono)){
-                throw new Exception("Teléfono duplicado.");
+                throw new EinvalidPropertyException("Teléfono duplicado.");
             }
             cliente.setTelefono(telefono);
 
             opConcesionario.agregarCliente(cliente);
             System.out.println("Cliente agregado correctamente.");
-        } catch (Exception ex){
+        } catch (EinvalidPropertyException ex){
             System.out.println("Error: " + ex.getMessage());
             agregar();
         }
@@ -183,7 +184,7 @@ public class OperacionesClientes {
                             System.out.print("Nuevo nombre: ");
                             String nuevoNombre = scan.nextLine();
                             if (!Validar.validateName(nuevoNombre)) {
-                                throw new Exception("Nombre incorrecto.");
+                                throw new EinvalidPropertyException("Nombre incorrecto.");
                             }
                             cliente.setNombre(nuevoNombre);
                             break;
@@ -191,7 +192,7 @@ public class OperacionesClientes {
                             System.out.print("Nueva dirección: ");
                             String nuevaDireccion = scan.nextLine();
                             if (!Validar.validateDireccion(nuevaDireccion)) {
-                                throw new Exception("Dirección incorrecta.");
+                                throw new EinvalidPropertyException("Dirección incorrecta.");
                             }
                             cliente.setDireccion(nuevaDireccion);
                             break;
@@ -199,11 +200,11 @@ public class OperacionesClientes {
                             System.out.print("Indique nuevo teléfono: ");
                             String nuevoTelefono = scan.nextLine();
                             if (!Validar.validateTelefono(nuevoTelefono)) {
-                                throw new Exception("Teléfono incorrecto.");
+                                throw new EinvalidPropertyException("Teléfono incorrecto.");
                             }
                             int telefonoNuevo = Integer.parseInt(nuevoTelefono);
                             if(verificarTlfRep(telefonoNuevo)){
-                                throw new Exception("Teléfono duplicado");
+                                throw new EinvalidPropertyException("Teléfono duplicado");
                             }
                             cliente.setTelefono(telefonoNuevo);
                             break;
@@ -213,8 +214,8 @@ public class OperacionesClientes {
                 System.out.println("Cliente modificado correctamente!!");
             }
 
-        } catch (Exception ex) {
-            System.out.println("Eroor: " + ex.getMessage());
+        } catch (EinvalidPropertyException ex) {
+            System.out.println("Error: " + ex.getMessage());
             modificar();
         }
     }
