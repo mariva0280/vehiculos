@@ -286,7 +286,7 @@ public class OperacionesCoches {
         System.out.println(indices.size() + 1 + " - Salir");
         System.out.println("");
     }
-    private void listarCoches() {
+    public void listarCoches() {
         System.out.println("");
         System.out.println("------------LISTA COCHES-------------------");
         System.out.println("");

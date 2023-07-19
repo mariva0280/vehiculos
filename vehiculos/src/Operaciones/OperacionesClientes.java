@@ -65,14 +65,14 @@ public class OperacionesClientes {
         Scanner scan = new Scanner(System.in);
         try {
             System.out.print("Introduzca el nombre del cliente: ");
-            String nombre = (scan.nextLine());
+            String nombre = scan.nextLine();
             if(!Validar.validateName(nombre)){
                 throw new EinvalidPropertyException("Nombre incorrecto.");
             }
             cliente.setNombre(nombre);
 
             System.out.print("Introduzca la dirección del cliente: ");
-            String direccion = (scan.nextLine());
+            String direccion = scan.nextLine();
             if(!Validar.validateDireccion(direccion)){
                 throw new EinvalidPropertyException("Dirección incorrecta.");
             }

@@ -10,12 +10,11 @@ public class Coche {
     private double precioVenta;
     private TipoVehiculo tipoVehiculo;
     private Estado estado;
-    private ArrayList<Reparacion> reparaciones;
 
     public Coche() {
     }
 
-    public Coche(String marca, String modelo, String matricula, double precioCompra, double precioVenta, TipoVehiculo tipoVehiculo, Estado estado, ArrayList<Reparacion> reparaciones) {
+    public Coche(String marca, String modelo, String matricula, double precioCompra, double precioVenta, TipoVehiculo tipoVehiculo, Estado estado) {
 
         this.marca = marca;
         this.modelo = modelo;
@@ -24,7 +23,6 @@ public class Coche {
         this.precioVenta = precioVenta;
         this.tipoVehiculo = tipoVehiculo;
         this.estado = estado;
-        this.reparaciones = reparaciones;
     }
 
     public String getMarca() {
@@ -82,14 +80,6 @@ public class Coche {
         this.estado = estado;
     }
 
-    public ArrayList<Reparacion> getReparaciones() {
-        return reparaciones;
-    }
-
-    public void setReparaciones(ArrayList<Reparacion> reparaciones) {
-        this.reparaciones = reparaciones;
-    }
-
     @Override
     public String toString() {
         return "Coche{" +
@@ -99,8 +89,6 @@ public class Coche {
                 ", precioCompra=" + precioCompra +
                 ", precioVenta=" + precioVenta +
                 ", tipoVehiculo=" + tipoVehiculo +
-                ", estado=" + estado +
-                ", reparaciones=" + reparaciones +
                 '}';
     }
 }

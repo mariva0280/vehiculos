@@ -50,10 +50,11 @@ public class ProyectoConcesionario {
                             opClientes.menuClientes();
                             break;
                         case (4):
-                            //OperacionesCoches opCoches = new OperacionesCoches(concesionario);
-                            //opCoches.menuCoches();
-                            OperacionesExposicion opExposicion = new OperacionesExposicion(concesionario);
-                            opExposicion.modificarExposicion();
+                            //OperacionesInformes opInformes = new OperacionesInformes(concesionario);
+                            //opInformes.menuInformes();
+                            OperacionesVentas opVentas = new OperacionesVentas(concesionario);
+                            opVentas.vender();
+
                             break;
                         case (5):
                             System.exit(0);

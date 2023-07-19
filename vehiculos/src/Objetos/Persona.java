@@ -51,9 +51,9 @@ public class Persona {
     @Override
     public String toString() {
         return
-                "Nombre: " + nombre + '\'' +
-                        ". Direccion: " + direccion + '\'' +
-                        ". DNI: " + dni + '\'' +
+                "Nombre: " + nombre  +
+                        ". Direccion: " + direccion +
+                        ". DNI: " + dni +
                         ". Telefono: " + telefono;
     }
 }
