@@ -11,6 +11,8 @@ public class Concesionario {
     private HashMap<Integer, Exposicion> exposiciones;
     private HashMap<String,Reserva> cochesReservados;
     private HashMap<String, Venta> cochesVendidos;
+    private HashMap<String, Reparacion> cochesReparacion;
+
 
 
     public Concesionario() {
@@ -20,6 +22,7 @@ public class Concesionario {
         this.exposiciones = new HashMap<Integer,Exposicion>();
         this.cochesReservados = new HashMap<String,Reserva>();
         this.cochesVendidos = new HashMap<String, Venta>();
+        this.cochesReparacion = new HashMap<>();
     }
 
 
@@ -69,5 +72,13 @@ public class Concesionario {
 
     public void setCochesVendidos(HashMap<String, Venta> cochesVendidos) {
         this.cochesVendidos = cochesVendidos;
+    }
+
+    public HashMap<String, Reparacion> getCochesReparacion() {
+        return cochesReparacion;
+    }
+
+    public void setCochesReparacion(HashMap<String, Reparacion> cochesReparacion) {
+        this.cochesReparacion = cochesReparacion;
     }
 }

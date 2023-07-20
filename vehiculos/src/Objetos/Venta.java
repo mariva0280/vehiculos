@@ -42,4 +42,9 @@ public class Venta {
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
     }
+
+    @Override
+    public String toString() {
+        return " El coche: " + coche + " ,ha sido comprado por: " + cliente + " , se lo ha vendido: " + vendedor;
+    }
 }

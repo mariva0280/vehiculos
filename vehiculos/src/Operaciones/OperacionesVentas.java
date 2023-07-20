@@ -53,14 +53,15 @@ public class OperacionesVentas {
         for (Cliente item : clientes.values()) {
             lista.add(item);
         }
-        System.out.println("------------LISTA CLIENTES-------------------");
+        System.out.println("*****LISTA CLIENTES*****");
         System.out.println("");
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
-        System.out.println(lista.size() + 1 + " - Salir");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
+        System.out.println(lista.size() + 1 + " - Salir.");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
         System.out.println("");
-        System.out.print("Elija el cliente o pulsa " + (lista.size()+1) + " para salir: ");
+        System.out.print("Elija el cliente: ");
+        System.out.println((lista.size()+1) + " - Salir.");
         try {
             int opcion = scan.nextInt();
             if(opcion == lista.size() + 1) {
@@ -83,14 +84,15 @@ public class OperacionesVentas {
         for (Vendedor item : vendedores.values()) {
             lista.add(item);
         }
-        System.out.println("------------LISTA VENDEDORES-------------------");
+        System.out.println("*****LISTA VENDEDORES*****");
         System.out.println("");
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
         System.out.println(lista.size() + 1 + " - Salir");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
         System.out.println("");
-        System.out.print("Elija el vendedor o pulsa " + (lista.size()+1) + " para salir: ");
+        System.out.print("Elija el vendedor: ");
+        System.out.print((lista.size()+1) + " - Salir.");
         try {
             int opcion = scan.nextInt();
             if(opcion == lista.size() + 1) {
@@ -113,14 +115,15 @@ public class OperacionesVentas {
         for (Coche item : coches.values()) {
             lista.add(item);
         }
-        System.out.println("------------LISTA COCHES-------------------");
+        System.out.println("*****LISTA COCHES*****");
         System.out.println("");
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
-        System.out.println(lista.size() + 1 + " - Salir");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
+        System.out.println(lista.size() + 1 + " - Salir.");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
         System.out.println("");
-        System.out.print("Elija el coche deseado por el cliente o pulsa " + (lista.size()+1) + " para salir: ");
+        System.out.print("Elija el coche deseado por el cliente: ");
+        System.out.print((lista.size()+1) + " - Salir.");
         try {
             int opcion = scan.nextInt();
             if(opcion == lista.size() + 1) {
@@ -160,11 +163,12 @@ public class OperacionesVentas {
         for (Venta item : ventas.values()) {
             lista.add(item);
         }
-        System.out.println("----LISTA DE COCHES VENDIDOS----");
+        System.out.println("*****LISTA DE COCHES VENDIDOS*****");
         for(int i = 0; i < lista.size(); i++){
             System.out.println((i + 1) + " - " + lista.get(i).getCoche().toString());
         }
-        System.out.print("Escoga el coche o pulsa " + (lista.size() + 1) + " para salir: " );
+        System.out.print("Escoga el coche: ");
+        System.out.print((lista.size()+1)+ " - Salir.");
         Scanner scan = new Scanner(System.in);
 
         try{
@@ -185,11 +189,12 @@ public class OperacionesVentas {
         for (Venta item : ventas.values()) {
             lista.add(item);
         }
-        System.out.println("----LISTA DE VENDEDORES----");
+        System.out.println("*****LISTA DE VENDEDORES*****");
         for(int i = 0; i < lista.size(); i++){
             System.out.println((i + 1) + " - " + lista.get(i).getVendedor().toString());
         }
-        System.out.print("Escoga el vendedor  " + (lista.size() + 1) + " para salir: " );
+        System.out.print("Escoga el vendedor:  ");
+        System.out.print((lista.size()+1) + " - Salir.");
 
 
         try{
@@ -202,7 +207,7 @@ public class OperacionesVentas {
                     numCoche ++;
                 }
             }
-            System.out.println("El total de ingresos por ventas del vendedor es: " + numCoche * 200);
+            System.out.print("El total de ingresos por ventas del vendedor es: " + numCoche * 200);
         }catch (Exception ex){
             System.out.println("Error: " +ex.getMessage());
         }

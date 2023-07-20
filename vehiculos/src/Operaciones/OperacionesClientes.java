@@ -1,3 +1,8 @@
+/*
+REVISAR EL METODO ELIMINAR CLIENTE PORQUE NO ME FUNCIONA BIEN CUANDO HAY CLIENTES CON COCHES RESERVADOS O COMPRADOS, PORQUE ME SALTA EL SOUT
+OPCION INCORRECTA PERO AL FINAL SI QUE ELIMINA AL CLIENTE DE LA LISTA, LO DEMÁS FUNCIONA, FALTA IMPLEMENTAR EL MENÚ DEFINITIVO QUE ES AL QUE TIENEN
+ACCESO LOS CLIENTES EN EL QUE SOLO PUEDEN CONSULTAR LOS COCHES EN STOCK
+ */
 package Operaciones;
 
 
@@ -25,11 +30,11 @@ public class OperacionesClientes {
         System.out.println("");
         while (opcion != 5) {
             System.out.println("*****MENU CLIENTES*****");
-            System.out.println("1 - Dar de alta");
-            System.out.println("2 - Dar de baja");
-            System.out.println("3 - Modificar");
-            System.out.println("4 - Listado Clientes");
-            System.out.println("5 - Salir");
+            System.out.println("1 - Dar de alta.");
+            System.out.println("2 - Dar de baja.");
+            System.out.println("3 - Modificar.");
+            System.out.println("4 - Listado Clientes.");
+            System.out.println("5 - Salir.");
             System.out.println("");
             System.out.print("Elija una opcion: ");
             try {
@@ -59,7 +64,7 @@ public class OperacionesClientes {
         }
     }
 
-    private void agregar() {
+    public void agregar() {
         opConcesionario = new OperacionesConcesionario(concesionario);
         Cliente cliente = new Cliente();
         Scanner scan = new Scanner(System.in);
@@ -107,7 +112,7 @@ public class OperacionesClientes {
         }
     }
 
-    private void eliminar() {
+    public void eliminar() {
         opConcesionario = new OperacionesConcesionario(concesionario);
         Scanner scan = new Scanner(System.in);
         int opcion;
@@ -124,7 +129,7 @@ public class OperacionesClientes {
         try {
             opcion = scan.nextInt();
             if (opcion > (lista.size() + 1)) {   // Si la opcion es mayor que lista.size + 1 significa que nos salimos de las posibles opciones del menu
-                System.out.println("Opcion incorrecta!!");
+                System.out.println("Opcion incorrecta.");
                 eliminar();
             } else if (opcion == lista.size() + 1) {    // Si la opcion es una posicion mas que el tamaño de la lista significa que es la opcion "salir" y no hacemos nada
 
@@ -132,23 +137,21 @@ public class OperacionesClientes {
                 opConcesionario.eliminarCliente(lista.get(opcion - 1));
                 Cliente cliente = lista.get(opcion - 1);
                 if(cliente.getCochesReservados().isEmpty() && cliente.getCochesComprados().isEmpty()) {
-                    //opConcesionario.eliminarCliente(cliente);
-                    System.out.println("");
-                    System.out.println("Cliente eliminado correctamente!!");
-                    System.out.println("");
+                    System.out.println("Cliente eliminado correctamente.");
+
                 }else {
-                    System.out.println("No se puede eliminar el cliente. Tiene coches reservados o comprados");
+                    System.out.println("No se puede eliminar el cliente. Tiene coches reservados o comprados.");
                 }
                 eliminar();
             }
 
         } catch (Exception ex) {
-            System.out.println("Opcion incorrecta!!");
+            System.out.println("Opcion incorrecta.");
             eliminar();
         }
     }
 
-    private void modificar() {
+    public void modificar() {
         opConcesionario = new OperacionesConcesionario(concesionario);
         Scanner scan = new Scanner(System.in);
         int opcion;
@@ -163,7 +166,7 @@ public class OperacionesClientes {
         try {
             opcion = scan.nextInt();
             if (opcion > (lista.size() + 1)) {
-                System.out.println("Opcion incorrecta!!");
+                System.out.println("Opcion incorrecta.");
                 modificar();
             } else if (opcion == lista.size() + 1) {
 
@@ -171,10 +174,10 @@ public class OperacionesClientes {
                 Cliente cliente = lista.get(opcion - 1);
                 System.out.println("");
                 while (opcion != 4) {
-                    System.out.println("1 - Modificar nombre");
-                    System.out.println("2 - Modificar dirección");
-                    System.out.println("3 - Modificar teléfono");
-                    System.out.println("4 - Guardar cambios");
+                    System.out.println("1 - Modificar nombre.");
+                    System.out.println("2 - Modificar dirección.");
+                    System.out.println("3 - Modificar teléfono.");
+                    System.out.println("4 - Guardar cambios.");
                     System.out.print("Elija una opcion: ");
                     opcion = scan.nextInt();
 
@@ -204,14 +207,14 @@ public class OperacionesClientes {
                             }
                             int telefonoNuevo = Integer.parseInt(nuevoTelefono);
                             if(verificarTlfRep(telefonoNuevo)){
-                                throw new EinvalidPropertyException("Teléfono duplicado");
+                                throw new EinvalidPropertyException("Teléfono duplicado.");
                             }
                             cliente.setTelefono(telefonoNuevo);
                             break;
                     }
                 }
                 opConcesionario.modificarCliente(cliente);
-                System.out.println("Cliente modificado correctamente!!");
+                System.out.println("Cliente modificado correctamente.");
             }
 
         } catch (EinvalidPropertyException ex) {
@@ -220,9 +223,9 @@ public class OperacionesClientes {
         }
     }
 
-    private void indicesClientes(ArrayList<Cliente> lista) {
+    public void indicesClientes(ArrayList<Cliente> lista) {
         System.out.println("");
-        System.out.println("------------LISTA CLIENTES-------------------");
+        System.out.println("*****LISTA CLIENTES*****");
         System.out.println("");
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
@@ -230,22 +233,22 @@ public class OperacionesClientes {
         System.out.println(lista.size() + 1 + " - Salir");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
         System.out.println("");
     }
-    private void listarClientes() {
+    public void listarClientes() {
         System.out.println("");
-        System.out.println("------------LISTA CLIENTES-------------------");
+        System.out.println("*****LISTA CLIENTES*****");
         System.out.println("");
         HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
         if (clientes.isEmpty()) {
-            System.out.println("No hay vendedores registrados.");
+            System.out.println("No hay clientes registrados.");
         } else {
             for (Cliente cliente : clientes.values()) {
                 System.out.println(cliente.toString());
-                System.out.println("----------------------------------------");
+                System.out.println("");
             }
         }
         System.out.println("");
     }
-    private boolean verificarDniRep(String dni){
+    public boolean verificarDniRep(String dni){
         HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
         for(Cliente cliente : clientes.values()){
             if(cliente.getDni().equals(dni)){
@@ -254,7 +257,7 @@ public class OperacionesClientes {
         }
         return false;
     }
-    private boolean verificarTlfRep(int telefono){
+    public boolean verificarTlfRep(int telefono){
         HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
         for(Cliente cliente : clientes.values()){
             if(cliente.getTelefono() == telefono){

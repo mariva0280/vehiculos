@@ -46,7 +46,8 @@ public class Validar {
             return false;
         }
         return true;
-    }public static boolean validateModelo(String modelo){
+    }
+    public static boolean validateModelo(String modelo){
         if(modelo == null || modelo.isEmpty()){
             return false;
         }

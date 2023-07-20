@@ -16,12 +16,12 @@ public class OperacionesDirector {
     public void menuDirector() {
         Scanner scan = new Scanner(System.in);
         while (opcion != 7) {
-            System.out.println("1 - Dar de alta");
-            System.out.println("2 - Dar de baja");
-            System.out.println("3 - Modificar");
-            System.out.println("4 - Consultar vendedores");
-            System.out.println("5 - Consultar clientes");
-            System.out.println("6 - Consultar coches en stock");
+            System.out.println("1 - Dar de alta.");
+            System.out.println("2 - Dar de baja.");
+            System.out.println("3 - Modificar.");
+            System.out.println("4 - Consultar vendedores.");
+            System.out.println("5 - Consultar clientes.");
+            System.out.println("6 - Consultar coches en stock.");
             System.out.println("7 - Salir");
             System.out.println("");
             System.out.print("Elija una opcion: ");

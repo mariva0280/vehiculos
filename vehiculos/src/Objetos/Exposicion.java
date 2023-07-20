@@ -63,12 +63,12 @@ public class Exposicion {
 
     @Override
     public String toString() {
-        return "Exposicion{" +
-                "numeroExposicion=" + numeroExposicion +
-                ", direccion='" + direccion + '\'' +
-                ", telefono=" + telefono +
-                ", ciudad='" + ciudad + '\'' +
-                ", cochesExposicion=" + cochesExposicion +
-                '}';
+        return " Exposición con número: " + numeroExposicion + " ,Dirección: " + direccion + " , Nº teléfono: " + telefono + " ,Ciudad: " + ciudad + " ,tiene los siguientes coches: " + cochesExposicion;
+        /*return "Exposicion: " +
+                " Numero Exposición: " + numeroExposicion +
+                ", Dirección: " + direccion +
+                ", Teléfono: " + telefono +
+                ", Ciudad: " + ciudad +
+                ", Coches Exposición: " + cochesExposicion;*/
     }
 }
