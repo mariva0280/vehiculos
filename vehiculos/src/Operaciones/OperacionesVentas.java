@@ -1,3 +1,7 @@
+/*
+ESTA CLASE ESTA TERMINADA Y FUNCIONA
+ */
+
 package Operaciones;
 
 import Objetos.*;
@@ -60,8 +64,7 @@ public class OperacionesVentas {
         }
         System.out.println(lista.size() + 1 + " - Salir.");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
         System.out.println("");
-        System.out.print("Elija el cliente: ");
-        System.out.println((lista.size()+1) + " - Salir.");
+        System.out.print("Elija de la lista el cliente que desea comprar el coche o pulse " + (lista.size()+1)+ " para salir: ");
         try {
             int opcion = scan.nextInt();
             if(opcion == lista.size() + 1) {
@@ -69,7 +72,7 @@ public class OperacionesVentas {
             }else {
                 cliente = lista.get(opcion - 1);
             }
-
+            System.out.println("Cliente elegido correctamente.");
 
         }catch (Exception ex){
             System.out.println("Error: " + ex.getMessage());
@@ -91,8 +94,7 @@ public class OperacionesVentas {
         }
         System.out.println(lista.size() + 1 + " - Salir");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
         System.out.println("");
-        System.out.print("Elija el vendedor: ");
-        System.out.print((lista.size()+1) + " - Salir.");
+        System.out.print("Elija el vendedor de la lista que va a realizar la venta o pulse " + (lista.size()+1) + " para salir: ");
         try {
             int opcion = scan.nextInt();
             if(opcion == lista.size() + 1) {
@@ -100,6 +102,7 @@ public class OperacionesVentas {
             }else {
                 vendedor = lista.get(opcion - 1);
             }
+            System.out.println("Vendedor elegido correctamente.");
 
 
         }catch (Exception ex){
@@ -122,8 +125,7 @@ public class OperacionesVentas {
         }
         System.out.println(lista.size() + 1 + " - Salir.");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
         System.out.println("");
-        System.out.print("Elija el coche deseado por el cliente: ");
-        System.out.print((lista.size()+1) + " - Salir.");
+        System.out.print("Elija el coche deseado por el cliente o pulse " + (lista.size()+1)+" para salir: ");
         try {
             int opcion = scan.nextInt();
             if(opcion == lista.size() + 1) {
@@ -131,6 +133,7 @@ public class OperacionesVentas {
             }else {
                 coche = lista.get(opcion - 1);
             }
+            System.out.println("Coche añadido al cliente correctamente.");
 
 
         }catch (Exception ex){
@@ -167,8 +170,9 @@ public class OperacionesVentas {
         for(int i = 0; i < lista.size(); i++){
             System.out.println((i + 1) + " - " + lista.get(i).getCoche().toString());
         }
-        System.out.print("Escoga el coche: ");
-        System.out.print((lista.size()+1)+ " - Salir.");
+        System.out.println("");
+        System.out.print("Escoga el coche de la lista o pulse " + (lista.size()+1) + " para salir: ");
+
         Scanner scan = new Scanner(System.in);
 
         try{
@@ -193,9 +197,8 @@ public class OperacionesVentas {
         for(int i = 0; i < lista.size(); i++){
             System.out.println((i + 1) + " - " + lista.get(i).getVendedor().toString());
         }
-        System.out.print("Escoga el vendedor:  ");
-        System.out.print((lista.size()+1) + " - Salir.");
-
+        System.out.println("");
+        System.out.print("Escoga el vendedor de la lista para ver los coches que ha vendido o pulse " + (lista.size()+1) + " para salir: ");
 
         try{
             int opcion = scan.nextInt();
@@ -207,7 +210,8 @@ public class OperacionesVentas {
                     numCoche ++;
                 }
             }
-            System.out.print("El total de ingresos por ventas del vendedor es: " + numCoche * 200);
+            System.out.print("El total de ingresos por ventas del vendedor es: " + numCoche * 200 + " €.");
+            System.out.println("");
         }catch (Exception ex){
             System.out.println("Error: " +ex.getMessage());
         }

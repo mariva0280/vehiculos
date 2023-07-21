@@ -82,13 +82,8 @@ public class Coche {
 
     @Override
     public String toString() {
-        return "Coche: " +
-                "Marca: " + marca  +
-                ", Modelo: " + modelo +
-                ", Matricula: " + matricula +
-                ", Precio Compra: " + precioCompra +
-                ", Precio Venta: " + precioVenta +
-                ", Tipo Vehiculo: " + tipoVehiculo;
+        return "Coche: "  + marca + " ,Modelo: " + modelo + " ,Matrícula: " + matricula + " ,Precio Compra: " + precioCompra + " € "+" ,Precio Venta: " + precioVenta +" € " +" ,Tipo Vehículo: " + tipoVehiculo;
+
     }
 }
 

@@ -1,5 +1,5 @@
 /*
-ESTA CLASE FUNCIONAN TODAS MENOS COCHES EN REPARACIÓN PORQUE TODAVIA NO ESTÁ HECHA LA CLASE HAY QUE REVISAR LOS SOUTS PARA QUE IMPRIMA TODO BIEN
+ESTA CLASE FUNCIONAN TODAS MENOS COCHES EN REPARACIÓN PORQUE TODAVIA NO ESTÁ HECHA
  */
 package Operaciones;
 
@@ -45,12 +45,13 @@ public class OperacionesInformes {
                         opCoches.listarCoches();
                         break;
                     case (2):
-                        opReservas.menuReservas();
+                        opReservas.listarReservas();
                         break;
                     case (3):
                         //modificar();
                         break;
                     case (4):
+                        opReservas.listarReservasCliente();
                         break;
                     case (5):
                         opVentas.listarClientePorModelo();

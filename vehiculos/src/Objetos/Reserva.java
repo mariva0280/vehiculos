@@ -35,6 +35,11 @@ public class Reserva {
     }
     @Override
     public String toString() {
-        return " Reserva del coche con matrícula: " + coche.getMatricula() + " , Cliente: " + cliente.getNombre();
+        return " Reserva del coche: " + coche.getMarca() +" con matrícula: "+ coche.getMatricula() +" , realizada por el cliente: " + cliente.getNombre() +" con DNI: " +cliente.getDni();
+    }
+
+
+    public String toString1() {
+        return "Coche reservado " + coche.getMarca() + " con matrícula: " + coche.getMatricula();
     }
 }
