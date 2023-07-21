@@ -7,7 +7,7 @@ public class Exposicion {
     private String direccion;
     private String telefono;
     private String ciudad;
-    private ArrayList<Coche> coches;
+    private ArrayList<Coche> cochesExposicion;
 
     public Exposicion() {
     }
@@ -17,7 +17,8 @@ public class Exposicion {
         this.direccion = direccion;
         this.telefono = telefono;
         this.ciudad = ciudad;
-        this.coches = new ArrayList<>();
+        this.cochesExposicion = new ArrayList<>();
+
     }
 
     public int getNumeroExposicion() {
@@ -53,14 +54,16 @@ public class Exposicion {
     }
 
     public ArrayList<Coche> getCochesExposicion() {
-        return coches;
+        return cochesExposicion;
     }
 
     public void setCochesExposicion(ArrayList<Coche> cochesExposicion) {
-        this.coches = cochesExposicion;
+        this.cochesExposicion = cochesExposicion;
     }
+
+    @Override
     public void agregarCoche(Coche coche){
-        coches.add(coche);
+        cochesExposicion.add(coche);
         coche.setEstado(Estado.EN_EXPOSICION);
     }
 
@@ -71,7 +74,7 @@ public class Exposicion {
                 ", direccion='" + direccion + '\'' +
                 ", telefono=" + telefono +
                 ", ciudad='" + ciudad + '\'' +
-                ", cochesExposicion=" + coches +
+                ", cochesExposicion=" + cochesExposicion +
                 '}';
     }
 }

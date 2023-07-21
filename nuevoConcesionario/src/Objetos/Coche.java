@@ -1,4 +1,5 @@
 package Objetos;
+
 public class Coche {
     private String marca;
     private String modelo;
@@ -79,13 +80,12 @@ public class Coche {
 
     @Override
     public String toString() {
-        return "Coche{" +
-                "marca='" + marca + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", matricula='" + matricula + '\'' +
-                ", precioCompra=" + precioCompra +
-                ", precioVenta=" + precioVenta +
-                ", tipoVehiculo=" + tipoVehiculo +
-                '}';
+        return "Coche: " +
+                "Marca: " + marca  +
+                ", Modelo: " + modelo +
+                ", Matricula: " + matricula +
+                ", Precio Compra: " + precioCompra +
+                ", Precio Venta: " + precioVenta +
+                ", Tipo Vehiculo: " + tipoVehiculo;
     }
 }

@@ -83,6 +83,9 @@ public class OperacionesConcesionario {
         listaExposiciones.replace(exposicion.getNumeroExposicion(), exposicion);
         concesionario.setExposiciones(listaExposiciones);
     }
+    public HashMap<Integer,Exposicion> listarExposiciones(){
+        return concesionario.getExposiciones();
+    }
     //AQUI HE CREADO EL METODO AGREGARVENTA QUE USAMOS EN EL METODO VENDER DE LA CLASE OPERACIONESVENTAS
     public void agregarVenta(Venta venta){
         HashMap<String, Venta> listaVentas = concesionario.getCochesVendidos();
@@ -103,7 +106,11 @@ public class OperacionesConcesionario {
         concesionario.setCochesReservados(listaReservas);
     }
     public HashMap<String,Reserva> listarReservas(){return concesionario.getCochesReservados();}
-    public HashMap<Integer,Exposicion> listarExposiciones(){
-        return concesionario.getExposiciones();
+    public void agregarReparacion(Reparacion reparacion) {
+        HashMap<String,Reparacion> listaReparaciones = concesionario.getCochesReparacion();
+        listaReparaciones.put(reparacion.getCoche().getMatricula(),reparacion);
+        concesionario.setCochesReparacion(listaReparaciones);
     }
+
+
 }

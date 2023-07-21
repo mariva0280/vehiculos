@@ -1,5 +1,4 @@
-/*
-ESTA CLASE LA HEMOS CREADO EN OBJETOS USANDO OTROS OBJETOS EN ESTE CASO COCHE, CLIENTE Y VENDEDOR,PORQUE SON
+/*ESTA CLASE LA HEMOS CREADO EN OBJETOS USANDO OTROS OBJETOS EN ESTE CASO COCHE, CLIENTE Y VENDEDOR,PORQUE SON
  LOS TRES OBJETOS QUE INTERFIEREN EN LA VENTA DE UN  COCHE,ES COMO SI
 FUESE UNA HERENCIA, PERO AL ESTAR USANDO LOS OBJETOS YA CREADOS NOS RETORNA LOS DATOS QUE CONTIENEN ESOS OBJETOS
  */
@@ -41,5 +40,10 @@ public class Venta {
 
     public void setVendedor(Vendedor vendedor) {
         this.vendedor = vendedor;
+    }
+
+    @Override
+    public String toString() {
+        return " El coche: " + coche + " ,ha sido comprado por: " + cliente + " , se lo ha vendido: " + vendedor;
     }
 }

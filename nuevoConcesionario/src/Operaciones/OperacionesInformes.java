@@ -1,3 +1,6 @@
+/*
+ESTA CLASE FUNCIONAN TODAS MENOS COCHES EN REPARACIÓN PORQUE TODAVIA NO ESTÁ HECHA LA CLASE HAY QUE REVISAR LOS SOUTS PARA QUE IMPRIMA TODO BIEN
+ */
 package Operaciones;
 
 import Objetos.*;
@@ -60,8 +63,5 @@ public class OperacionesInformes {
                 scan.nextLine();
             }
         }
-
     }
-
-
 }
