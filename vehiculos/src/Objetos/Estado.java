@@ -3,6 +3,8 @@ package Objetos;
 
 public enum Estado {
     STOCK,
-    RESERVADO
+    RESERVADO,
+    REPARACION,
+    EN_EXPOSICION
 }
 

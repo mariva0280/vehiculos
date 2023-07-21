@@ -111,6 +111,23 @@ public class OperacionesConcesionario {
         listaReparaciones.put(reparacion.getCoche().getMatricula(),reparacion);
         concesionario.setCochesReparacion(listaReparaciones);
     }
+    public void cambiarEstadoReparacion(Reparacion reparacion) {
+        if(reparacion != null) {
+            Coche coche = reparacion.getCoche();
+            coche.setEstado(Estado.REPARACION);
+            modificarCoche(coche);
+        }else{
+            System.out.println("El coche indicado no está en reparación");
+        }
+    }
+
+    public HashMap listarReparaciones(){return concesionario.getCochesReparacion();}
+    public void agregarMecanico(Mecanico mecanico) {
+        HashMap<String,Mecanico> listaMecanicos = concesionario.getMecanicos();
+        listaMecanicos.put(mecanico.getDni(),mecanico);
+        concesionario.setMecanicos(listaMecanicos);
+    }
+    public HashMap listarMecanicos(){return concesionario.getMecanicos();}
 
 
 
