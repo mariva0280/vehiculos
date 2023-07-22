@@ -1,5 +1,5 @@
 /*
-ESTA CLASE FUNCIONAN TODAS MENOS COCHES EN REPARACIÓN PORQUE TODAVIA NO ESTÁ HECHA LA CLASE HAY QUE REVISAR LOS SOUTS PARA QUE IMPRIMA TODO BIEN
+ESTA CLASE FUNCIONAN TODAS MENOS COCHES EN REPARACIÓN PORQUE TODAVIA NO ESTÁ HECHA
  */
 package Operaciones;
 
@@ -24,33 +24,35 @@ public class OperacionesInformes {
 
     }
     public void menuInformes(){
-        int opcion = 0;
         Scanner scan = new Scanner(System.in);
-        System.out.println("");
-        while (opcion != 7) {
-            System.out.println("*****MENU INFORMES*****");
-            System.out.println("1 - Coches en venta.");
-            System.out.println("2 - Coches reservados.");
-            System.out.println("3 - Coches en reparación.");
-            System.out.println("4 - Clientes coches reservados.");
-            System.out.println("5 - Clientes coches comprados.");
-            System.out.println("6 - Vendedores coches vendidos.");
-            System.out.println("7 - Salir.");
+        try {
+            int opcion = 0;
             System.out.println("");
-            System.out.print("Elija una opcion: ");
-            try {
+            while (opcion != 7) {
+                System.out.println("*****MENU INFORMES*****");
+                System.out.println("1 - Coches en venta.");
+                System.out.println("2 - Coches reservados.");
+                System.out.println("3 - Coches en reparación.");
+                System.out.println("4 - Clientes coches reservados.");
+                System.out.println("5 - Clientes coches comprados.");
+                System.out.println("6 - Vendedores coches vendidos.");
+                System.out.println("7 - Salir.");
+                System.out.println("");
+                System.out.print("Elija una opcion: ");
+
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case (1):
                         opCoches.listarCoches();
                         break;
                     case (2):
-                        opReservas.menuReservas();
+                        opReservas.listarReservas();
                         break;
                     case (3):
                         //modificar();
                         break;
                     case (4):
+                        opReservas.listarReservasCliente();
                         break;
                     case (5):
                         opVentas.listarClientePorModelo();
@@ -59,7 +61,8 @@ public class OperacionesInformes {
                         opVentas.listarCochesPorVendedor();
                         break;
                 }
-            } catch (Exception ex) {
+            }
+        }catch (Exception ex) {
                 scan.nextLine();
             }
         }

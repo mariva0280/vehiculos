@@ -59,9 +59,9 @@ public class OperacionesCoches {
             }
         }
         catch (Exception ex) {
-                menuCoches();
-            }
+            menuCoches();
         }
+    }
 
 
     public void agregar() {
@@ -137,20 +137,20 @@ public class OperacionesCoches {
 
     public void eliminar() {
         try {
-        opConcesionario = new OperacionesConcesionario(concesionario);
-        Scanner scan = new Scanner(System.in);
-        int opcion;
-        HashMap<String, Coche> coches = opConcesionario.listarCoches();
-        // HACEMOS ARRAYLIST PARA TRABAJAR CON INDICES EN VEZ DE CON DNI
-        ArrayList<Coche> indices = new ArrayList<>();
-        //COMPLETAMOS EL ARRAYLIST DE INDICES CON LOS VALORES VENDEDORES DEL HASHMAP
-        for (Coche item : coches.values()) {
-            indices.add(item);
-        }
-        //PASAMOS ARRALIST AL METODO LISTARVENDEDORES Y REUTILIZAR CODIGO
-        indicesCoches(indices);
-        System.out.print("Elija el coche a eliminar: ");
-        //System.out.println("Si no desea eliminar vendedor pulse 3 para salir: ");
+            opConcesionario = new OperacionesConcesionario(concesionario);
+            Scanner scan = new Scanner(System.in);
+            int opcion;
+            HashMap<String, Coche> coches = opConcesionario.listarCoches();
+            // HACEMOS ARRAYLIST PARA TRABAJAR CON INDICES EN VEZ DE CON DNI
+            ArrayList<Coche> indices = new ArrayList<>();
+            //COMPLETAMOS EL ARRAYLIST DE INDICES CON LOS VALORES VENDEDORES DEL HASHMAP
+            for (Coche item : coches.values()) {
+                indices.add(item);
+            }
+            //PASAMOS ARRALIST AL METODO LISTARVENDEDORES Y REUTILIZAR CODIGO
+            indicesCoches(indices);
+            System.out.print("Elija el coche a eliminar: ");
+            //System.out.println("Si no desea eliminar vendedor pulse 3 para salir: ");
 
             opcion = scan.nextInt();
             if (opcion > (indices.size() + 1)) { // Si la opcion es mayor que el tamaño del ARRAYLIST, indices.size() + 1 nos dice que nos salimos de las posibles opciones del menu

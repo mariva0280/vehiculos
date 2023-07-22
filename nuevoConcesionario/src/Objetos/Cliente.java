@@ -30,8 +30,9 @@ public class Cliente extends Persona{
         this.cochesReservados = cochesReservados;
     }
 
-   /* @Override
+    /*@Override
     public String toString() {
+        return "Cliente tiene comprados" + cochesComprados + " y reservados " + cochesReservados;
         return "Cliente{" +
                 "cochesComprados=" + cochesComprados +
                 ", cochesReservados=" + cochesReservados +

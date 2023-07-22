@@ -16,22 +16,23 @@ public class ProyectoConcesionario {
 
     }
     public static void mostrarMenu() {
-        Concesionario concesionario = new Concesionario();
-        Scanner scanner = new Scanner(System.in);
-        int opcion = 0;
-        System.out.println("******************************************");
-        System.out.println("*****Bienvenido al concesionario VV*****");
-        System.out.println("*****Pulse la opción deseada para acceder*****");
-        System.out.println("");
-        while (opcion != 5) {
-            try {
+        try {
+            Concesionario concesionario = new Concesionario();
+            Scanner scanner = new Scanner(System.in);
+            int opcion = 0;
+            System.out.println("******************************************");
+            System.out.println("*****Bienvenido al concesionario VV*****");
+            System.out.println("*****Pulse la opción deseada para acceder*****");
+            System.out.println("");
+            while (opcion != 5) {
+
                 System.out.println("1 - Director.");
                 System.out.println("2 - Vendedor.");
                 System.out.println("3 - Cliente.");
                 System.out.println("4 - Mecánico.");
                 System.out.println("5 - Salir.");
                 System.out.println(" ");
-                System.out.print("Eliga la opción: ");
+                System.out.print("Elija la opción: ");
                 opcion = scanner.nextInt();
 
                 if (opcion > 5) {
@@ -52,19 +53,19 @@ public class ProyectoConcesionario {
                         case (4):
                             //OperacionesInformes opInformes = new OperacionesInformes(concesionario);
                             //opInformes.menuInformes();
-                            //OperacionesVentas opVentas = new OperacionesVentas(concesionario);
-                            //opVentas.vender();
-                            OperacionesExposicion opExposiciones = new OperacionesExposicion(concesionario);
-                            opExposiciones.menuExposiciones();
+                            OperacionesVentas opVentas = new OperacionesVentas(concesionario);
+                            opVentas.vender();
+                            //OperacionesExposicion opExposiciones = new OperacionesExposicion(concesionario);
+                            //opExposiciones.menuExposiciones();
                             break;
                         case (5):
                             System.exit(0);
                     }
                 }
-            } catch (Exception ex) {
+            }
+        }         catch (Exception ex) {
                 System.out.println("*****Opción inválida.*****");
                 mostrarMenu();
             }
         }
     }
-}

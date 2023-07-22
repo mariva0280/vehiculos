@@ -62,19 +62,7 @@ public class Exposicion {
     }
 
     @Override
-    public void agregarCoche(Coche coche){
-        cochesExposicion.add(coche);
-        coche.setEstado(Estado.EN_EXPOSICION);
-    }
-
-    @Override
     public String toString() {
-        return "Exposicion{" +
-                "numeroExposicion=" + numeroExposicion +
-                ", direccion='" + direccion + '\'' +
-                ", telefono=" + telefono +
-                ", ciudad='" + ciudad + '\'' +
-                ", cochesExposicion=" + cochesExposicion +
-                '}';
+        return " Exposición con número: " + numeroExposicion + " ,Dirección: " + direccion + " , Nº teléfono: " + telefono + " ,Ciudad: " + ciudad + " ,tiene: " + cochesExposicion;
     }
 }

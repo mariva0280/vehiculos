@@ -15,17 +15,18 @@ public class OperacionesDirector {
 
     public void menuDirector() {
         Scanner scan = new Scanner(System.in);
-        while (opcion != 7) {
-            System.out.println("1 - Dar de alta.");
-            System.out.println("2 - Dar de baja.");
-            System.out.println("3 - Modificar.");
-            System.out.println("4 - Consultar vendedores.");
-            System.out.println("5 - Consultar clientes.");
-            System.out.println("6 - Consultar coches en stock.");
-            System.out.println("7 - Salir");
-            System.out.println("");
-            System.out.print("Elija una opcion: ");
-            try {
+        try {
+            while (opcion != 7) {
+                System.out.println("1 - Dar de alta.");
+                System.out.println("2 - Dar de baja.");
+                System.out.println("3 - Modificar.");
+                System.out.println("4 - Consultar vendedores.");
+                System.out.println("5 - Consultar clientes.");
+                System.out.println("6 - Consultar coches en stock.");
+                System.out.println("7 - Salir");
+                System.out.println("");
+                System.out.print("Elija una opcion: ");
+
                 opcion = scan.nextInt();
                 switch (opcion) {
                     /*case (1):
@@ -46,16 +47,19 @@ public class OperacionesDirector {
                     case (6):
                         imprimirCoches();*/
                 }
-            } catch (Exception ex) {
+            }
+        }
+        catch (Exception ex) {
                 scan.nextLine();
             }
         }
     }
 
     /*private void agregar() {
+    try {
         DirectorComercial director = new DirectorComercial();
         Scanner scan = new Scanner(System.in);
-        try {
+
             System.out.print("Introduzca el nombre del director: ");
             director.setNombre(scan.nextLine());
             System.out.println("Introduzca la direccion del director: ");

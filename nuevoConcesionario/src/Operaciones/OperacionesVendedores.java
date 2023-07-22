@@ -195,6 +195,7 @@ public class OperacionesVendedores {
     }
 
     public void modificar() {
+        try {
         opConcesionario = new OperacionesConcesionario(concesionario);
         Scanner scan = new Scanner(System.in);
         int opcion;
@@ -206,7 +207,7 @@ public class OperacionesVendedores {
         indicesVendedores(lista);
         System.out.print("Elija el número del vendedor a modificar: ");
 
-        try {
+
             opcion = scan.nextInt();
             if (opcion > (lista.size() + 1)) {
                 System.out.println("Opción incorrecta.");

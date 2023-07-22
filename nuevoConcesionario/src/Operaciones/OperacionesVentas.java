@@ -1,6 +1,11 @@
+/*
+ESTA CLASE ESTA TERMINADA Y FUNCIONA
+ */
+
 package Operaciones;
 
 import Objetos.*;
+import Exception.EinvalidPropertyException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -45,9 +50,11 @@ public class OperacionesVentas {
     EL COCHE, EL VENDEDOR QUE LO VENDE Y EL COCHE QUE ESCOGE DE LA LISTA PARA VENDER
      */
     public String verClientes(HashMap<String, Cliente> clientes) {
+        Cliente cliente = new Cliente();
+        try {
         ArrayList<Cliente> lista = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
-        Cliente cliente = new Cliente();
+
 
         for (Cliente item : clientes.values()) {
             lista.add(item);
@@ -59,16 +66,15 @@ public class OperacionesVentas {
         }
         System.out.println(lista.size() + 1 + " - Salir.");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
         System.out.println("");
-        System.out.print("Elija el cliente: ");
-        System.out.println((lista.size()+1) + " - Salir.");
-        try {
+        System.out.print("Elija de la lista el cliente que desea comprar el coche o pulse " + (lista.size()+1)+ " para salir: ");
+
             int opcion = scan.nextInt();
             if(opcion == lista.size() + 1) {
 
             }else {
                 cliente = lista.get(opcion - 1);
             }
-
+            System.out.println("Cliente elegido correctamente.");
 
         }catch (Exception ex){
             System.out.println("Error: " + ex.getMessage());
@@ -76,9 +82,10 @@ public class OperacionesVentas {
         return cliente.getDni();
     }
     public String verVendedores(HashMap<String, Vendedor> vendedores) {
+        Vendedor vendedor = new Vendedor();
+        try {
         ArrayList<Vendedor> lista = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
-        Vendedor vendedor = new Vendedor();
 
         for (Vendedor item : vendedores.values()) {
             lista.add(item);
@@ -90,15 +97,15 @@ public class OperacionesVentas {
         }
         System.out.println(lista.size() + 1 + " - Salir");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
         System.out.println("");
-        System.out.print("Elija el vendedor: ");
-        System.out.print((lista.size()+1) + " - Salir.");
-        try {
+        System.out.print("Elija el vendedor de la lista que va a realizar la venta o pulse " + (lista.size()+1) + " para salir: ");
+
             int opcion = scan.nextInt();
             if(opcion == lista.size() + 1) {
 
             }else {
                 vendedor = lista.get(opcion - 1);
             }
+            System.out.println("Vendedor elegido correctamente.");
 
 
         }catch (Exception ex){
@@ -107,9 +114,10 @@ public class OperacionesVentas {
         return vendedor.getDni();
     }
     public String verCoches(HashMap<String, Coche> coches) {
+        Coche coche = new Coche();
+        try {
         ArrayList<Coche> lista = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
-        Coche coche = new Coche();
 
         for (Coche item : coches.values()) {
             lista.add(item);
@@ -121,15 +129,15 @@ public class OperacionesVentas {
         }
         System.out.println(lista.size() + 1 + " - Salir.");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
         System.out.println("");
-        System.out.print("Elija el coche deseado por el cliente: ");
-        System.out.print((lista.size()+1) + " - Salir.");
-        try {
+        System.out.print("Elija el coche deseado por el cliente o pulse " + (lista.size()+1)+" para salir: ");
+
             int opcion = scan.nextInt();
             if(opcion == lista.size() + 1) {
 
             }else {
                 coche = lista.get(opcion - 1);
             }
+            System.out.println("Coche añadido al cliente correctamente.");
 
 
         }catch (Exception ex){
@@ -157,6 +165,7 @@ public class OperacionesVentas {
     ESTE METODO ESCOGEMOS DE LA LISTA DE COCHES VENDIDOS Y NOS IMPRIME LOS DATOS DEL CLIENTE QUE LO HA COMPRADO
      */
     public void listarClientePorModelo() {
+        try{
         HashMap<String,Venta> ventas = opConcesionario.listarVentas();
         ArrayList<Venta> lista = new ArrayList<>();
         for (Venta item : ventas.values()) {
@@ -166,11 +175,11 @@ public class OperacionesVentas {
         for(int i = 0; i < lista.size(); i++){
             System.out.println((i + 1) + " - " + lista.get(i).getCoche().toString());
         }
-        System.out.print("Escoga el coche: ");
-        System.out.print((lista.size()+1)+ " - Salir.");
+        System.out.println("");
+        System.out.print("Escoga el coche de la lista o pulse " + (lista.size()+1) + " para salir: ");
+
         Scanner scan = new Scanner(System.in);
 
-        try{
             int opcion = scan.nextInt();
             System.out.println("Cliente que ha comprado el coche: " + lista.get(opcion-1).getCliente().toString());
         }catch (Exception ex){
@@ -182,6 +191,7 @@ public class OperacionesVentas {
     CON LAS VENTAS
      */
     public void listarCochesPorVendedor() {
+        try{
         HashMap<String,Venta> ventas = opConcesionario.listarVentas();
         ArrayList<Venta> lista = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
@@ -192,11 +202,9 @@ public class OperacionesVentas {
         for(int i = 0; i < lista.size(); i++){
             System.out.println((i + 1) + " - " + lista.get(i).getVendedor().toString());
         }
-        System.out.print("Escoga el vendedor:  ");
-        System.out.print((lista.size()+1) + " - Salir.");
+        System.out.println("");
+        System.out.print("Escoga el vendedor de la lista para ver los coches que ha vendido o pulse " + (lista.size()+1) + " para salir: ");
 
-
-        try{
             int opcion = scan.nextInt();
             int numCoche = 0;
             System.out.println("El vendedor ha vendido: ");
@@ -206,7 +214,8 @@ public class OperacionesVentas {
                     numCoche ++;
                 }
             }
-            System.out.print("El total de ingresos por ventas del vendedor es: " + numCoche * 200);
+            System.out.print("El total de ingresos por ventas del vendedor es: " + numCoche * 200 + " €.");
+            System.out.println("");
         }catch (Exception ex){
             System.out.println("Error: " +ex.getMessage());
         }
