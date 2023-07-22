@@ -19,17 +19,18 @@ public class OperacionesReservas {
         this.opConcesionario = new OperacionesConcesionario(concesionario);
     }
     public void menuReservas(){
-        int opcion = 0;
         Scanner scan = new Scanner(System.in);
-        System.out.println("");
-        while (opcion != 4) {
-            System.out.println("*****MENU RESERVAS*****");
-            System.out.println("1 - Reservar.");
-            System.out.println("2 - Cancelar reserva.");
-            System.out.println("3 - Lista reservas.");
-            System.out.println("4 - Salir.");
-            System.out.print("Elija una opcion: ");
-            try {
+        try {
+            int opcion = 0;
+            System.out.println("");
+            while (opcion != 4) {
+                System.out.println("*****MENU RESERVAS*****");
+                System.out.println("1 - Reservar.");
+                System.out.println("2 - Cancelar reserva.");
+                System.out.println("3 - Lista reservas.");
+                System.out.println("4 - Salir.");
+                System.out.print("Elija una opcion: ");
+
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case (1):
@@ -44,9 +45,9 @@ public class OperacionesReservas {
                     case (4):
                         break;
                 }
-            } catch (Exception ex) {
-                scan.nextLine();
             }
+        }catch (Exception ex) {
+            scan.nextLine();
         }
     }
     public void reservar() {
@@ -66,18 +67,18 @@ public class OperacionesReservas {
         //opInformes.menuInformes();
     }
     public void cancelar(){
-        opConcesionario = new OperacionesConcesionario(concesionario);
-        Scanner scan = new Scanner(System.in);
-        int opcion;
-        HashMap<String,Reserva> reservas = opConcesionario.listarReservas();
-        // HACEMOS ARRAYLIST PARA TRABAJAR CON INDICES EN VEZ DE CON DNI
-        ArrayList<Reserva> lista = new ArrayList<>();
-        //COMPLETAMOS EL ARRAYLIST DE INDICES CON LOS VALORES CLIENTES DEL HASHMAP
-        for (Reserva item : reservas.values()) {
-            lista.add(item);
-        }
+        try{
+            opConcesionario = new OperacionesConcesionario(concesionario);
+            Scanner scan = new Scanner(System.in);
+            int opcion;
+            HashMap<String,Reserva> reservas = opConcesionario.listarReservas();
+            // HACEMOS ARRAYLIST PARA TRABAJAR CON INDICES EN VEZ DE CON DNI
+            ArrayList<Reserva> lista = new ArrayList<>();
+            //COMPLETAMOS EL ARRAYLIST DE INDICES CON LOS VALORES CLIENTES DEL HASHMAP
+            for (Reserva item : reservas.values()) {
+                lista.add(item);
+            }
 
-        try {
             System.out.println("*****LISTA RESERVAS*****");
             System.out.println("");
             for(int i = 0; i < lista.size(); i++){

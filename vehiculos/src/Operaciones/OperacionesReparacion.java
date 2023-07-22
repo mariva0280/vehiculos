@@ -18,16 +18,17 @@ public class OperacionesReparacion {
     }
 
     public void menuReparaciones() {
-        int opcion = 0;
         Scanner scan = new Scanner(System.in);
-        while (opcion != 4) {
-            System.out.println("1 - Agregar coche a reparar.");
-            System.out.println("2 - Modificar estado de la reparación.");
-            System.out.println("3 - Consultar reparaciones de un coche.");
-            System.out.println("4 - Salir.");
-            System.out.println("");
-            System.out.print("Elija una opción: ");
-            try {
+        try {
+            int opcion = 0;
+            while (opcion != 4) {
+                System.out.println("1 - Agregar coche a reparar.");
+                System.out.println("2 - Modificar estado de la reparación.");
+                System.out.println("3 - Consultar reparaciones de un coche.");
+                System.out.println("4 - Salir.");
+                System.out.println("");
+                System.out.print("Elija una opción: ");
+
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case 1:
@@ -40,10 +41,11 @@ public class OperacionesReparacion {
                         consultarReparacionesCoche();
                         break;
                 }
-            } catch (Exception ex) {
-                scan.nextLine();
             }
+        }catch (Exception ex) {
+                scan.nextLine();
         }
+
     }
     public void agregarReparar() {
         //LUEGO SE BORRA LA LLAMADA Y EL METODO LO PONEMOS PARA PROBAR

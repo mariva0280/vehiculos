@@ -25,19 +25,20 @@ public class OperacionesClientes {
         this.opConcesionario = new OperacionesConcesionario(concesionario);
     }
     public void menuClientes(){
-        int opcion = 0;
         Scanner scan = new Scanner(System.in);
-        System.out.println("");
-        while (opcion != 5) {
-            System.out.println("*****MENU CLIENTES*****");
-            System.out.println("1 - Dar de alta.");
-            System.out.println("2 - Dar de baja.");
-            System.out.println("3 - Modificar.");
-            System.out.println("4 - Listado Clientes.");
-            System.out.println("5 - Salir.");
+        try{
+            int opcion = 0;
             System.out.println("");
-            System.out.print("Elija una opcion: ");
-            try {
+            while (opcion != 5) {
+                System.out.println("*****MENU CLIENTES*****");
+                System.out.println("1 - Dar de alta.");
+                System.out.println("2 - Dar de baja.");
+                System.out.println("3 - Modificar.");
+                System.out.println("4 - Listado Clientes.");
+                System.out.println("5 - Salir.");
+                System.out.println("");
+                System.out.print("Elija una opcion: ");
+
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case (1):
@@ -58,17 +59,18 @@ public class OperacionesClientes {
                         System.out.println("Opción inválida.");
                         break;
                 }
-            } catch (Exception ex) {
-                scan.nextLine();
             }
+        } catch (Exception ex) {
+            scan.nextLine();
         }
     }
 
     public void agregar() {
-        opConcesionario = new OperacionesConcesionario(concesionario);
-        Cliente cliente = new Cliente();
-        Scanner scan = new Scanner(System.in);
-        try {
+        try{
+            opConcesionario = new OperacionesConcesionario(concesionario);
+            Cliente cliente = new Cliente();
+            Scanner scan = new Scanner(System.in);
+
             System.out.print("Introduzca el nombre del cliente: ");
             String nombre = scan.nextLine();
             if(!Validar.validateName(nombre)){
@@ -113,20 +115,20 @@ public class OperacionesClientes {
     }
 
     public void eliminar() {
-        opConcesionario = new OperacionesConcesionario(concesionario);
-        Scanner scan = new Scanner(System.in);
-        int opcion;
-        HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
-        // HACEMOS ARRAYLIST PARA TRABAJAR CON INDICES EN VEZ DE CON DNI
-        ArrayList<Cliente> lista = new ArrayList<>();
-        //COMPLETAMOS EL ARRAYLIST DE INDICES CON LOS VALORES CLIENTES DEL HASHMAP
-        for (Cliente item : clientes.values()) {
-            lista.add(item);
-        }
-        //PASAMOS ARRAYLIST AL METODO INDICECLIENTES Y REUTILIZAR CODIGO
-        indicesClientes(lista);
-        System.out.print("Elija el número del cliente a eliminar: ");
-        try {
+        try{
+            opConcesionario = new OperacionesConcesionario(concesionario);
+            Scanner scan = new Scanner(System.in);
+            int opcion;
+            HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
+            // HACEMOS ARRAYLIST PARA TRABAJAR CON INDICES EN VEZ DE CON DNI
+            ArrayList<Cliente> lista = new ArrayList<>();
+            //COMPLETAMOS EL ARRAYLIST DE INDICES CON LOS VALORES CLIENTES DEL HASHMAP
+            for (Cliente item : clientes.values()) {
+                lista.add(item);
+            }
+            //PASAMOS ARRAYLIST AL METODO INDICECLIENTES Y REUTILIZAR CODIGO
+            indicesClientes(lista);
+            System.out.print("Elija el número del cliente a eliminar: ");
             opcion = scan.nextInt();
             if (opcion > (lista.size() + 1)) {   // Si la opcion es mayor que lista.size + 1 significa que nos salimos de las posibles opciones del menu
                 System.out.println("Opcion incorrecta.");
@@ -152,18 +154,19 @@ public class OperacionesClientes {
     }
 
     public void modificar() {
-        opConcesionario = new OperacionesConcesionario(concesionario);
-        Scanner scan = new Scanner(System.in);
-        int opcion;
-        HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
-        ArrayList<Cliente> lista = new ArrayList<>();
-        for (Cliente item : clientes.values()) {
-            lista.add(item);
-        }
-        indicesClientes(lista);
-        System.out.print("Elija el número del cliente a modificar: ");
+        try{
+            opConcesionario = new OperacionesConcesionario(concesionario);
+            Scanner scan = new Scanner(System.in);
+            int opcion;
+            HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
+            ArrayList<Cliente> lista = new ArrayList<>();
+            for (Cliente item : clientes.values()) {
+                lista.add(item);
+            }
+            indicesClientes(lista);
+            System.out.print("Elija el número del cliente a modificar: ");
 
-        try {
+
             opcion = scan.nextInt();
             if (opcion > (lista.size() + 1)) {
                 System.out.println("Opcion incorrecta.");

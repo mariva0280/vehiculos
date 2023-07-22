@@ -8,16 +8,18 @@ public class Reparacion {
     private Date fecha;
     private boolean resuelta;
     private Coche coche;
+    private Mecanico mecanico;
 
     public Reparacion() {
     }
 
-    public Reparacion(TipoReparacion tipoReparacion, String descripcion, Date fecha, boolean resuelta,Coche coche) {
+    public Reparacion(TipoReparacion tipoReparacion, String descripcion, Date fecha, boolean resuelta,Coche coche,Mecanico mecanico) {
         this.tipoReparacion = tipoReparacion;
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.resuelta = resuelta;
         this.coche = coche;
+        this.mecanico = mecanico;
     }
 
     public TipoReparacion getTipoReparacion() {
@@ -58,6 +60,14 @@ public class Reparacion {
 
     public void setCoche(Coche coche) {
         this.coche = coche;
+    }
+
+    public Mecanico getMecanico() {
+        return mecanico;
+    }
+
+    public void setMecanico(Mecanico mecanico) {
+        this.mecanico = mecanico;
     }
 
     @Override

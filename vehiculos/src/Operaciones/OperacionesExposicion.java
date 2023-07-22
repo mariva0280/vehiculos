@@ -57,11 +57,10 @@ public class OperacionesExposicion {
     }
 
     public void agregarExposicion() {
-        // AQUI TENEMOS DE NUEVO LA LLAMADA AL METODO LLENAR CONCECIONARIO PARA PROBAR QUE LUEGO BORRAREMOS
-        llenarConcesionario();
-        Scanner scan = new Scanner(System.in);
-
         try {
+            // AQUI TENEMOS DE NUEVO LA LLAMADA AL METODO LLENAR CONCECIONARIO PARA PROBAR QUE LUEGO BORRAREMOS
+            llenarConcesionario();
+            Scanner scan = new Scanner(System.in);
             opConcesionario = new OperacionesConcesionario(concesionario);
             Exposicion exposicion = new Exposicion();
             System.out.print("Introduzca un número a la exposición: ");
@@ -111,8 +110,8 @@ public class OperacionesExposicion {
     }
 
     public void removerExposicion() {
-        Scanner scanner = new Scanner(System.in);
         try {
+            Scanner scanner = new Scanner(System.in);
             opConcesionario = new OperacionesConcesionario(concesionario);
             HashMap<Integer, Exposicion> exposiciones = concesionario.getExposiciones();
             System.out.print("Introduzca el número de exposición a eliminar: ");
@@ -130,9 +129,8 @@ public class OperacionesExposicion {
     }
 
     public void modificarExposicion() {
-        Scanner scan = new Scanner(System.in);
-
         try {
+            Scanner scan = new Scanner(System.in);
             int opcion;
             System.out.print("Elija la exposición a modificar: ");
             HashMap<Integer, Exposicion> exposiciones = concesionario.getExposiciones();

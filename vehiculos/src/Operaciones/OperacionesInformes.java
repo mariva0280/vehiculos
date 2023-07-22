@@ -13,6 +13,7 @@ public class OperacionesInformes {
     private OperacionesCoches opCoches;
     private OperacionesVentas opVentas;
     private OperacionesReservas opReservas;
+    private OperacionesReparacion opReparaciones;
 
     public OperacionesInformes(Concesionario concesionario) {
 
@@ -21,24 +22,25 @@ public class OperacionesInformes {
         this.opCoches = new OperacionesCoches(concesionario);
         this.opVentas = new OperacionesVentas(concesionario);
         this.opReservas = new OperacionesReservas(concesionario);
-
+        this.opReparaciones = new OperacionesReparacion(concesionario);
     }
     public void menuInformes(){
-        int opcion = 0;
         Scanner scan = new Scanner(System.in);
-        System.out.println("");
-        while (opcion != 7) {
-            System.out.println("*****MENU INFORMES*****");
-            System.out.println("1 - Coches en venta.");
-            System.out.println("2 - Coches reservados.");
-            System.out.println("3 - Coches en reparación.");
-            System.out.println("4 - Clientes coches reservados.");
-            System.out.println("5 - Clientes coches comprados.");
-            System.out.println("6 - Vendedores coches vendidos.");
-            System.out.println("7 - Salir.");
+        try{
+            int opcion = 0;
             System.out.println("");
-            System.out.print("Elija una opcion: ");
-            try {
+            while (opcion != 7) {
+                System.out.println("*****MENU INFORMES*****");
+                System.out.println("1 - Coches en venta.");
+                System.out.println("2 - Coches reservados.");
+                System.out.println("3 - Coches en reparación.");
+                System.out.println("4 - Clientes coches reservados.");
+                System.out.println("5 - Clientes coches comprados.");
+                System.out.println("6 - Vendedores coches vendidos.");
+                System.out.println("7 - Salir.");
+                System.out.println("");
+                System.out.print("Elija una opcion: ");
+
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case (1):
@@ -48,7 +50,7 @@ public class OperacionesInformes {
                         opReservas.listarReservas();
                         break;
                     case (3):
-                        //modificar();
+                        opReparaciones.listarReparaciones();
                         break;
                     case (4):
                         opReservas.listarReservasCliente();
@@ -60,12 +62,9 @@ public class OperacionesInformes {
                         opVentas.listarCochesPorVendedor();
                         break;
                 }
-            } catch (Exception ex) {
-                scan.nextLine();
             }
+        }catch (Exception ex) {
+            scan.nextLine();
         }
-
     }
-
-
 }
