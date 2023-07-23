@@ -18,11 +18,35 @@ public class OperacionesClientes {
 
     private Concesionario concesionario;
     private OperacionesConcesionario opConcesionario;
+    private OperacionesCoches opCoches;
 
     public OperacionesClientes(Concesionario concesionario) {
 
         this.concesionario = concesionario;
         this.opConcesionario = new OperacionesConcesionario(concesionario);
+        this.opCoches = new OperacionesCoches(concesionario);
+    }
+    public void menuFinalClientes() {
+        Scanner scan = new Scanner(System.in);
+        try{
+            int opcion = 0;
+            System.out.println("");
+            while(opcion != 2){
+                System.out.println("*****MENU CLIENTES*****");
+                System.out.println("1 - Consultar coches disponibles.");
+                System.out.println("2 - Salir.");
+                opcion = scan.nextInt();
+                switch (opcion) {
+                    case (1):
+                        opCoches.listarCoches();
+                        break;
+                    case (2):
+                        break;
+                }
+            }
+        }catch (Exception ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
     }
     public void menuClientes(){
         Scanner scan = new Scanner(System.in);

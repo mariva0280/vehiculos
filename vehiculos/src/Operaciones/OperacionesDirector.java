@@ -6,17 +6,38 @@ import Objetos.DirectorComercial;
 import java.util.Scanner;
 
 public class OperacionesDirector {
-    int opcion;
-    private final Concesionario concesionario;
+
+    private  Concesionario concesionario;
+    private OperacionesConcesionario opConcesionario;
+    private OperacionesCoches opCoches;
+    private OperacionesClientes opClientes;
+    private OperacionesExposicion opExposiciones;
+    private OperacionesInformes opInformes;
+    private OperacionesReparacion opReparaciones;
+    private OperacionesReservas opReservas;
+    private OperacionesVendedores opVendedores;
+    private OperacionesVentas opVentas;
+
 
     public OperacionesDirector(Concesionario concesionario) {
         this.concesionario = concesionario;
+        this.opConcesionario = new OperacionesConcesionario(concesionario);
+        this.opCoches = new OperacionesCoches(concesionario);
+        this.opClientes = new OperacionesClientes(concesionario);
+        this.opExposiciones = new OperacionesExposicion(concesionario);
+        this.opInformes = new OperacionesInformes(concesionario);
+        this.opReparaciones = new OperacionesReparacion(concesionario);
+        this.opReservas = new OperacionesReservas(concesionario);
+        this.opVendedores = new OperacionesVendedores(concesionario);
+        this.opVentas = new OperacionesVentas(concesionario);
     }
 
     public void menuDirector() {
+        int opcion = 0;
         Scanner scan = new Scanner(System.in);
         while (opcion != 7) {
-            System.out.println("1 - Dar de alta.");
+            System.out.println("*****MENÚ DIRECTOR*****");
+            System.out.println("1 - Dar de alta,baja,modificar, coches, clientes,vendedores y mecánicos.");
             System.out.println("2 - Dar de baja.");
             System.out.println("3 - Modificar.");
             System.out.println("4 - Consultar vendedores.");
@@ -28,16 +49,32 @@ public class OperacionesDirector {
             try {
                 opcion = scan.nextInt();
                 switch (opcion) {
-                    /*case (1):
-                        agregar();
+                    case (1):
+                        //opCoches.menuCoches(); podemos ponerlo así por menus para que nos pase por todas las opciones o llamando al metodo que queramos, eso ya lo que decidamos.
+                        opCoches.agregar();
+                        opVendedores.agregar();
+                        opClientes.agregar();
+                        opVentas.vender();
+                        opReservas.reservar();
+                        opReparaciones.agregarReparar();
+                        opExposiciones.agregarExposicion();
+                        opCoches.agregarCocheExposicion();
                         break;
                     case (2):
-                        eliminar();
+                        opCoches.eliminar();
+                        opVendedores.eliminar();
+                        opClientes.eliminar();
+                        opExposiciones.removerExposicion();
+                        opCoches.removerCocheExposicion();
+                        opReservas.cancelar();
                         break;
                     case (3):
-                        modificar();
+                        opCoches.modificar();
+                        opVendedores.modificar();
+                        opClientes.modificar();
+                        opExposiciones.modificarExposicion();
                         break;
-                    case (4):
+                    /*case (4):
                         test();
                         break;
                     case (5):

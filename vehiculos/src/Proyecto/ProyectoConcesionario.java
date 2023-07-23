@@ -40,18 +40,20 @@ public class ProyectoConcesionario {
                 } else if (opcion < 5) {
                     switch (opcion) {
                         case (1):
+                            OperacionesDirector opDirector = new OperacionesDirector(concesionario);
+                            opDirector.menuDirector();
                             break;
                         case (2):
                             OperacionesVendedores opVendedores = new OperacionesVendedores(concesionario);
-                            opVendedores.menuVendedores();
+                            opVendedores.menuFinalVendedor();
                             break;
                         case (3):
                             OperacionesClientes opClientes = new OperacionesClientes(concesionario);
-                            opClientes.menuClientes();
+                            opClientes.menuFinalClientes();
                             break;
                         case (4):
-                            OperacionesReparacion opReparaciones = new OperacionesReparacion(concesionario);
-                            opReparaciones.menuReparaciones();
+                            //OperacionesReparacion opReparaciones = new OperacionesReparacion(concesionario);
+                            //opReparaciones.menuReparaciones();
                             //OperacionesExposicion opExposiciones = new OperacionesExposicion(concesionario);
                             //opExposiciones.menuExposiciones();
 

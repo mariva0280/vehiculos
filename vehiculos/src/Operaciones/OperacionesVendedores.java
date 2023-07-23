@@ -31,34 +31,35 @@ public class OperacionesVendedores {
         int opcion = 0;
         Scanner scan = new Scanner(System.in);
         System.out.println("");
-        while (opcion != 5) {
+        while (opcion != 6) {
             System.out.println("*****MENU VENDEDORES*****");
             System.out.println("1 - Consultar ventas");
-            System.out.println("2 - Dar de baja");
-            System.out.println("3 - Modificar");
-            System.out.println("4 - Listado Vendedores");
-            System.out.println("5 - Salir");
+            System.out.println("2 - Consultar reservas.");
+            System.out.println("3 - Consultar exposiciones.");
+            System.out.println("4 - Consultar coches.");
+            System.out.println("5 - Consultar clientes.");
+            System.out.println("6 - Salir.");
             System.out.println("");
             System.out.print("Elija una opcion: ");
             try {
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case (1):
-                        opVentas.vender();
+                        opVentas.listarCochesPorVendedor();
                         break;
                     case (2):
-                        opReservas.menuReservas();
+                        opReservas.listarReservas();
                         break;
                     case (3):
-                        opClientes.menuClientes();
+                        opExposicion.listarExposiciones();
                         break;
                     case (4):
-                        opCoches.menuCoches();
+                        opCoches.listarCoches();
                         break;
                     case (5):
+                        opClientes.listarClientes();
                         break;
-                    default:
-                        System.out.println("Opción invalida.");
+                    case (6):
                         break;
                 }
             } catch (Exception ex) {
