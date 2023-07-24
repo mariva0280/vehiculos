@@ -144,20 +144,17 @@ public class OperacionesClientes {
             Scanner scan = new Scanner(System.in);
             int opcion;
             HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
-            // HACEMOS ARRAYLIST PARA TRABAJAR CON INDICES EN VEZ DE CON DNI
             ArrayList<Cliente> lista = new ArrayList<>();
-            //COMPLETAMOS EL ARRAYLIST DE INDICES CON LOS VALORES CLIENTES DEL HASHMAP
             for (Cliente item : clientes.values()) {
                 lista.add(item);
             }
-            //PASAMOS ARRAYLIST AL METODO INDICECLIENTES Y REUTILIZAR CODIGO
             indicesClientes(lista);
             System.out.print("Elija el número del cliente a eliminar: ");
             opcion = scan.nextInt();
-            if (opcion > (lista.size() + 1)) {   // Si la opcion es mayor que lista.size + 1 significa que nos salimos de las posibles opciones del menu
+            if (opcion > (lista.size() + 1)) {
                 System.out.println("Opcion incorrecta.");
                 eliminar();
-            } else if (opcion == lista.size() + 1) {    // Si la opcion es una posicion mas que el tamaño de la lista significa que es la opcion "salir" y no hacemos nada
+            } else if (opcion == lista.size() + 1) {
 
             } else {
                 opConcesionario.eliminarCliente(lista.get(opcion - 1));
@@ -257,7 +254,7 @@ public class OperacionesClientes {
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
-        System.out.println(lista.size() + 1 + " - Salir");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
+        System.out.println(lista.size() + 1 + " - Salir");
         System.out.println("");
     }
     public void listarClientes() {

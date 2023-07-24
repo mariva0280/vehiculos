@@ -13,6 +13,7 @@ public class Concesionario {
     private HashMap<String, Venta> cochesVendidos;
     private HashMap<String, Reparacion> cochesReparacion;
     private HashMap<String,Mecanico> mecanicos;
+    private DirectorComercial director;
 
 
 
@@ -25,6 +26,7 @@ public class Concesionario {
         this.cochesVendidos = new HashMap<String, Venta>();
         this.cochesReparacion = new HashMap<>();
         this.mecanicos = new HashMap<>();
+        this.director = new DirectorComercial();
     }
 
 
@@ -90,5 +92,13 @@ public class Concesionario {
 
     public void setMecanicos(HashMap<String, Mecanico> mecanicos) {
         this.mecanicos = mecanicos;
+    }
+
+    public DirectorComercial getDirector() {
+        return director;
+    }
+
+    public void setDirector(DirectorComercial director) {
+        this.director = director;
     }
 }

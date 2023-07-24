@@ -5,6 +5,7 @@ public enum Estado {
     STOCK,
     RESERVADO,
     REPARACION,
-    EN_EXPOSICION
+    EN_EXPOSICION,
+    REPARADO
 }
 

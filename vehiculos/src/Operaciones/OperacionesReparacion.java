@@ -165,47 +165,7 @@ public class OperacionesReparacion {
         }
         return coche.getMatricula();
     }
-    private void agregarM() {
-        opConcesionario = new OperacionesConcesionario(concesionario);
-        Mecanico mecanico = new Mecanico();
-        Scanner scan = new Scanner(System.in);
-        try {
-            System.out.print("Introduzca el nombre del cliente: ");
-            String nombre = (scan.nextLine());
-            if(!Validar.validateName(nombre)){
-                throw new EinvalidPropertyException("Nombre incorrecto.");
-            }
-            mecanico.setNombre(nombre);
 
-            System.out.print("Introduzca la dirección del cliente: ");
-            String direccion = (scan.nextLine());
-            if(!Validar.validateDireccion(direccion)){
-                throw new EinvalidPropertyException("Dirección incorrecta.");
-            }
-            mecanico.setDireccion(direccion);
-
-            System.out.print("Introduzca el DNI del cliente: ");
-            String dni =(scan.nextLine());
-            if(!Validar.validateDni(dni)){
-                throw new EinvalidPropertyException("DNI incorrecto.");
-            }
-            mecanico.setDni(dni);
-
-            System.out.print("Introduzca el teléfono del cliente: ");
-            String telefonoStr =scan.nextLine();
-            if(!Validar.validateTelefono(telefonoStr)){
-                throw new EinvalidPropertyException("Teléfono incorrecto.");
-            }
-            int telefono = Integer.parseInt(telefonoStr);
-            mecanico.setTelefono(telefono);
-
-            opConcesionario.agregarMecanico(mecanico);
-            System.out.println("Mecánico  agregado correctamente.");
-        } catch (EinvalidPropertyException ex){
-            System.out.println("Error: " + ex.getMessage());
-            agregarM();
-        }
-    }
     public String verMecanicos(HashMap<String, Mecanico> mecanicos) {
         ArrayList<Mecanico> lista = new ArrayList<>();
         Scanner scan = new Scanner(System.in);

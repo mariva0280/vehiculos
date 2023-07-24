@@ -58,8 +58,7 @@ public class OperacionesExposicion {
 
     public void agregarExposicion() {
         try {
-            // AQUI TENEMOS DE NUEVO LA LLAMADA AL METODO LLENAR CONCECIONARIO PARA PROBAR QUE LUEGO BORRAREMOS
-            llenarConcesionario();
+
             Scanner scan = new Scanner(System.in);
             opConcesionario = new OperacionesConcesionario(concesionario);
             Exposicion exposicion = new Exposicion();
@@ -94,7 +93,6 @@ public class OperacionesExposicion {
 
             opConcesionario.agregarExposicion(exposicion);
             System.out.println("Exposición agregada correctamente.");
-            //AQUI HE AÑADIDO EL METODO PARA AÑADIR COCHES A EXPOSICION QUE ESTÁ EN OPERACIONES COCHES VALE
 
             System.out.println("¿Desea agregar un coche a la exposición? (S / N)");
             String respuesta = scan.nextLine();
@@ -228,18 +226,5 @@ public class OperacionesExposicion {
         }
         System.out.println("");
     }
-    public void llenarConcesionario(){
 
-        Coche coche1 = new Coche("Seat","Ibiza","7250CGR",8000,10000, TipoVehiculo.TURISMO, Estado.STOCK);
-        Coche coche2 = new Coche("BMW","X-2","7251LGR",28000,35000,TipoVehiculo.TODOTERRENO,Estado.STOCK);
-        Coche coche3 = new Coche("CITROEN","Berlingo","7252FGR",18000,20000,TipoVehiculo.INDUSTRIAL,Estado.STOCK);
-
-        opConcesionario.agregarCoche(coche1);
-        opConcesionario.agregarCoche(coche2);
-        opConcesionario.agregarCoche(coche3);
-        Cliente cliente = new Cliente("MARIA","TOLEDO","12345678A",123123123);
-        Vendedor vendedor = new Vendedor("PEDRO","MADRID","12345678B",456456456);
-        opConcesionario.agregarCliente(cliente);
-        opConcesionario.agregarVendedor(vendedor);
-    }
 }

@@ -12,8 +12,4 @@ public class Vendedor extends Persona {
         super(nombre, direccion, dni,telefono);
 
     }
-
-
-
-
 }

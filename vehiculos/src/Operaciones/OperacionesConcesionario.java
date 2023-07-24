@@ -115,7 +115,9 @@ public class OperacionesConcesionario {
         if(reparacion != null) {
             Coche coche = reparacion.getCoche();
             coche.setEstado(Estado.REPARACION);
+            reparacion.setResuelta(true);
             modificarCoche(coche);
+            System.out.println("El coche ha sido reparado y su estado ha sido actualizado.");
         }else{
             System.out.println("El coche indicado no está en reparación");
         }
@@ -128,6 +130,11 @@ public class OperacionesConcesionario {
         concesionario.setMecanicos(listaMecanicos);
     }
     public HashMap listarMecanicos(){return concesionario.getMecanicos();}
+    /*public void agregarDirector(DirectorComercial director) {
+        HashMap<String,DirectorComercial> listaMecanicos = concesionario.getMecanicos();
+        listaMecanicos.put(mecanico.getDni(),mecanico);
+        concesionario.setMecanicos(listaMecanicos);
+    }*/
 
 
 

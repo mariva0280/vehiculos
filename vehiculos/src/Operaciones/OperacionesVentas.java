@@ -20,35 +20,53 @@ public class OperacionesVentas {
         this.concesionario = concesionario;
         this.opConcesionario = new OperacionesConcesionario(concesionario);
     }
-    // METODO PARA VENDER UN COCHE
+
+    public void menuVentas(){
+        Scanner scan = new Scanner(System.in);
+        try {
+            int opcion = 0;
+            System.out.println("");
+            while (opcion != 4) {
+                System.out.println("*****MENU VENTAS*****");
+                System.out.println("1 - Ventas.");
+                System.out.println("2 - Lista clientes con coches vendidos.");
+                System.out.println("3 - Lista coches vendidos por vendedor.");
+                System.out.println("4 - Salir.");
+                System.out.print("Elija una opcion: ");
+
+                opcion = scan.nextInt();
+                switch (opcion) {
+                    case (1):
+                        vender();
+                        break;
+                    case (2):
+                        listarClientePorModelo();
+                        break;
+                    case (3):
+                        listarCochesPorVendedor();
+                        break;
+                    case (4):
+                        break;
+                }
+            }
+        }catch (Exception ex) {
+            scan.nextLine();
+        }
+    }
+
     public void vender() {
-        /* ESTE METODO LLENAR CONCESIONARIO ESTÁ HECHO PARA PROBARLO EL PROGRAMA SIN TENER QUE
-        ESTAR SIEMPRE INGRESANDO TODOS LOS DATOS PARA QUE FUNCIONE SE BORRARÁ CUANDO SEA NECESARIO
-         */
-        llenarConcesionario();
 
         HashMap<String, Cliente> clientes = opConcesionario.listarClientes();
         HashMap<String, Vendedor> vendedores = opConcesionario.listarVendedores();
         HashMap<String, Coche> coches = opConcesionario.listarCoches();
-
 
         Venta venta = new Venta();
         venta.setCliente(clientes.get(verClientes(clientes)));
         venta.setVendedor(vendedores.get(verVendedores(vendedores)));
         venta.setCoche(coches.get(verCoches(coches)));
         opConcesionario.agregarVenta(venta);
-        /*
-        LA INSTANCIA AQUI A OPERACIONES INFORMES ES PARA QUE PODAMOS USAR EL MENU INFORMES DESDE EL MAIN
-        Y PODAMOS PROBAR LO QUE HAY EN OPERACIONES INFORMES SE BORRARÁ CUANDO ESTE TERMINADO Y FUNCIONANDO
-         */
-        OperacionesInformes opInformes = new OperacionesInformes(concesionario);
-        opInformes.menuInformes();
-
     }
-    /*
-    ESTOS METODOS VERCLIENTES,VERVENDEDORES Y VERCOCHES SON PARA ESCOGER DE LA LISTA EL CLIENTE QUE VA A COMPRAR
-    EL COCHE, EL VENDEDOR QUE LO VENDE Y EL COCHE QUE ESCOGE DE LA LISTA PARA VENDER
-     */
+
     public String verClientes(HashMap<String, Cliente> clientes) {
         ArrayList<Cliente> lista = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
@@ -62,7 +80,7 @@ public class OperacionesVentas {
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
-        System.out.println(lista.size() + 1 + " - Salir.");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
+        System.out.println(lista.size() + 1 + " - Salir.");
         System.out.println("");
         System.out.print("Elija de la lista el cliente que desea comprar el coche o pulse " + (lista.size()+1)+ " para salir: ");
         try {
@@ -92,7 +110,7 @@ public class OperacionesVentas {
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
-        System.out.println(lista.size() + 1 + " - Salir");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
+        System.out.println(lista.size() + 1 + " - Salir");
         System.out.println("");
         System.out.print("Elija el vendedor de la lista que va a realizar la venta o pulse " + (lista.size()+1) + " para salir: ");
         try {
@@ -123,7 +141,7 @@ public class OperacionesVentas {
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
-        System.out.println(lista.size() + 1 + " - Salir.");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
+        System.out.println(lista.size() + 1 + " - Salir.");
         System.out.println("");
         System.out.print("Elija el coche deseado por el cliente o pulse " + (lista.size()+1)+" para salir: ");
         try {
@@ -157,9 +175,6 @@ public class OperacionesVentas {
         }
         System.out.println("");
     }*/
-    /*
-    ESTE METODO ESCOGEMOS DE LA LISTA DE COCHES VENDIDOS Y NOS IMPRIME LOS DATOS DEL CLIENTE QUE LO HA COMPRADO
-     */
     public void listarClientePorModelo() {
         HashMap<String,Venta> ventas = opConcesionario.listarVentas();
         ArrayList<Venta> lista = new ArrayList<>();
@@ -182,10 +197,6 @@ public class OperacionesVentas {
             System.out.println("Error: " +ex.getMessage());
         }
     }
-    /*
-    ESTE METODO ESCOGES EL VENDEDOR Y TE MUESTRA LA LISTA DE COCHES VENDIDOS POR VENDEDOR Y EL DINERO QUE HA GANADO
-    CON LAS VENTAS
-     */
     public void listarCochesPorVendedor() {
         HashMap<String,Venta> ventas = opConcesionario.listarVentas();
         ArrayList<Venta> lista = new ArrayList<>();
@@ -215,25 +226,6 @@ public class OperacionesVentas {
         }catch (Exception ex){
             System.out.println("Error: " +ex.getMessage());
         }
-    }
-
-    /*
-    ESTE METODO COMO TE HE PUESTO ARRIBA ES PARA PROBAR TODAS LAS FUNCIONES NUEVAS PORQUE HASTA QUE NO TENGAMOS
-    TODAS LAS FUNCIONALIDADES NO ESTARA DINAMICO Y NO FUNCIONARA COMPLETO
-     */
-    public void llenarConcesionario(){
-
-        Coche coche1 = new Coche("Seat","Ibiza","7250CGR",8000,10000, TipoVehiculo.TURISMO, Estado.STOCK);
-        Coche coche2 = new Coche("BMW","X-2","7251LGR",28000,35000,TipoVehiculo.TODOTERRENO,Estado.STOCK);
-        Coche coche3 = new Coche("CITROEN","Berlingo","7252FGR",18000,20000,TipoVehiculo.INDUSTRIAL,Estado.STOCK);
-
-        opConcesionario.agregarCoche(coche1);
-        opConcesionario.agregarCoche(coche2);
-        opConcesionario.agregarCoche(coche3);
-        Cliente cliente = new Cliente("MARIA","TOLEDO","12345678A",123123123);
-        Vendedor vendedor = new Vendedor("PEDRO","MADRID","12345678B",456456456);
-        opConcesionario.agregarCliente(cliente);
-        opConcesionario.agregarVendedor(vendedor);
     }
 
 }

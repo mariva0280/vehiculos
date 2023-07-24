@@ -1,8 +1,12 @@
 package Operaciones;
 
+import Objetos.Cliente;
 import Objetos.Concesionario;
 import Objetos.DirectorComercial;
+import Validaciones.Validar;
+import Exception.EinvalidPropertyException;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class OperacionesDirector {
@@ -50,38 +54,49 @@ public class OperacionesDirector {
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case (1):
+                        opCoches.menuCoches();
+                        opVendedores.menuVendedores();
+                        opClientes.menuClientes();
                         //opCoches.menuCoches(); podemos ponerlo así por menus para que nos pase por todas las opciones o llamando al metodo que queramos, eso ya lo que decidamos.
-                        opCoches.agregar();
+                        /*opCoches.agregar();
                         opVendedores.agregar();
                         opClientes.agregar();
                         opVentas.vender();
                         opReservas.reservar();
                         opReparaciones.agregarReparar();
                         opExposiciones.agregarExposicion();
-                        opCoches.agregarCocheExposicion();
+                        opCoches.agregarCocheExposicion();*/
                         break;
                     case (2):
+                        opVentas.menuVentas();
+                        /*opVentas.listarClientePorModelo();
+                        opVentas.listarCochesPorVendedor();
+                        opVentas.vender();
                         opCoches.eliminar();
                         opVendedores.eliminar();
                         opClientes.eliminar();
                         opExposiciones.removerExposicion();
                         opCoches.removerCocheExposicion();
-                        opReservas.cancelar();
+                        opReservas.cancelar();*/
                         break;
                     case (3):
-                        opCoches.modificar();
+                        opExposiciones.menuExposiciones();
+                        /*opCoches.modificar();
                         opVendedores.modificar();
                         opClientes.modificar();
-                        opExposiciones.modificarExposicion();
+                        opExposiciones.modificarExposicion();*/
                         break;
-                    /*case (4):
-                        test();
+                    case (4):
+                        opReparaciones.menuReparaciones();
                         break;
                     case (5):
-                        imprimirClientes();
+                        opReservas.menuReservas();
                         break;
                     case (6):
-                        imprimirCoches();*/
+                        opInformes.menuInformes();
+                        break;
+                    case (7):
+                        break;
                 }
             } catch (Exception ex) {
                 scan.nextLine();
@@ -89,30 +104,70 @@ public class OperacionesDirector {
         }
     }
 
-    /*private void agregar() {
-        DirectorComercial director = new DirectorComercial();
-        Scanner scan = new Scanner(System.in);
-        try {
+    /*public void agregar() {
+        try{
+            opConcesionario = new OperacionesConcesionario(concesionario);
+            DirectorComercial director = new DirectorComercial();
+            Scanner scan = new Scanner(System.in);
+
             System.out.print("Introduzca el nombre del director: ");
-            director.setNombre(scan.nextLine());
-            System.out.println("Introduzca la direccion del director: ");
-            director.setDireccion(scan.nextLine());
-            System.out.println("Introduzca el DNI del director: ");
-            director.setDni(scan.nextLine());
-            System.out.println("Introduzca el telefono del director: ");
-            director.setTelefono(scan.nextInt());
-            concesionario.agregarDirector(director);
-            System.out.println("Director añadido correctamente.");
-        } catch (Exception ex) {
-            System.out.println(" ");
-            System.out.println("Telefono incorrecto");
+            String nombre = scan.nextLine();
+            if(!Validar.validateName(nombre)){
+                throw new EinvalidPropertyException("Nombre incorrecto.");
+            }
+            director.setNombre(nombre);
+
+            System.out.print("Introduzca la dirección del director: ");
+            String direccion = scan.nextLine();
+            if(!Validar.validateDireccion(direccion)){
+                throw new EinvalidPropertyException("Dirección incorrecta.");
+            }
+            director.setDireccion(direccion);
+
+            System.out.print("Introduzca el DNI del director: ");
+            String dni =(scan.nextLine());
+            if(!Validar.validateDni(dni)){
+                throw new EinvalidPropertyException("DNI incorrecto.");
+            }
+            if(verificarDniRep(dni)){
+                throw new EinvalidPropertyException("DNI duplicado.");
+            }
+            director.setDni(dni);
+
+            System.out.print("Introduzca el teléfono del director: ");
+            String telefonoStr =scan.nextLine();
+            if(!Validar.validateTelefono(telefonoStr)){
+                throw new EinvalidPropertyException("Teléfono incorrecto.");
+            }
+            int telefono = Integer.parseInt(telefonoStr);
+            if(verificarTlfRep(telefono)){
+                throw new EinvalidPropertyException("Teléfono duplicado.");
+            }
+            director.setTelefono(telefono);
+
+            opConcesionario.agregarDirector(director);
+            System.out.println("Director agregado correctamente.");
+        } catch (EinvalidPropertyException ex){
+            System.out.println("Error: " + ex.getMessage());
             agregar();
         }
-        test();
-    }*/
-    /*private void test(){
-        DirectorComercial directorComercial = concesionario.listarDirector();
-        if ( directorComercial == null) System.out.println("No hay un director comercial asignado");
-        else System.out.println(directorComercial.toString());
+    }
+    public boolean verificarDniRep(String dni){
+        HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
+        for(Cliente cliente : clientes.values()){
+            if(cliente.getDni().equals(dni)){
+                return true;
+            }
+        }
+        return false;
+    }
+    public boolean verificarTlfRep(int telefono){
+        HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
+        for(Cliente cliente : clientes.values()){
+            if(cliente.getTelefono() == telefono){
+                return true;
+            }
+        }
+        return false;
     }*/
 }

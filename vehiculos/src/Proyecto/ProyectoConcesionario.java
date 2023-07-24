@@ -52,11 +52,8 @@ public class ProyectoConcesionario {
                             opClientes.menuFinalClientes();
                             break;
                         case (4):
-                            //OperacionesReparacion opReparaciones = new OperacionesReparacion(concesionario);
-                            //opReparaciones.menuReparaciones();
-                            //OperacionesExposicion opExposiciones = new OperacionesExposicion(concesionario);
-                            //opExposiciones.menuExposiciones();
-
+                            OperacionesMecanicos opMecanicos = new OperacionesMecanicos(concesionario);
+                            opMecanicos.menuFinalMecanico();
                             break;
                         case (5):
                             System.exit(0);

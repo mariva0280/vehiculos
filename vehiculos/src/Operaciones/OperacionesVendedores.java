@@ -167,24 +167,21 @@ public class OperacionesVendedores {
         Scanner scan = new java.util.Scanner(System.in);
         int opcion;
         HashMap<String, Vendedor> vendedores = opConcesionario.listarVendedores();
-        // Creamos un arrayList llamado lista para poder trabajar con índices
         ArrayList<Vendedor> lista = new ArrayList<>();
-        // Aquí llenamos la lista con los valores (vendedores) del hashmap
         for (Vendedor item : vendedores.values()) {
             lista.add(item);
         }
-        // Pasamos la lista al método indicesVendedores y así reutilizar código
         indicesVendedores(lista);
         System.out.print("Elija el número del vendedor a eliminar: ");
         try {
             opcion = scan.nextInt();
-            if (opcion > (lista.size() + 1)) {   // Si la opcion es mayor que lista.size + 1 significa que nos salimos de las posibles opciones del menu
+            if (opcion > (lista.size() + 1)) {
                 System.out.println("Opción incorrecta.");
                 eliminar();
-            } else if (opcion == lista.size() + 1) {    // Si la opcion es una posicion mas que el tamaño de la lista significa que es la opcion "salir" y no hacemos nada
+            } else if (opcion == lista.size() + 1) {
 
             } else {
-                opConcesionario.eliminarVendedor(lista.get(opcion - 1));// Pasamos al metodo eliminarVendedor del concesionario, el vendedor elegido en la lista
+                opConcesionario.eliminarVendedor(lista.get(opcion - 1));
                 System.out.println("Vendedor eliminado correctamente.");
                 eliminar();
             }
