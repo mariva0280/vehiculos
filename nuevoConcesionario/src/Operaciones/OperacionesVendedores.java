@@ -31,34 +31,36 @@ public class OperacionesVendedores {
         int opcion = 0;
         Scanner scan = new Scanner(System.in);
         System.out.println("");
-        while (opcion != 5) {
+        while (opcion != 6) {
             System.out.println("*****MENU VENDEDORES*****");
             System.out.println("1 - Consultar ventas");
-            System.out.println("2 - Dar de baja");
-            System.out.println("3 - Modificar");
-            System.out.println("4 - Listado Vendedores");
-            System.out.println("5 - Salir");
+            System.out.println("2 - Consultar reservas.");
+            System.out.println("3 - Consultar exposiciones.");
+            System.out.println("4 - Consultar coches.");
+            System.out.println("5 - Consultar clientes.");
+            System.out.println("6 - Salir.");
             System.out.println("");
             System.out.print("Elija una opcion: ");
             try {
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case (1):
+                        opVentas.listarCochesPorVendedor();
                         opVentas.vender();
                         break;
                     case (2):
-                        opReservas.menuReservas();
+                        opReservas.listarReservas();
                         break;
                     case (3):
-                        opClientes.menuClientes();
+                        opExposicion.listarExposiciones();
                         break;
                     case (4):
-                        opCoches.menuCoches();
+                        opCoches.listarCoches();
                         break;
                     case (5):
+                        opClientes.listarClientes();
                         break;
-                    default:
-                        System.out.println("Opción invalida.");
+                    case (6):
                         break;
                 }
             } catch (Exception ex) {
@@ -77,7 +79,7 @@ public class OperacionesVendedores {
             System.out.println("2 - Dar de baja.");
             System.out.println("3 - Modificar.");
             System.out.println("4 - Listado Vendedores.");
-            System.out.println("5 - Salir.");
+            System.out.println("5 - Menú clientes.");
             System.out.println("");
             System.out.print("Elija una opcion: ");
             try {
@@ -166,24 +168,21 @@ public class OperacionesVendedores {
         Scanner scan = new java.util.Scanner(System.in);
         int opcion;
         HashMap<String, Vendedor> vendedores = opConcesionario.listarVendedores();
-        // Creamos un arrayList llamado lista para poder trabajar con índices
         ArrayList<Vendedor> lista = new ArrayList<>();
-        // Aquí llenamos la lista con los valores (vendedores) del hashmap
         for (Vendedor item : vendedores.values()) {
             lista.add(item);
         }
-        // Pasamos la lista al método indicesVendedores y así reutilizar código
         indicesVendedores(lista);
         System.out.print("Elija el número del vendedor a eliminar: ");
         try {
             opcion = scan.nextInt();
-            if (opcion > (lista.size() + 1)) {   // Si la opcion es mayor que lista.size + 1 significa que nos salimos de las posibles opciones del menu
+            if (opcion > (lista.size() + 1)) {
                 System.out.println("Opción incorrecta.");
                 eliminar();
-            } else if (opcion == lista.size() + 1) {    // Si la opcion es una posicion mas que el tamaño de la lista significa que es la opcion "salir" y no hacemos nada
+            } else if (opcion == lista.size() + 1) {
 
             } else {
-                opConcesionario.eliminarVendedor(lista.get(opcion - 1));// Pasamos al metodo eliminarVendedor del concesionario, el vendedor elegido en la lista
+                opConcesionario.eliminarVendedor(lista.get(opcion - 1));
                 System.out.println("Vendedor eliminado correctamente.");
                 eliminar();
             }
@@ -195,7 +194,6 @@ public class OperacionesVendedores {
     }
 
     public void modificar() {
-        try {
         opConcesionario = new OperacionesConcesionario(concesionario);
         Scanner scan = new Scanner(System.in);
         int opcion;
@@ -207,7 +205,7 @@ public class OperacionesVendedores {
         indicesVendedores(lista);
         System.out.print("Elija el número del vendedor a modificar: ");
 
-
+        try {
             opcion = scan.nextInt();
             if (opcion > (lista.size() + 1)) {
                 System.out.println("Opción incorrecta.");

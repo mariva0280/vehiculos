@@ -13,6 +13,7 @@ public class OperacionesInformes {
     private OperacionesCoches opCoches;
     private OperacionesVentas opVentas;
     private OperacionesReservas opReservas;
+    private OperacionesReparacion opReparaciones;
 
     public OperacionesInformes(Concesionario concesionario) {
 
@@ -21,11 +22,11 @@ public class OperacionesInformes {
         this.opCoches = new OperacionesCoches(concesionario);
         this.opVentas = new OperacionesVentas(concesionario);
         this.opReservas = new OperacionesReservas(concesionario);
-
+        this.opReparaciones = new OperacionesReparacion(concesionario);
     }
     public void menuInformes(){
         Scanner scan = new Scanner(System.in);
-        try {
+        try{
             int opcion = 0;
             System.out.println("");
             while (opcion != 7) {
@@ -49,7 +50,7 @@ public class OperacionesInformes {
                         opReservas.listarReservas();
                         break;
                     case (3):
-                        //modificar();
+                        opReparaciones.listarReparaciones();
                         break;
                     case (4):
                         opReservas.listarReservasCliente();
@@ -63,8 +64,7 @@ public class OperacionesInformes {
                 }
             }
         }catch (Exception ex) {
-                scan.nextLine();
-            }
+            scan.nextLine();
         }
     }
 }

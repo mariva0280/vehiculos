@@ -19,17 +19,18 @@ public class OperacionesReservas {
         this.opConcesionario = new OperacionesConcesionario(concesionario);
     }
     public void menuReservas(){
-        int opcion = 0;
         Scanner scan = new Scanner(System.in);
-        System.out.println("");
-        while (opcion != 4) {
-            System.out.println("*****MENU RESERVAS*****");
-            System.out.println("1 - Reservar.");
-            System.out.println("2 - Cancelar reserva.");
-            System.out.println("3 - Lista reservas.");
-            System.out.println("4 - Salir.");
-            System.out.print("Elija una opcion: ");
-            try {
+        try {
+            int opcion = 0;
+            System.out.println("");
+            while (opcion != 4) {
+                System.out.println("*****MENU RESERVAS*****");
+                System.out.println("1 - Reservar.");
+                System.out.println("2 - Cancelar reserva.");
+                System.out.println("3 - Lista reservas.");
+                System.out.println("4 - Salir.");
+                System.out.print("Elija una opcion: ");
+
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case (1):
@@ -44,14 +45,12 @@ public class OperacionesReservas {
                     case (4):
                         break;
                 }
-            } catch (Exception ex) {
-                scan.nextLine();
             }
+        }catch (Exception ex) {
+            scan.nextLine();
         }
     }
     public void reservar() {
-        //ESTE HAY QUE BORRAR LUEGO LA LLAMADA Y EL METODO QUE ESTÁ HECHO ABAJO ES PARA PROBAR
-        //llenarConcesionario();
 
         HashMap<String, Coche> coches = opConcesionario.listarCoches();
         HashMap<String, Cliente> clientes = opConcesionario.listarClientes();
@@ -61,22 +60,18 @@ public class OperacionesReservas {
         reserva.setCliente(clientes.get(verClientes(clientes)));
 
         opConcesionario.agregarReserva(reserva);
-        //ESTO HAY QUE ELIMINARLO LUEGO ES PARA PROBARLO CON INFORMES A LA VEZ.
-        //OperacionesInformes opInformes = new OperacionesInformes(concesionario);
-        //opInformes.menuInformes();
+
     }
     public void cancelar(){
-        try {
-        opConcesionario = new OperacionesConcesionario(concesionario);
-        Scanner scan = new Scanner(System.in);
-        int opcion;
-        HashMap<String,Reserva> reservas = opConcesionario.listarReservas();
-        // HACEMOS ARRAYLIST PARA TRABAJAR CON INDICES EN VEZ DE CON DNI
-        ArrayList<Reserva> lista = new ArrayList<>();
-        //COMPLETAMOS EL ARRAYLIST DE INDICES CON LOS VALORES CLIENTES DEL HASHMAP
-        for (Reserva item : reservas.values()) {
-            lista.add(item);
-        }
+        try{
+            opConcesionario = new OperacionesConcesionario(concesionario);
+            Scanner scan = new Scanner(System.in);
+            int opcion;
+            HashMap<String,Reserva> reservas = opConcesionario.listarReservas();
+            ArrayList<Reserva> lista = new ArrayList<>();
+            for (Reserva item : reservas.values()) {
+                lista.add(item);
+            }
 
             System.out.println("*****LISTA RESERVAS*****");
             System.out.println("");
@@ -103,11 +98,9 @@ public class OperacionesReservas {
     }
 
     public String verCoches(HashMap<String, Coche> coches) {
-        Coche coche = new Coche();
-        try {
         ArrayList<Coche> lista = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
-
+        Coche coche = new Coche();
 
         for (Coche item : coches.values()) {
             lista.add(item);
@@ -117,10 +110,10 @@ public class OperacionesReservas {
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
-        System.out.println(lista.size() + 1 + " - Salir.");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
+        System.out.println(lista.size() + 1 + " - Salir.");
         System.out.println("");
         System.out.print("Elija el coche deseado por el cliente de la lista para reservar o pulse " + (lista.size() + 1) + " para salir: ");
-
+        try {
             int opcion = scan.nextInt();
             if(opcion == lista.size() + 1) {
 
@@ -135,11 +128,9 @@ public class OperacionesReservas {
         return coche.getMatricula();
     }
     public String verClientes(HashMap<String, Cliente> clientes) {
-        Cliente cliente = new Cliente();
-        try {
         ArrayList<Cliente> lista = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
-
+        Cliente cliente = new Cliente();
 
         for (Cliente item : clientes.values()) {
             lista.add(item);
@@ -149,11 +140,11 @@ public class OperacionesReservas {
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
-        System.out.println(lista.size() + 1 + " - Salir.");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
+        System.out.println(lista.size() + 1 + " - Salir.");
         System.out.println("");
         System.out.print("Elija de la lista el cliente que desea reservar el coche o pulse " + (lista.size() + 1) + " para salir: ");
 
-
+        try {
             int opcion = scan.nextInt();
             if(opcion == lista.size() + 1) {
 
@@ -182,7 +173,6 @@ public class OperacionesReservas {
         }
     }
     public void listarReservasCliente() {
-        try{
         HashMap<String,Reserva> reservas = opConcesionario.listarReservas();
         ArrayList<Reserva> lista = new ArrayList<>();
         for (Reserva reserva : reservas.values()) {
@@ -197,7 +187,7 @@ public class OperacionesReservas {
 
         Scanner scan = new Scanner(System.in);
 
-
+        try{
             int opcion = scan.nextInt();
             System.out.println("Cliente que ha reservado el coche: " + lista.get(opcion-1).getCliente().toString());
 
@@ -205,18 +195,5 @@ public class OperacionesReservas {
             System.out.println("Error: " +ex.getMessage());
         }
     }
-    public void llenarConcesionario(){
 
-        Coche coche1 = new Coche("Seat","Ibiza","7250CGR",8000,10000, TipoVehiculo.TURISMO, Estado.STOCK);
-        Coche coche2 = new Coche("BMW","X-2","7251LGR",28000,35000,TipoVehiculo.TODOTERRENO,Estado.STOCK);
-        Coche coche3 = new Coche("CITROEN","Berlingo","7252FGR",18000,20000,TipoVehiculo.INDUSTRIAL,Estado.STOCK);
-
-        opConcesionario.agregarCoche(coche1);
-        opConcesionario.agregarCoche(coche2);
-        opConcesionario.agregarCoche(coche3);
-        Cliente cliente = new Cliente("MARIA","TOLEDO","12345678A",123123123);
-        Vendedor vendedor = new Vendedor("PEDRO","MADRID","12345678B",456456456);
-        opConcesionario.agregarCliente(cliente);
-        opConcesionario.agregarVendedor(vendedor);
-    }
 }

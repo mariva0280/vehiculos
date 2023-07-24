@@ -19,7 +19,8 @@ public class OperacionesExposicion {
         this.concesionario = concesionario;
         this.opConcesionario = new OperacionesConcesionario(concesionario);
     }
-    public void menuExposiciones(){
+
+    public void menuExposiciones() {
         int opcion = 0;
         Scanner scan = new Scanner(System.in);
         System.out.println("");
@@ -57,9 +58,7 @@ public class OperacionesExposicion {
     }
 
     public void agregarExposicion() {
-        // AQUI TENEMOS DE NUEVO LA LLAMADA AL METODO LLENAR CONCECIONARIO PARA PROBAR QUE LUEGO BORRAREMOS
         try {
-            llenarConcesionario();
             Scanner scan = new Scanner(System.in);
             opConcesionario = new OperacionesConcesionario(concesionario);
             Exposicion exposicion = new Exposicion();
@@ -98,7 +97,7 @@ public class OperacionesExposicion {
 
             System.out.println("¿Desea agregar un coche a la exposición? (S / N)");
             String respuesta = scan.nextLine();
-            if(respuesta.equalsIgnoreCase("S")){
+            if (respuesta.equalsIgnoreCase("S")) {
                 OperacionesCoches opCoches = new OperacionesCoches(concesionario);
                 opCoches.agregarCocheExposicion();
             }
@@ -120,17 +119,20 @@ public class OperacionesExposicion {
                 throw new EinvalidPropertyException("Número de exposición incorrecto.");
             }
             Exposicion exposicion = exposiciones.get(numero);
-            opConcesionario.removerExposicion(exposicion);
-            System.out.println("Exposición eliminada correctamente.");
+            int tamanio = exposicion.getCochesExposicion().size();
+            if (tamanio == 0) {
+                opConcesionario.removerExposicion(exposicion);
+                System.out.println("Exposición eliminada correctamente.");
+            } else throw new EinvalidPropertyException("No puedes eliminar una exposición con coches");
         } catch (EinvalidPropertyException e) {
-            System.out.println(e.getMessage());
-            removerExposicion();
+            System.out.println("Error:" + e.getMessage());
+            menuExposiciones();
         }
     }
 
     public void modificarExposicion() {
         try {
-        Scanner scan = new Scanner(System.in);
+            Scanner scan = new Scanner(System.in);
 
             int opcion;
             System.out.print("Elija la exposición a modificar: ");
@@ -202,17 +204,19 @@ public class OperacionesExposicion {
             modificarExposicion();
         }
     }
-    public void indicesExposiciones(ArrayList<Exposicion> indices){
+
+    public void indicesExposiciones(ArrayList<Exposicion> indices) {
         System.out.println("");
         System.out.println("*****LISTA EXPOSICIONES*****");
         System.out.println("");
-        for(int i = 0; i < indices.size(); i++){
+        for (int i = 0; i < indices.size(); i++) {
             System.out.println((i + 1) + " - " + indices.get(i).toString());
             System.out.println("");
         }
         System.out.println(indices.size() + 1 + " - Salir.");
         System.out.println("");
     }
+
     public void listarExposiciones() {
         System.out.println("");
         System.out.println("*****LISTA EXPOSICIONES*****");
@@ -229,18 +233,5 @@ public class OperacionesExposicion {
         }
         System.out.println("");
     }
-    public void llenarConcesionario(){
 
-        Coche coche1 = new Coche("Seat","Ibiza","7250CGR",8000,10000, TipoVehiculo.TURISMO, Estado.STOCK);
-        Coche coche2 = new Coche("BMW","X-2","7251LGR",28000,35000,TipoVehiculo.TODOTERRENO,Estado.STOCK);
-        Coche coche3 = new Coche("CITROEN","Berlingo","7252FGR",18000,20000,TipoVehiculo.INDUSTRIAL,Estado.STOCK);
-
-        opConcesionario.agregarCoche(coche1);
-        opConcesionario.agregarCoche(coche2);
-        opConcesionario.agregarCoche(coche3);
-        Cliente cliente = new Cliente("MARIA","TOLEDO","12345678A",123123123);
-        Vendedor vendedor = new Vendedor("PEDRO","MADRID","12345678B",456456456);
-        opConcesionario.agregarCliente(cliente);
-        opConcesionario.agregarVendedor(vendedor);
-    }
 }

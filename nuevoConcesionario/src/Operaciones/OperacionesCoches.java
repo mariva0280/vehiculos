@@ -34,7 +34,7 @@ public class OperacionesCoches {
                 System.out.println("2 - Dar de baja.");
                 System.out.println("3 - Modificar.");
                 System.out.println("4 - Listado Coches.");
-                System.out.println("5 - Salir.");
+                System.out.println("5 - Menú vendedores.");
                 System.out.println("");
                 System.out.print("Elija una opcion: ");
 
@@ -53,7 +53,7 @@ public class OperacionesCoches {
                         listarCoches();
                         break;
                     case (5):
-                        break; // Salir del ciclo while y regresar al método mostrarMenu
+                        break;
 
                 }
             }
@@ -141,25 +141,21 @@ public class OperacionesCoches {
             Scanner scan = new Scanner(System.in);
             int opcion;
             HashMap<String, Coche> coches = opConcesionario.listarCoches();
-            // HACEMOS ARRAYLIST PARA TRABAJAR CON INDICES EN VEZ DE CON DNI
             ArrayList<Coche> indices = new ArrayList<>();
-            //COMPLETAMOS EL ARRAYLIST DE INDICES CON LOS VALORES VENDEDORES DEL HASHMAP
             for (Coche item : coches.values()) {
                 indices.add(item);
             }
-            //PASAMOS ARRALIST AL METODO LISTARVENDEDORES Y REUTILIZAR CODIGO
             indicesCoches(indices);
             System.out.print("Elija el coche a eliminar: ");
-            //System.out.println("Si no desea eliminar vendedor pulse 3 para salir: ");
 
             opcion = scan.nextInt();
-            if (opcion > (indices.size() + 1)) { // Si la opcion es mayor que el tamaño del ARRAYLIST, indices.size() + 1 nos dice que nos salimos de las posibles opciones del menu
+            if (opcion > (indices.size() + 1)) {
                 System.out.println("Opción incorrecta.");
                 eliminar();
-            } else if (opcion == indices.size() + 1) { // Si la opcion es una posicion mas que el tamaño de la lista significa que es la opcion "salir" y no hacemos nada
+            } else if (opcion == indices.size() + 1) {
 
             } else {
-                opConcesionario.eliminarCoche(indices.get(opcion - 1)); // Pasamos al metodo eliminarVendedor del concesionario, el vendedor elegido en la lista
+                opConcesionario.eliminarCoche(indices.get(opcion - 1));
                 System.out.println("Coche eliminado correctamente.");
                 eliminar();
             }

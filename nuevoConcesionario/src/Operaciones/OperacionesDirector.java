@@ -1,85 +1,108 @@
 package Operaciones;
 
+import Objetos.Cliente;
 import Objetos.Concesionario;
 import Objetos.DirectorComercial;
+import Validaciones.Validar;
+import Exception.EinvalidPropertyException;
 
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class OperacionesDirector {
-    int opcion;
-    private final Concesionario concesionario;
+
+    private Concesionario concesionario;
+    private OperacionesConcesionario opConcesionario;
+    private OperacionesCoches opCoches;
+    private OperacionesClientes opClientes;
+    private OperacionesExposicion opExposiciones;
+    private OperacionesInformes opInformes;
+    private OperacionesReparacion opReparaciones;
+    private OperacionesReservas opReservas;
+    private OperacionesVendedores opVendedores;
+    private OperacionesVentas opVentas;
+
 
     public OperacionesDirector(Concesionario concesionario) {
         this.concesionario = concesionario;
+        this.opConcesionario = new OperacionesConcesionario(concesionario);
+        this.opCoches = new OperacionesCoches(concesionario);
+        this.opClientes = new OperacionesClientes(concesionario);
+        this.opExposiciones = new OperacionesExposicion(concesionario);
+        this.opInformes = new OperacionesInformes(concesionario);
+        this.opReparaciones = new OperacionesReparacion(concesionario);
+        this.opReservas = new OperacionesReservas(concesionario);
+        this.opVendedores = new OperacionesVendedores(concesionario);
+        this.opVentas = new OperacionesVentas(concesionario);
     }
 
     public void menuDirector() {
         Scanner scan = new Scanner(System.in);
         try {
+            int opcion = 0;
             while (opcion != 7) {
-                System.out.println("1 - Dar de alta.");
-                System.out.println("2 - Dar de baja.");
-                System.out.println("3 - Modificar.");
-                System.out.println("4 - Consultar vendedores.");
-                System.out.println("5 - Consultar clientes.");
-                System.out.println("6 - Consultar coches en stock.");
+                System.out.println("*****MENÚ DIRECTOR*****");
+                System.out.println("1 - Dar de alta,baja,modificar, coches, clientes,vendedores y mecánicos.");
+                System.out.println("2 - Ventas.");
+                System.out.println("3 - Exposiciones.");
+                System.out.println("4 - Reparaciones.");
+                System.out.println("5 - Reservas.");
+                System.out.println("6 - Informes.");
                 System.out.println("7 - Salir");
                 System.out.println("");
                 System.out.print("Elija una opcion: ");
 
                 opcion = scan.nextInt();
                 switch (opcion) {
-                    /*case (1):
-                        agregar();
+                    case (1):
+                        opCoches.menuCoches();
+                        opVendedores.menuVendedores();
+                        opClientes.menuClientes();
+                        //opCoches.menuCoches(); podemos ponerlo así por menus para que nos pase por todas las opciones o llamando al metodo que queramos, eso ya lo que decidamos.
+                        /*opCoches.agregar();
+                        opVendedores.agregar();
+                        opClientes.agregar();
+                        opVentas.vender();
+                        opReservas.reservar();
+                        opReparaciones.agregarReparar();
+                        opExposiciones.agregarExposicion();
+                        opCoches.agregarCocheExposicion();*/
                         break;
                     case (2):
-                        eliminar();
+                        opVentas.menuVentas();
+                        /*opVentas.listarClientePorModelo();
+                        opVentas.listarCochesPorVendedor();
+                        opVentas.vender();
+                        opCoches.eliminar();
+                        opVendedores.eliminar();
+                        opClientes.eliminar();
+                        opExposiciones.removerExposicion();
+                        opCoches.removerCocheExposicion();
+                        opReservas.cancelar();*/
                         break;
                     case (3):
-                        modificar();
+                        opExposiciones.menuExposiciones();
+                        /*opCoches.modificar();
+                        opVendedores.modificar();
+                        opClientes.modificar();
+                        opExposiciones.modificarExposicion();*/
                         break;
                     case (4):
-                        test();
+                        opReparaciones.menuReparaciones();
                         break;
                     case (5):
-                        imprimirClientes();
+                        opReservas.menuReservas();
                         break;
                     case (6):
-                        imprimirCoches();*/
+                        opInformes.menuInformes();
+                        break;
+                    case (7):
+                        break;
                 }
             }
         }
-        catch (Exception ex) {
+        catch(Exception ex){
                 scan.nextLine();
             }
         }
-    }
-
-    /*private void agregar() {
-    try {
-        DirectorComercial director = new DirectorComercial();
-        Scanner scan = new Scanner(System.in);
-
-            System.out.print("Introduzca el nombre del director: ");
-            director.setNombre(scan.nextLine());
-            System.out.println("Introduzca la direccion del director: ");
-            director.setDireccion(scan.nextLine());
-            System.out.println("Introduzca el DNI del director: ");
-            director.setDni(scan.nextLine());
-            System.out.println("Introduzca el telefono del director: ");
-            director.setTelefono(scan.nextInt());
-            concesionario.agregarDirector(director);
-            System.out.println("Director añadido correctamente.");
-        } catch (Exception ex) {
-            System.out.println(" ");
-            System.out.println("Telefono incorrecto");
-            agregar();
-        }
-        test();
-    }*/
-    /*private void test(){
-        DirectorComercial directorComercial = concesionario.listarDirector();
-        if ( directorComercial == null) System.out.println("No hay un director comercial asignado");
-        else System.out.println(directorComercial.toString());
-    }*/
 }
