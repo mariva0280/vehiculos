@@ -22,12 +22,13 @@ public class OperacionesMecanicos {
         try{
             int opcion = 0;
             System.out.println("");
-            while(opcion != 2){
+            while(opcion != 4){
                 System.out.println("*****MENU MECANICOS*****");
                 System.out.println("1 - Consultar coches reparación.");
                 System.out.println("2 - Añadir reparación.");
                 System.out.println("3 - Modificar estado reparación.");
                 System.out.println("4 - Salir.");
+                System.out.print("Elija la opción: ");
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case (1):

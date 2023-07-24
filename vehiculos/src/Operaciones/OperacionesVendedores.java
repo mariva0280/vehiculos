@@ -46,6 +46,7 @@ public class OperacionesVendedores {
                 switch (opcion) {
                     case (1):
                         opVentas.listarCochesPorVendedor();
+                        opVentas.vender();
                         break;
                     case (2):
                         opReservas.listarReservas();
