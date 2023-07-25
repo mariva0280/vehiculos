@@ -1,6 +1,3 @@
-/*
-ESTA CLASE EN PRINCIPIO FUNCIONA Y NO HAY NADA QUE REVISAR LOS SOUTS ESTÁN BIEN, SOLO FALTA IMPLEMENTAR EL MENÚ DEFINITIVO AL QUE TIENEN ACCESO LOS VENDEDORES
- */
 package Operaciones;
 
 import Exception.EinvalidPropertyException;
@@ -18,6 +15,7 @@ public class OperacionesVendedores {
     private OperacionesClientes opClientes;
     private OperacionesCoches opCoches;
     private OperacionesExposicion opExposicion;
+    private Validar validar;
     public OperacionesVendedores(Concesionario concesionario) {
 
         this.concesionario = concesionario;
@@ -26,6 +24,7 @@ public class OperacionesVendedores {
         this.opCoches = new OperacionesCoches(concesionario);
         this.opReservas = new OperacionesReservas(concesionario);
         this.opClientes = new OperacionesClientes(concesionario);
+        this.validar = new Validar(concesionario);
     }
     public void menuFinalVendedor() {
         int opcion = 0;
@@ -33,11 +32,11 @@ public class OperacionesVendedores {
         System.out.println("");
         while (opcion != 6) {
             System.out.println("*****MENU VENDEDORES*****");
-            System.out.println("1 - Consultar ventas");
-            System.out.println("2 - Consultar reservas.");
-            System.out.println("3 - Consultar exposiciones.");
-            System.out.println("4 - Consultar coches.");
-            System.out.println("5 - Consultar clientes.");
+            System.out.println("1 - Acceder a menú ventas.");
+            System.out.println("2 - Acceder a menú reservas.");
+            System.out.println("3 - Acceder a consultas exposiciones.");
+            System.out.println("4 - Acceder a consultas coches.");
+            System.out.println("5 - Acceder a consultas clientes.");
             System.out.println("6 - Salir.");
             System.out.println("");
             System.out.print("Elija una opcion: ");
@@ -45,11 +44,10 @@ public class OperacionesVendedores {
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case (1):
-                        opVentas.listarCochesPorVendedor();
-                        opVentas.vender();
+                        opVentas.menuVentas();
                         break;
                     case (2):
-                        opReservas.listarReservas();
+                        opReservas.menuReservas();
                         break;
                     case (3):
                         opExposicion.listarExposiciones();
@@ -79,7 +77,7 @@ public class OperacionesVendedores {
             System.out.println("2 - Dar de baja.");
             System.out.println("3 - Modificar.");
             System.out.println("4 - Listado Vendedores.");
-            System.out.println("5 - Menú clientes.");
+            System.out.println("5 - Salir.");
             System.out.println("");
             System.out.print("Elija una opcion: ");
             try {
@@ -99,9 +97,9 @@ public class OperacionesVendedores {
                         break;
                     case (5):
                         break;
-                    default:
+                    /*default:
                         System.out.println("Opción invalida.");
-                        break;
+                        break;*/
                 }
             } catch (Exception ex) {
                 scan.nextLine();
@@ -117,31 +115,31 @@ public class OperacionesVendedores {
         try {
             System.out.print("Introduzca el nombre del vendedor: ");
             String nombre = scan.nextLine();
-            if (!Validar.validateName(nombre)) {
+            if (!validar.validateName(nombre)) {
                 throw new EinvalidPropertyException("Nombre incorrecto.");
             }
             vendedor.setNombre(nombre);
 
             System.out.print("Introduzca la dirección del vendedor: ");
             String direccion = scan.nextLine();
-            if (!Validar.validateDireccion(direccion)) {
+            if (!validar.validateDireccion(direccion)) {
                 throw new EinvalidPropertyException("Dirección incorrecta.");
             }
             vendedor.setDireccion(direccion);
 
             System.out.print("Introduzca el DNI del vendedor: ");
             String dni = scan.nextLine();
-            if (!Validar.validateDni(dni)) {
+            if (!validar.validateDni(dni)) {
                 throw new EinvalidPropertyException("DNI incorrecto.");
             }
-            if (verificarDniRep(dni)) {
+            if (validar.verificarDniRep(dni)) {
                 throw new EinvalidPropertyException("DNI duplicado.");
             }
             vendedor.setDni(dni);
 
             System.out.print("Introduzca el teléfono del vendedor: ");
             String telefonoStr = scan.nextLine();
-            if (!Validar.validateTelefono(telefonoStr)) {
+            if (!validar.validateTelefono(telefonoStr)) {
                 throw new EinvalidPropertyException("Teléfono incorrecto.");
             }
             int telefono = Integer.parseInt(telefonoStr);
@@ -228,7 +226,7 @@ public class OperacionesVendedores {
                         case (1):
                             System.out.print("Nuevo nombre: ");
                             String nuevoNombre = scan.nextLine();
-                            if(!Validar.validateName(nuevoNombre)){
+                            if(!validar.validateName(nuevoNombre)){
                                 throw new Exception("Nombre incorrecto.");
                             }
                             vendedor.setNombre(nuevoNombre);
@@ -236,7 +234,7 @@ public class OperacionesVendedores {
                         case (2):
                             System.out.print("Nueva dirección: ");
                             String nuevaDireccion = scan.nextLine();
-                            if(!Validar.validateDireccion(nuevaDireccion)){
+                            if(!validar.validateDireccion(nuevaDireccion)){
                                 throw new Exception("Dirección incorrecta.");
                             }
                             vendedor.setDireccion(nuevaDireccion);
@@ -244,7 +242,7 @@ public class OperacionesVendedores {
                         case (3):
                             System.out.print("Indique nuevo teléfono: ");
                             String nuevoTelefono = scan.nextLine();
-                            if(!Validar.validateTelefono(nuevoTelefono)){
+                            if(!validar.validateTelefono(nuevoTelefono)){
                                 throw new Exception("Teléfono incorrecto.");
                             }
                             int telefonoNuevo = Integer.parseInt(nuevoTelefono);
@@ -289,15 +287,6 @@ public class OperacionesVendedores {
             }
         }
         System.out.println("");
-    }
-    public boolean verificarDniRep(String dni){
-        HashMap<String,Vendedor> vendedores = opConcesionario.listarVendedores();
-        for(Vendedor vendedor : vendedores.values()){
-            if(vendedor.getDni().equals(dni)){
-                return true;
-            }
-        }
-        return false;
     }
     public boolean verificarTlfRep(int telefono){
         HashMap<String,Vendedor> vendedores = opConcesionario.listarVendedores();

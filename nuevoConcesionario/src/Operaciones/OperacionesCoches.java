@@ -1,8 +1,3 @@
-/*
-ESTA CLASE EN PRINCIPIO FUNCIONA PORQUE LA HE IDO PROBANDO POCO A POCO Y EN EL
-METODO LLENAR CONCESIONARIO ME HA FUNCIONADA AL AGREGAR COCHES, PERO SERÁ LA
-ULTIMA QUE COMPROBAREMOS CUANDO TERMINEMOS
- */
 package Operaciones;
 
 import Objetos.*;
@@ -16,11 +11,13 @@ import java.util.Scanner;
 public class OperacionesCoches {
     private Concesionario concesionario;
     private OperacionesConcesionario opConcesionario;
+    private Validar validar;
 
     public OperacionesCoches(Concesionario concesionario) {
 
         this.concesionario = concesionario;
         this.opConcesionario = new OperacionesConcesionario(concesionario);
+        this.validar = new Validar(concesionario);
     }
 
     public void menuCoches() {
@@ -34,7 +31,7 @@ public class OperacionesCoches {
                 System.out.println("2 - Dar de baja.");
                 System.out.println("3 - Modificar.");
                 System.out.println("4 - Listado Coches.");
-                System.out.println("5 - Menú vendedores.");
+                System.out.println("5 - Salir.");
                 System.out.println("");
                 System.out.print("Elija una opcion: ");
 
@@ -71,21 +68,21 @@ public class OperacionesCoches {
             Scanner scan = new Scanner(System.in);
             System.out.print("Introduzca la marca del coche: ");
             String marca = scan.nextLine();
-            if (!Validar.validateMarca(marca)) {
+            if (!validar.validateMarca(marca)) {
                 throw new EinvalidPropertyException("Marca incorrecta no admite campos nulos.");
             }
             coche.setMarca(marca);
 
             System.out.print("Introduzca el modelo del coche: ");
             String modelo = scan.nextLine();
-            if (!Validar.validateModelo(modelo)) {
+            if (!validar.validateModelo(modelo)) {
                 throw new EinvalidPropertyException("Modelo incorrecto no admite campos nulos.");
             }
             coche.setModelo(modelo);
 
             System.out.print("Introduzca la matricula del coche: ");
             String matricula = scan.nextLine();
-            if (!Validar.validarMatricula(matricula)) {
+            if (!validar.validarMatricula(matricula)) {
                 throw new EinvalidPropertyException("Matricula incorrecta.");
             }
             if (verificarMatriculaRep(matricula)) {
@@ -96,34 +93,27 @@ public class OperacionesCoches {
 
             System.out.print("Introduzca el precio de compra del coche: ");
             double precioCompra = scan.nextDouble();
-            if (!Validar.validarPrecioCompra(precioCompra)) {
+            if (!validar.validarPrecioCompra(precioCompra)) {
                 throw new EinvalidPropertyException("El precio de compra no puede ser 0");
             }
             coche.setPrecioCompra(precioCompra);
 
             System.out.print("Introduzca el precio de venta del coche: ");
             double precioVenta = scan.nextDouble();
-            if (!Validar.validarPrecioVenta(precioCompra, precioVenta)) {
+            if (!validar.validarPrecioVenta(precioCompra, precioVenta)) {
                 throw new EinvalidPropertyException("El precio de venta no puede ser 0 ni inferior al precio de compra.");
             }
             coche.setPrecioVenta(precioVenta);
 
-            System.out.print("Introduzca el tipo de coche: ");
+            System.out.print("Introduzca el tipo de coche,turismo,todoterreno o industrial: ");
             String tipoCocheStr = scan.next();
             TipoVehiculo tipoCoche = TipoVehiculo.valueOf(tipoCocheStr.toUpperCase());
-            if (!Validar.validarTipoVehiculo(tipoCoche)) {
+            if (!validar.validarTipoVehiculo(tipoCoche)) {
                 throw new EinvalidPropertyException("El tipo de vehiculo solo puede ser turismo, todoterreno o industrial.");
             }
             coche.setTipoVehiculo(tipoCoche);
 
-
-            System.out.print("Introduca el estado del coche: ");
-            String estadoStr = scan.next();
-            Estado estado = Estado.valueOf(estadoStr.toUpperCase());
-            if (!Validar.validarEstado(estado)) {
-                throw new EinvalidPropertyException("El estado del vehículo solo puede ser en stock o reservado.");
-            }
-            coche.setEstado(estado);
+            coche.setEstado(Estado.STOCK);
 
             opConcesionario.agregarCoche(coche);
             System.out.println("Coche añadido correctamente.");
@@ -188,7 +178,7 @@ public class OperacionesCoches {
                 Coche coche = indices.get(opcion - 1);
                 System.out.println("");
                 while (opcion != 8) {
-                    System.out.println("");
+                    System.out.println("*****MODIFICAR COCHE*****");
                     System.out.println("1 - Modificar marca. ");
                     System.out.println("2 - Modificar modelo.");
                     System.out.println("3 - Modificar matrícula.");
@@ -197,14 +187,14 @@ public class OperacionesCoches {
                     System.out.println("6 - Modificar tipo de vehículo.");
                     System.out.println("7 - Modificar estado del vehículo.");
                     System.out.println("8 - Guardar cambios");
-                    System.out.print("Elija una opcion: ");
+                    System.out.print("Elija una opción: ");
                     opcion = scan.nextInt();
                     scan = new Scanner(System.in);
                     switch (opcion) {
                         case 1:
                             System.out.print("Nueva marca: ");
                             String nuevaMarca = scan.nextLine();
-                            if (!Validar.validateMarca(nuevaMarca)) {
+                            if (!validar.validateMarca(nuevaMarca)) {
                                 throw new EinvalidPropertyException("Nueva marca incorrecta.");
                             }
                             coche.setMarca(nuevaMarca);
@@ -212,7 +202,7 @@ public class OperacionesCoches {
                         case 2:
                             System.out.print("Nuevo modelo: ");
                             String nuevoModelo = scan.nextLine();
-                            if (!Validar.validateModelo(nuevoModelo)) {
+                            if (!validar.validateModelo(nuevoModelo)) {
                                 throw new EinvalidPropertyException("Nuevo modelo incorrecto.");
                             }
                             coche.setModelo(nuevoModelo);
@@ -220,7 +210,7 @@ public class OperacionesCoches {
                         case 3:
                             System.out.print("Nueva matrícula: ");
                             String nuevaMatricula = scan.nextLine();
-                            if (!Validar.validarMatricula(nuevaMatricula)) {
+                            if (!validar.validarMatricula(nuevaMatricula)) {
                                 throw new EinvalidPropertyException("Matrícula incorrecta.");
                             }
                             if (verificarMatriculaRep(nuevaMatricula)) {
@@ -231,7 +221,7 @@ public class OperacionesCoches {
                         case 4:
                             System.out.print("Nuevo precio de compra: ");
                             double nuevoPrecioCompra = scan.nextDouble();
-                            if (!Validar.validarPrecioCompra(nuevoPrecioCompra)) {
+                            if (!validar.validarPrecioCompra(nuevoPrecioCompra)) {
                                 throw new EinvalidPropertyException("Precio de compra no puede ser 0.");
                             }
                             coche.setPrecioCompra(nuevoPrecioCompra);
@@ -239,16 +229,16 @@ public class OperacionesCoches {
                         case 5:
                             System.out.print("Nuevo precio de venta: ");
                             double nuevoPrecioVenta = scan.nextDouble();
-                            if (!Validar.validarPrecioVenta(coche.getPrecioCompra(), nuevoPrecioVenta)) {
+                            if (!validar.validarPrecioVenta(coche.getPrecioCompra(), nuevoPrecioVenta)) {
                                 throw new EinvalidPropertyException("Precio de venta no puede ser 0, ni menos que el precio de compra.");
                             }
                             coche.setPrecioVenta(nuevoPrecioVenta);
                             break;
                         case 6:
-                            System.out.print("Nuevo tipo de vehículo: ");
+                            System.out.print("Nuevo tipo de vehículo,turismo,todoterreno o industrial: ");
                             String nuevoTipoStr = scan.next();
                             TipoVehiculo nuevoTipo = TipoVehiculo.valueOf(nuevoTipoStr.toUpperCase());
-                            if (!Validar.validarTipoVehiculo(nuevoTipo)) {
+                            if (!validar.validarTipoVehiculo(nuevoTipo)) {
                                 throw new EinvalidPropertyException("Tipo de vehículo incorrecto, solo puede ser turismo, todoterreno o industrial.");
                             }
                             coche.setTipoVehiculo(nuevoTipo);
@@ -257,7 +247,7 @@ public class OperacionesCoches {
                             System.out.print("Nuevo estado del vehiculo: ");
                             String nuevoEstadoStr = scan.next();
                             Estado nuevoEstado = Estado.valueOf(nuevoEstadoStr.toUpperCase());
-                            if (!Validar.validarEstado(nuevoEstado)) {
+                            if (!validar.validarEstado(nuevoEstado)) {
                                 throw new EinvalidPropertyException("Estado incorrecto.");
                             }
                             coche.setEstado(nuevoEstado);
@@ -274,7 +264,7 @@ public class OperacionesCoches {
 
     }
 
-    public void agregarCocheExposicion() { //No lo retira del stock
+    public void agregarCocheExposicion() {
         try {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Elija una exposición para agregar el coche");
@@ -370,7 +360,7 @@ public class OperacionesCoches {
             System.out.println(e.getMessage());
             removerCocheExposicion();
         }
-    } //No lo vuelve a agregar al stock porque nunca salió
+    }
 
     public void indicesCoches(ArrayList<Coche> indices) {
         System.out.println("");

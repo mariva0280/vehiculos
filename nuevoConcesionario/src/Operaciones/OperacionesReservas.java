@@ -1,6 +1,3 @@
-/*
-ESTA CLASE FUNCIONA COMPLETA.
- */
 package Operaciones;
 
 import Objetos.*;

@@ -1,7 +1,4 @@
 package Objetos;
-
-import Proyecto.ProyectoConcesionario;
-
 import java.util.HashMap;
 
 public class Concesionario {
@@ -18,15 +15,15 @@ public class Concesionario {
 
 
     public Concesionario() {
-        this.vendedores = new HashMap<String,Vendedor>();
-        this.clientes = new HashMap<String,Cliente>();
-        this.coches = new HashMap<String, Coche>();
-        this.exposiciones = new HashMap<Integer,Exposicion>();
-        this.cochesReservados = new HashMap<String,Reserva>();
-        this.cochesVendidos = new HashMap<String, Venta>();
+        this.vendedores = new HashMap<>();
+        this.clientes = new HashMap<>();
+        this.coches = new HashMap<>();
+        this.exposiciones = new HashMap<>();
+        this.cochesReservados = new HashMap<>();
+        this.cochesVendidos = new HashMap<>();
         this.cochesReparacion = new HashMap<>();
         this.mecanicos = new HashMap<>();
-        this.director = new DirectorComercial();
+        this.director = new DirectorComercial("FRAN", "BARCELONA","12345678B","123123123");
     }
 
 

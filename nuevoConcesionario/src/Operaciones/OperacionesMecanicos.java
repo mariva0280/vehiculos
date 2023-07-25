@@ -11,15 +11,17 @@ public class OperacionesMecanicos {
     private Concesionario concesionario;
     private OperacionesConcesionario opConcesionario;
     private OperacionesReparacion opReparacion;
+    private Validar validar;
     public OperacionesMecanicos(Concesionario concesionario) {
 
         this.concesionario = concesionario;
         this.opConcesionario = new OperacionesConcesionario(concesionario);
         this.opReparacion = new OperacionesReparacion(concesionario);
+        this.validar = new Validar(concesionario);
     }
     public void menuFinalMecanico() {
+        Scanner scan = new Scanner(System.in);
         try{
-            Scanner scan = new Scanner(System.in);
             int opcion = 0;
             System.out.println("");
             while(opcion != 4){
@@ -53,7 +55,7 @@ public class OperacionesMecanicos {
         try{
             int opcion = 0;
             System.out.println("");
-            while (opcion != 5) {
+            while (opcion != 2) {
                 System.out.println("*****MENU MECANICOS*****");
                 System.out.println("1 - Dar de alta.");
                 System.out.println("2 - Salir.");
@@ -74,28 +76,27 @@ public class OperacionesMecanicos {
         }
     }
     public void agregarM() {
-        try {
         opConcesionario = new OperacionesConcesionario(concesionario);
         Mecanico mecanico = new Mecanico();
         Scanner scan = new Scanner(System.in);
-
+        try {
             System.out.print("Introduzca el nombre del mecánico: ");
             String nombre = scan.nextLine();
-            if(!Validar.validateName(nombre)){
+            if(!validar.validateName(nombre)){
                 throw new EinvalidPropertyException("Nombre incorrecto.");
             }
             mecanico.setNombre(nombre);
 
             System.out.print("Introduzca el DNI del mecánico: ");
-            String dni = scan.nextLine();
-            if(!Validar.validateDni(dni)){
+            String dni =(scan.nextLine());
+            if(!validar.validateDni(dni)){
                 throw new EinvalidPropertyException("DNI incorrecto.");
             }
             mecanico.setDni(dni);
 
             System.out.print("Introduzca el teléfono del mecánico: ");
             String telefonoStr =scan.nextLine();
-            if(!Validar.validateTelefono(telefonoStr)){
+            if(!validar.validateTelefono(telefonoStr)){
                 throw new EinvalidPropertyException("Teléfono incorrecto.");
             }
             int telefono = Integer.parseInt(telefonoStr);

@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ProyectoConcesionario {
 
-    public ProyectoConcesionario() {
+    public ProyectoConcesionario (){
     }
 
     public static void main(String[] args) {
@@ -15,25 +15,24 @@ public class ProyectoConcesionario {
         System.out.println("Gracias por su visita.");
 
     }
-
     public static void mostrarMenu() {
+        Concesionario concesionario = new Concesionario();
         Scanner scanner = new Scanner(System.in);
-        try {
-            Concesionario concesionario = new Concesionario();
-            int opcion = 0;
-            System.out.println("******************************************");
-            System.out.println("*****Bienvenido al concesionario VV*****");
-            System.out.println("*****Pulse la opción deseada para acceder*****");
-            System.out.println("");
-            while (opcion != 5) {
-
+        int opcion = 0;
+        System.out.println("******************************************");
+        System.out.println("*****Bienvenido al concesionario VV*****");
+        System.out.println("*****Pulse la opción deseada para acceder*****");
+        System.out.println("");
+        while (opcion != 5) {
+            try {
+                System.out.println("*****MENU PRINCIPAL*****");
                 System.out.println("1 - Director.");
                 System.out.println("2 - Vendedor.");
                 System.out.println("3 - Cliente.");
                 System.out.println("4 - Mecánico.");
                 System.out.println("5 - Salir.");
                 System.out.println(" ");
-                System.out.print("Elija la opción: ");
+                System.out.print("Eliga la opción: ");
                 opcion = scanner.nextInt();
 
                 if (opcion > 5) {
@@ -61,10 +60,10 @@ public class ProyectoConcesionario {
                             System.exit(0);
                     }
                 }
+            } catch (Exception ex) {
+                System.out.println("*****Opción inválida.*****");
+                mostrarMenu();
             }
-        } catch (Exception ex) {
-            System.out.println("*****Opción inválida.*****");
-            mostrarMenu();
         }
     }
 }

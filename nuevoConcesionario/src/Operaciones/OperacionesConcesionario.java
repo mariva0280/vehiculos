@@ -1,8 +1,3 @@
-/*
-ESTA CLASE LA USAMOS COMO INTERMEDIARIA Y PUNTO DE UNION ENTRE LOS OBJETOS Y EL MAIN
- */
-
-
 package Operaciones;
 
 import Objetos.*;
@@ -111,6 +106,11 @@ public class OperacionesConcesionario {
         listaReparaciones.put(reparacion.getCoche().getMatricula(),reparacion);
         concesionario.setCochesReparacion(listaReparaciones);
     }
+    public void eliminarReparacion(Reparacion reparacion) {
+        HashMap<String,Reparacion> listaReparaciones = concesionario.getCochesReparacion();
+        listaReparaciones.remove(reparacion.getCoche().getMatricula(),reparacion);
+        concesionario.setCochesReparacion(listaReparaciones);
+    }
     public void cambiarEstadoReparacion(Reparacion reparacion) {
         if(reparacion != null) {
             Coche coche = reparacion.getCoche();
@@ -130,12 +130,4 @@ public class OperacionesConcesionario {
         concesionario.setMecanicos(listaMecanicos);
     }
     public HashMap listarMecanicos(){return concesionario.getMecanicos();}
-    /*public void agregarDirector(DirectorComercial director) {
-        HashMap<String,DirectorComercial> listaMecanicos = concesionario.getMecanicos();
-        listaMecanicos.put(mecanico.getDni(),mecanico);
-        concesionario.setMecanicos(listaMecanicos);
-    }*/
-
-
-
 }

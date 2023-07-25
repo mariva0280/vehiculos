@@ -1,6 +1,3 @@
-/*
-ESTA CLASE FUNCIONA
- */
 package Operaciones;
 
 import Objetos.*;
@@ -14,13 +11,14 @@ import java.util.Scanner;
 public class OperacionesExposicion {
     private Concesionario concesionario;
     private OperacionesConcesionario opConcesionario;
+    private Validar validar;
 
     public OperacionesExposicion(Concesionario concesionario) {
         this.concesionario = concesionario;
         this.opConcesionario = new OperacionesConcesionario(concesionario);
+        this.validar = new Validar(concesionario);
     }
-
-    public void menuExposiciones() {
+    public void menuExposiciones(){
         int opcion = 0;
         Scanner scan = new Scanner(System.in);
         System.out.println("");
@@ -48,8 +46,8 @@ public class OperacionesExposicion {
                     case (4):
                         listarExposiciones();
                         break;
-                    case (5):
-                        break;
+                    /*case (5):
+                        break;*/
                 }
             } catch (Exception ex) {
                 scan.nextLine();
@@ -59,12 +57,13 @@ public class OperacionesExposicion {
 
     public void agregarExposicion() {
         try {
+
             Scanner scan = new Scanner(System.in);
             opConcesionario = new OperacionesConcesionario(concesionario);
             Exposicion exposicion = new Exposicion();
             System.out.print("Introduzca un número a la exposición: ");
             int numero = scan.nextInt();
-            if (!Validar.validarNumero(numero)) {
+            if (!validar.validarNumero(numero)) {
                 throw new EinvalidPropertyException("Introduzca un número de exposición válido.");
             }
             exposicion.setNumeroExposicion(numero);
@@ -72,32 +71,31 @@ public class OperacionesExposicion {
 
             System.out.print("Introduzca una dirección a la exposición: ");
             String direccion = scan.nextLine();
-            if (!Validar.validateDireccion(direccion)) {
+            if (!validar.validateDireccion(direccion)) {
                 throw new EinvalidPropertyException("Dirección incorrecta.");
             }
             exposicion.setDireccion(direccion);
 
             System.out.print("Introduzca un teléfono de contacto para la exposición: ");
             String telefono = scan.nextLine();
-            if (!Validar.validateTelefono(telefono)) {
+            if (!validar.validateTelefono(telefono)) {
                 throw new EinvalidPropertyException("Teléfono incorrecto.");
             }
             exposicion.setTelefono(telefono);
 
             System.out.print("Introduzca una ciudad de destino: ");
             String ciudad = scan.nextLine();
-            if (!Validar.validateCiudad(ciudad)) {
+            if (!validar.validateCiudad(ciudad)) {
                 throw new EinvalidPropertyException("Ciudad incorrecta.");
             }
             exposicion.setCiudad(ciudad);
 
             opConcesionario.agregarExposicion(exposicion);
             System.out.println("Exposición agregada correctamente.");
-            //AQUI HE AÑADIDO EL METODO PARA AÑADIR COCHES A EXPOSICION QUE ESTÁ EN OPERACIONES COCHES VALE
 
             System.out.println("¿Desea agregar un coche a la exposición? (S / N)");
             String respuesta = scan.nextLine();
-            if (respuesta.equalsIgnoreCase("S")) {
+            if(respuesta.equalsIgnoreCase("S")){
                 OperacionesCoches opCoches = new OperacionesCoches(concesionario);
                 opCoches.agregarCocheExposicion();
             }
@@ -120,12 +118,13 @@ public class OperacionesExposicion {
             }
             Exposicion exposicion = exposiciones.get(numero);
             int tamanio = exposicion.getCochesExposicion().size();
-            if (tamanio == 0) {
+            if(tamanio == 0){
                 opConcesionario.removerExposicion(exposicion);
                 System.out.println("Exposición eliminada correctamente.");
-            } else throw new EinvalidPropertyException("No puedes eliminar una exposición con coches");
+            }else throw new EinvalidPropertyException("No se puede eliminar la exposción tiene coches agregados.");
+
         } catch (EinvalidPropertyException e) {
-            System.out.println("Error:" + e.getMessage());
+            System.out.println(e.getMessage());
             menuExposiciones();
         }
     }
@@ -133,7 +132,6 @@ public class OperacionesExposicion {
     public void modificarExposicion() {
         try {
             Scanner scan = new Scanner(System.in);
-
             int opcion;
             System.out.print("Elija la exposición a modificar: ");
             HashMap<Integer, Exposicion> exposiciones = concesionario.getExposiciones();
@@ -166,7 +164,7 @@ public class OperacionesExposicion {
                         case 1:
                             System.out.print("Nuevo número de exposición: ");
                             int numero = scan.nextInt();
-                            if (!Validar.validarNumero(numero)) {
+                            if (!validar.validarNumero(numero)) {
                                 throw new EinvalidPropertyException("Numero incorrecto.");
                             }
                             exposicion.setNumeroExposicion(numero);
@@ -174,7 +172,7 @@ public class OperacionesExposicion {
                         case 2:
                             System.out.print("Nueva dirección: ");
                             String direccion = scan.nextLine();
-                            if (!Validar.validateDireccion(direccion)) {
+                            if (!validar.validateDireccion(direccion)) {
                                 throw new EinvalidPropertyException("Dirección incorrecta.");
                             }
                             exposicion.setDireccion(direccion);
@@ -182,7 +180,7 @@ public class OperacionesExposicion {
                         case 3:
                             System.out.print("Nuevo teléfono: ");
                             String telefono = scan.nextLine();
-                            if (!Validar.validateTelefono(telefono)) {
+                            if (!validar.validateTelefono(telefono)) {
                                 throw new EinvalidPropertyException("Teléfono incorrecto.");
                             }
                             exposicion.setTelefono(telefono);
@@ -190,7 +188,7 @@ public class OperacionesExposicion {
                         case 4:
                             System.out.print("Nueva ciudad: ");
                             String ciudad = scan.nextLine();
-                            if (!Validar.validateCiudad(ciudad)) {
+                            if (!validar.validateCiudad(ciudad)) {
                                 throw new EinvalidPropertyException("Ciudad incorrecta.");
                             }
                             exposicion.setCiudad(ciudad);
@@ -204,19 +202,17 @@ public class OperacionesExposicion {
             modificarExposicion();
         }
     }
-
-    public void indicesExposiciones(ArrayList<Exposicion> indices) {
+    public void indicesExposiciones(ArrayList<Exposicion> indices){
         System.out.println("");
         System.out.println("*****LISTA EXPOSICIONES*****");
         System.out.println("");
-        for (int i = 0; i < indices.size(); i++) {
+        for(int i = 0; i < indices.size(); i++){
             System.out.println((i + 1) + " - " + indices.get(i).toString());
             System.out.println("");
         }
         System.out.println(indices.size() + 1 + " - Salir.");
         System.out.println("");
     }
-
     public void listarExposiciones() {
         System.out.println("");
         System.out.println("*****LISTA EXPOSICIONES*****");
@@ -233,5 +229,4 @@ public class OperacionesExposicion {
         }
         System.out.println("");
     }
-
 }

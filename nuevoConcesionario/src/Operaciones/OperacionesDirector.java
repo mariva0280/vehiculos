@@ -1,12 +1,9 @@
 package Operaciones;
 
-import Objetos.Cliente;
 import Objetos.Concesionario;
 import Objetos.DirectorComercial;
 import Validaciones.Validar;
-import Exception.EinvalidPropertyException;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class OperacionesDirector {
@@ -21,6 +18,8 @@ public class OperacionesDirector {
     private OperacionesReservas opReservas;
     private OperacionesVendedores opVendedores;
     private OperacionesVentas opVentas;
+    private OperacionesMecanicos opMecanicos;
+    private Validar validar;
 
 
     public OperacionesDirector(Concesionario concesionario) {
@@ -34,6 +33,7 @@ public class OperacionesDirector {
         this.opReservas = new OperacionesReservas(concesionario);
         this.opVendedores = new OperacionesVendedores(concesionario);
         this.opVentas = new OperacionesVentas(concesionario);
+        this.opMecanicos = new OperacionesMecanicos(concesionario);
     }
 
     public void menuDirector() {
@@ -42,50 +42,56 @@ public class OperacionesDirector {
             int opcion = 0;
             while (opcion != 7) {
                 System.out.println("*****MENÚ DIRECTOR*****");
-                System.out.println("1 - Dar de alta,baja,modificar, coches, clientes,vendedores y mecánicos.");
-                System.out.println("2 - Ventas.");
-                System.out.println("3 - Exposiciones.");
-                System.out.println("4 - Reparaciones.");
-                System.out.println("5 - Reservas.");
-                System.out.println("6 - Informes.");
-                System.out.println("7 - Salir");
+                System.out.println("1 - Acceso a menú coches,vendedores,clientes y mecánicos.");
+                System.out.println("2 - Acceso a menú ventas.");
+                System.out.println("3 - Acceso a menú exposiciones.");
+                System.out.println("4 - Acceso a menú reparaciones.");
+                System.out.println("5 - Acceso a menú reservas.");
+                System.out.println("6 - Acceso a menú informes.");
+                System.out.println("7 - Salir.");
                 System.out.println("");
                 System.out.print("Elija una opcion: ");
-
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case (1):
-                        opCoches.menuCoches();
-                        opVendedores.menuVendedores();
-                        opClientes.menuClientes();
-                        //opCoches.menuCoches(); podemos ponerlo así por menus para que nos pase por todas las opciones o llamando al metodo que queramos, eso ya lo que decidamos.
-                        /*opCoches.agregar();
-                        opVendedores.agregar();
-                        opClientes.agregar();
-                        opVentas.vender();
-                        opReservas.reservar();
-                        opReparaciones.agregarReparar();
-                        opExposiciones.agregarExposicion();
-                        opCoches.agregarCocheExposicion();*/
+                        try {
+                            while (opcion != 5) {
+                                System.out.println("*****ALTAS,BAJAS,MODIFICACIONES*****");
+                                System.out.println("1 - Menú Coches.");
+                                System.out.println("2 - Menú Vendedores.");
+                                System.out.println("3 - Menú Clientes.");
+                                System.out.println("4 - Menú Mecánicos.");
+                                System.out.println("5 - Salir.");
+                                System.out.print("Elija una opción: ");
+                                opcion = scan.nextInt();
+                                switch (opcion) {
+                                    case (1):
+                                        opCoches.menuCoches();
+                                        break;
+                                    case (2):
+                                        opVendedores.menuVendedores();
+                                        break;
+                                    case (3):
+                                        opClientes.menuClientes();
+                                        break;
+                                    case (4):
+                                        opMecanicos.menuMecanico();
+                                        break;
+                                    case (5):
+                                        break;
+                                }
+                            }
+                        } catch (Exception ex) {
+                            System.out.println("Opción incorrecta: " + ex.getMessage());
+                            menuDirector();
+                        }
                         break;
+
                     case (2):
                         opVentas.menuVentas();
-                        /*opVentas.listarClientePorModelo();
-                        opVentas.listarCochesPorVendedor();
-                        opVentas.vender();
-                        opCoches.eliminar();
-                        opVendedores.eliminar();
-                        opClientes.eliminar();
-                        opExposiciones.removerExposicion();
-                        opCoches.removerCocheExposicion();
-                        opReservas.cancelar();*/
                         break;
                     case (3):
                         opExposiciones.menuExposiciones();
-                        /*opCoches.modificar();
-                        opVendedores.modificar();
-                        opClientes.modificar();
-                        opExposiciones.modificarExposicion();*/
                         break;
                     case (4):
                         opReparaciones.menuReparaciones();
@@ -100,9 +106,47 @@ public class OperacionesDirector {
                         break;
                 }
             }
+        } catch (Exception ex) {
+            scan.nextLine();
         }
-        catch(Exception ex){
-                scan.nextLine();
-            }
+    }
+
+    public void agregarDirector() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            if (concesionario.getDirector() == null)
+                System.out.println("Introduzca los datos para agregar un director");
+            else System.out.println("Introduzca los nuevos datos para modificar el director:");
+
+            DirectorComercial director = new DirectorComercial();
+            System.out.println("Introduzca un nombre:");
+            String nombre = scanner.nextLine();
+            if (!validar.validateName(nombre)) throw new Exception("El nombre no es correcto");
+            director.setNombre(nombre);
+
+            System.out.println("Introduzca una dirección:");
+            String direccion = scanner.nextLine();
+            if (!validar.validateDireccion(direccion)) throw new Exception("La dirección no es correcta");
+            director.setDireccion(direccion);
+
+            System.out.println("Introduzca un DNI:");
+            String dni = scanner.nextLine();
+            if (!validar.validateDni(dni)) throw new Exception("El DNI no es correcto");
+            if (!validar.verificarDniRep(dni)) throw new Exception("El DNI introducido ya está dado de alta");
+            director.setDni(dni);
+
+            System.out.println("Introduzca un número de teléfono:");
+            String telefono = scanner.nextLine();
+            if (!validar.validateTelefono(telefono)) throw new Exception("El número de teléfono no es correcto");
+            int movil = Integer.parseInt(telefono);
+            director.setTelefono(movil);
+
+            concesionario.setDirector(director);
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            menuDirector();
         }
+    }
 }
+

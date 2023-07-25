@@ -1,13 +1,8 @@
 package Operaciones;
 import Objetos.*;
-import Operaciones.OperacionesConcesionario;
-import Exception.EinvalidPropertyException;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import  Validaciones.Validar;
 
 public class OperacionesReparacion {
     private  Concesionario concesionario;
@@ -23,6 +18,7 @@ public class OperacionesReparacion {
         try {
             int opcion = 0;
             while (opcion != 4) {
+                System.out.println("*****MENU REPARACIONES*****");
                 System.out.println("1 - Agregar coche a reparar.");
                 System.out.println("2 - Modificar estado de la reparación.");
                 System.out.println("3 - Consultar reparaciones de un coche.");
@@ -49,39 +45,38 @@ public class OperacionesReparacion {
 
     }
     public void agregarReparar() {
+
+        HashMap<String, Coche> coches = opConcesionario.listarCoches();
+        HashMap<String,Mecanico> mecanicos = opConcesionario.listarMecanicos();
+
+        Reparacion reparacion = new Reparacion();
+        reparacion.setCoche(coches.get(verCoches(coches)));
+        Mecanico mecanico = mecanicos.get(verMecanicos(mecanicos));
+        if(null == mecanico){
+            System.out.println("Debe ir al menú mecánicos y dar de alta al menos un mecánico.");
+            return;
+        }
+        reparacion.setMecanico(mecanico);
+        Scanner scan = new Scanner(System.in);
+        System.out.print("Indique el tipo de reparación: ");
+        TipoReparacion tipoReparacion = TipoReparacion.valueOf(scan.nextLine().toUpperCase());
+        System.out.print("Descripción de la reparación: ");
+        String descripcion = scan.nextLine();
+        System.out.print("Fecha de la reparación (dd/MM/yyyy): ");
+        String fechaStr = scan.nextLine();
         try {
-            if (concesionario.getCoches().isEmpty()) throw new EinvalidPropertyException("Concesionario vacio");
-            else {
-                HashMap<String, Coche> coches = opConcesionario.listarCoches();
-                HashMap<String, Mecanico> mecanicos = opConcesionario.listarMecanicos();
-
-                Reparacion reparacion = new Reparacion();
-                reparacion.setCoche(coches.get(verCoches(coches)));
-                reparacion.setMecanico(mecanicos.get(verMecanicos(mecanicos)));
-                Scanner scan = new Scanner(System.in);
-                System.out.print("Indique el tipo de reparación: ");
-                TipoReparacion tipoReparacion = TipoReparacion.valueOf(scan.nextLine().toUpperCase());
-                System.out.print("Descripción de la reparación: ");
-                String descripcion = scan.nextLine();
-                System.out.print("Fecha de la reparación (dd/MM/yyyy): ");
-                String fechaStr = scan.nextLine();
-
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-                Date fecha = dateFormat.parse(fechaStr);
-                reparacion.setTipoReparacion(tipoReparacion);
-                reparacion.setDescripcion(descripcion);
-                reparacion.setFecha(fecha);
-                opConcesionario.agregarReparacion(reparacion);
-                System.out.println("Reparación añadida correctamente.");
-            }
-        }
-        catch (EinvalidPropertyException ex) {
-                System.out.println("Error al leer la fecha. La reparación no se agregó.");
-                return;
-            } catch (ParseException e) {
-            throw new RuntimeException(e);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date fecha = dateFormat.parse(fechaStr);
+            reparacion.setTipoReparacion(tipoReparacion);
+            reparacion.setDescripcion(descripcion);
+            reparacion.setFecha(fecha);
+            System.out.println("Reparación añadida correctamente.");
+        } catch (Exception ex) {
+            System.out.println("Error al leer la fecha. La reparación no se agregó.");
+            return;
         }
 
+        opConcesionario.agregarReparacion(reparacion);
     }
 
     public void modificarEstado(){
@@ -108,6 +103,7 @@ public class OperacionesReparacion {
             } else if (opcion >=1 && opcion <= lista.size()) {
                 Reparacion reparacionSeleccionada = lista.get(opcion - 1);
                 opConcesionario.cambiarEstadoReparacion(reparacionSeleccionada);
+                opConcesionario.eliminarReparacion(reparacionSeleccionada);
                 System.out.println("Reparación modificada correctamente.");
             }else {
                 System.out.println("Opción incorrecta, vuelva a intentarlo.");
@@ -154,7 +150,7 @@ public class OperacionesReparacion {
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
-        System.out.println(lista.size() + 1 + " - Salir");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
+        System.out.println(lista.size() + 1 + " - Salir");
         System.out.println("");
         System.out.print("Elija el coche a reparar o pulse " + (lista.size()+1) + " para salir: ");
         try {
@@ -180,6 +176,7 @@ public class OperacionesReparacion {
         for (Mecanico item : mecanicos.values()) {
             lista.add(item);
         }
+        if(lista.size() == 0) return null;
         System.out.println("*****LISTA MECÁNICOS*****");
         System.out.println("");
         for (int i = 0; i < lista.size(); i++) {
@@ -216,4 +213,7 @@ public class OperacionesReparacion {
             }
         }
     }
+
 }
+
+
