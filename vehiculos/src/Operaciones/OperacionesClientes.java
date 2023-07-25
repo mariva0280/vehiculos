@@ -6,6 +6,8 @@ ACCESO LOS CLIENTES EN EL QUE SOLO PUEDEN CONSULTAR LOS COCHES EN STOCK
 package Operaciones;
 
 
+import Objetos.Reserva;
+import Objetos.Venta;
 import Validaciones.Validar;
 import Objetos.Concesionario;
 import Objetos.Cliente;
@@ -19,12 +21,14 @@ public class OperacionesClientes {
     private Concesionario concesionario;
     private OperacionesConcesionario opConcesionario;
     private OperacionesCoches opCoches;
+    private Validar validar;
 
     public OperacionesClientes(Concesionario concesionario) {
 
         this.concesionario = concesionario;
         this.opConcesionario = new OperacionesConcesionario(concesionario);
         this.opCoches = new OperacionesCoches(concesionario);
+        this.validar = new Validar(concesionario);
     }
     public void menuFinalClientes() {
         Scanner scan = new Scanner(System.in);
@@ -59,7 +63,7 @@ public class OperacionesClientes {
                 System.out.println("2 - Dar de baja.");
                 System.out.println("3 - Modificar.");
                 System.out.println("4 - Listado Clientes.");
-                System.out.println("5 - Salir.");
+                System.out.println("5 - Salir,menú director.");
                 System.out.println("");
                 System.out.print("Elija una opcion: ");
 
@@ -97,31 +101,31 @@ public class OperacionesClientes {
 
             System.out.print("Introduzca el nombre del cliente: ");
             String nombre = scan.nextLine();
-            if(!Validar.validateName(nombre)){
+            if(!validar.validateName(nombre)){
                 throw new EinvalidPropertyException("Nombre incorrecto.");
             }
             cliente.setNombre(nombre);
 
             System.out.print("Introduzca la dirección del cliente: ");
             String direccion = scan.nextLine();
-            if(!Validar.validateDireccion(direccion)){
+            if(!validar.validateDireccion(direccion)){
                 throw new EinvalidPropertyException("Dirección incorrecta.");
             }
             cliente.setDireccion(direccion);
 
             System.out.print("Introduzca el DNI del cliente: ");
             String dni =(scan.nextLine());
-            if(!Validar.validateDni(dni)){
+            if(!validar.validateDni(dni)){
                 throw new EinvalidPropertyException("DNI incorrecto.");
             }
-            if(verificarDniRep(dni)){
+            if(validar.verificarDniRep(dni)){
                 throw new EinvalidPropertyException("DNI duplicado.");
             }
             cliente.setDni(dni);
 
             System.out.print("Introduzca el teléfono del cliente: ");
             String telefonoStr =scan.nextLine();
-            if(!Validar.validateTelefono(telefonoStr)){
+            if(!validar.validateTelefono(telefonoStr)){
                 throw new EinvalidPropertyException("Teléfono incorrecto.");
             }
             int telefono = Integer.parseInt(telefonoStr);
@@ -157,15 +161,30 @@ public class OperacionesClientes {
             } else if (opcion == lista.size() + 1) {
 
             } else {
-                opConcesionario.eliminarCliente(lista.get(opcion - 1));
-                Cliente cliente = lista.get(opcion - 1);
-                if(cliente.getCochesReservados().isEmpty() && cliente.getCochesComprados().isEmpty()) {
-                    System.out.println("Cliente eliminado correctamente.");
 
-                }else {
-                    System.out.println("No se puede eliminar el cliente. Tiene coches reservados o comprados.");
+                Cliente cliente = lista.get(opcion - 1);
+                boolean vendido = false;
+                boolean reservado = false;
+                HashMap<String, Venta> ventas = this.opConcesionario.listarVentas();
+                HashMap<String, Reserva> reservas = this.opConcesionario.listarReservas();
+                for(Venta item : ventas.values()){
+                    if(item.getCliente().getDni().compareTo(cliente.getDni()) == 0){
+                        vendido = true;
+                    }
                 }
-                eliminar();
+                for(Reserva item : reservas.values()){
+                    if(item.getCliente().getDni().compareTo(cliente.getDni()) == 0){
+                        reservado = true;
+                    }
+                }
+                if(reservado || vendido) {
+                    System.out.println("No se puede eliminar el cliente. Tiene coches reservados o comprados.");
+                    eliminar();
+                }else {
+                    System.out.println("Cliente eliminado correctamente.");
+                    opConcesionario.eliminarCliente(lista.get(opcion - 1));
+                }
+
             }
 
         } catch (Exception ex) {
@@ -210,7 +229,7 @@ public class OperacionesClientes {
                         case (1):
                             System.out.print("Nuevo nombre: ");
                             String nuevoNombre = scan.nextLine();
-                            if (!Validar.validateName(nuevoNombre)) {
+                            if (!validar.validateName(nuevoNombre)) {
                                 throw new EinvalidPropertyException("Nombre incorrecto.");
                             }
                             cliente.setNombre(nuevoNombre);
@@ -218,7 +237,7 @@ public class OperacionesClientes {
                         case (2):
                             System.out.print("Nueva dirección: ");
                             String nuevaDireccion = scan.nextLine();
-                            if (!Validar.validateDireccion(nuevaDireccion)) {
+                            if (!validar.validateDireccion(nuevaDireccion)) {
                                 throw new EinvalidPropertyException("Dirección incorrecta.");
                             }
                             cliente.setDireccion(nuevaDireccion);
@@ -226,7 +245,7 @@ public class OperacionesClientes {
                         case (3):
                             System.out.print("Indique nuevo teléfono: ");
                             String nuevoTelefono = scan.nextLine();
-                            if (!Validar.validateTelefono(nuevoTelefono)) {
+                            if (!validar.validateTelefono(nuevoTelefono)) {
                                 throw new EinvalidPropertyException("Teléfono incorrecto.");
                             }
                             int telefonoNuevo = Integer.parseInt(nuevoTelefono);
@@ -271,15 +290,6 @@ public class OperacionesClientes {
             }
         }
         System.out.println("");
-    }
-    public boolean verificarDniRep(String dni){
-        HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
-        for(Cliente cliente : clientes.values()){
-            if(cliente.getDni().equals(dni)){
-                return true;
-            }
-        }
-        return false;
     }
     public boolean verificarTlfRep(int telefono){
         HashMap<String,Cliente> clientes = opConcesionario.listarClientes();

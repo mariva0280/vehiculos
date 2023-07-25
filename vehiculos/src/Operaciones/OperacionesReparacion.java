@@ -48,14 +48,18 @@ public class OperacionesReparacion {
 
     }
     public void agregarReparar() {
-        //LUEGO SE BORRA LA LLAMADA Y EL METODO LO PONEMOS PARA PROBAR
-        llenarConcesionario();
+
         HashMap<String, Coche> coches = opConcesionario.listarCoches();
         HashMap<String,Mecanico> mecanicos = opConcesionario.listarMecanicos();
 
         Reparacion reparacion = new Reparacion();
         reparacion.setCoche(coches.get(verCoches(coches)));
-        reparacion.setMecanico(mecanicos.get(verMecanicos(mecanicos)));
+        Mecanico mecanico = mecanicos.get(verMecanicos(mecanicos));
+        if(null == mecanico){
+            System.out.println("Debe ir al menú mecánicos y dar de alta al menos un mecánico.");
+            return;
+        }
+        reparacion.setMecanico(mecanico);
         Scanner scan = new Scanner(System.in);
         System.out.print("Indique el tipo de reparación: ");
         TipoReparacion tipoReparacion = TipoReparacion.valueOf(scan.nextLine().toUpperCase());
@@ -102,6 +106,7 @@ public class OperacionesReparacion {
             } else if (opcion >=1 && opcion <= lista.size()) {
                 Reparacion reparacionSeleccionada = lista.get(opcion - 1);
                 opConcesionario.cambiarEstadoReparacion(reparacionSeleccionada);
+                opConcesionario.eliminarReparacion(reparacionSeleccionada);
                 System.out.println("Reparación modificada correctamente.");
             }else {
                 System.out.println("Opción incorrecta, vuelva a intentarlo.");
@@ -148,7 +153,7 @@ public class OperacionesReparacion {
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
-        System.out.println(lista.size() + 1 + " - Salir");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
+        System.out.println(lista.size() + 1 + " - Salir");
         System.out.println("");
         System.out.print("Elija el coche a reparar o pulse " + (lista.size()+1) + " para salir: ");
         try {
@@ -174,6 +179,7 @@ public class OperacionesReparacion {
         for (Mecanico item : mecanicos.values()) {
             lista.add(item);
         }
+        if(lista.size() == 0) return null;
         System.out.println("*****LISTA MECÁNICOS*****");
         System.out.println("");
         for (int i = 0; i < lista.size(); i++) {
@@ -209,22 +215,6 @@ public class OperacionesReparacion {
                 index++;
             }
         }
-    }
-    public void llenarConcesionario(){
-
-        Coche coche1 = new Coche("Seat","Ibiza","7250CGR",8000,10000, TipoVehiculo.TURISMO, Estado.STOCK);
-        Coche coche2 = new Coche("BMW","X-2","7251LGR",28000,35000,TipoVehiculo.TODOTERRENO,Estado.STOCK);
-        Coche coche3 = new Coche("CITROEN","Berlingo","7252FGR",18000,20000,TipoVehiculo.INDUSTRIAL,Estado.STOCK);
-
-        opConcesionario.agregarCoche(coche1);
-        opConcesionario.agregarCoche(coche2);
-        opConcesionario.agregarCoche(coche3);
-        Cliente cliente = new Cliente("MARIA","TOLEDO","12345678A",123123123);
-        Vendedor vendedor = new Vendedor("PEDRO","MADRID","12345678B",456456456);
-        Mecanico mecanico = new Mecanico("JUAN","AVILA","12345678C","789789789");
-        opConcesionario.agregarCliente(cliente);
-        opConcesionario.agregarVendedor(vendedor);
-        opConcesionario.agregarMecanico(mecanico);
     }
 
 }

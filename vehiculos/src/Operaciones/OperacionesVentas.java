@@ -7,8 +7,10 @@ package Operaciones;
 import Objetos.*;
 import Exception.EinvalidPropertyException;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class OperacionesVentas {
@@ -63,8 +65,10 @@ public class OperacionesVentas {
         Venta venta = new Venta();
         venta.setCliente(clientes.get(verClientes(clientes)));
         venta.setVendedor(vendedores.get(verVendedores(vendedores)));
-        venta.setCoche(coches.get(verCoches(coches)));
+        Coche coche = coches.get(verCoches(coches));
+        venta.setCoche(coche);
         opConcesionario.agregarVenta(venta);
+        opConcesionario.eliminarCoche(coche);
     }
 
     public String verClientes(HashMap<String, Cliente> clientes) {
@@ -228,4 +232,26 @@ public class OperacionesVentas {
         }
     }
 
+    public void totalesVendedores(){
+        HashMap<String, Venta> listaVentas = opConcesionario.listarVentas();
+        List<Venta> lista = new ArrayList<>();
+        for(Venta item : listaVentas.values()){
+            lista.add(item);
+        }
+        Vendedor vendedor = new Vendedor();
+        Double total = 0.0;
+
+        for(Venta venta : lista){
+            vendedor = venta.getVendedor();
+            System.out.println("El vendedor " + vendedor.getNombre());
+            for(int i = 0; i < lista.size(); i++){
+                if(lista.get(i).getVendedor().getDni().compareTo(vendedor.getDni()) == 0){
+                    total += 200;
+                    lista.remove(i);
+                }
+            }
+            System.out.println("Ha obtenido " + total + "€.");
+        }
+
+    }
 }

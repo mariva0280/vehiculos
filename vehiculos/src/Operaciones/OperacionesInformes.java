@@ -29,7 +29,7 @@ public class OperacionesInformes {
         try{
             int opcion = 0;
             System.out.println("");
-            while (opcion != 7) {
+            while (opcion != 8) {
                 System.out.println("*****MENU INFORMES*****");
                 System.out.println("1 - Coches en venta.");
                 System.out.println("2 - Coches reservados.");
@@ -37,7 +37,8 @@ public class OperacionesInformes {
                 System.out.println("4 - Clientes coches reservados.");
                 System.out.println("5 - Clientes coches comprados.");
                 System.out.println("6 - Vendedores coches vendidos.");
-                System.out.println("7 - Salir.");
+                System.out.println("7 - Totales por vendedor.");
+                System.out.println("8 - Salir.");
                 System.out.println("");
                 System.out.print("Elija una opcion: ");
 
@@ -60,6 +61,9 @@ public class OperacionesInformes {
                         break;
                     case (6):
                         opVentas.listarCochesPorVendedor();
+                        break;
+                    case (7):
+                        opVentas.totalesVendedores();
                         break;
                 }
             }
