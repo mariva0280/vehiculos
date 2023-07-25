@@ -26,7 +26,7 @@ public class Concesionario {
         this.cochesVendidos = new HashMap<String, Venta>();
         this.cochesReparacion = new HashMap<>();
         this.mecanicos = new HashMap<>();
-        this.director = new DirectorComercial();
+        this.director = new DirectorComercial("FRAN", "BARCELONA","12345678B","123123123");
     }
 
 

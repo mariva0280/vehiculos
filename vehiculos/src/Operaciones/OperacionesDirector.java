@@ -44,13 +44,13 @@ public class OperacionesDirector {
             int opcion = 0;
             while (opcion != 7) {
                 System.out.println("*****MENÚ DIRECTOR*****");
-                System.out.println("1 - Dar de alta,baja,modificar, coches, clientes,vendedores y mecánicos.");
-                System.out.println("2 - Ventas.");
-                System.out.println("3 - Exposiciones.");
-                System.out.println("4 - Reparaciones.");
-                System.out.println("5 - Reservas.");
-                System.out.println("6 - Informes.");
-                System.out.println("7 - Salir");
+                System.out.println("1 - Acceso a menú coches,vendedores,clientes y mecánicos.");
+                System.out.println("2 - Acceso a menú ventas.");
+                System.out.println("3 - Acceso a menú exposiciones.");
+                System.out.println("4 - Acceso a menú reparaciones.");
+                System.out.println("5 - Acceso a menú reservas.");
+                System.out.println("6 - Acceso a menú informes.");
+                System.out.println("7 - Salir.");
                 System.out.println("");
                 System.out.print("Elija una opcion: ");
                 opcion = scan.nextInt();
@@ -58,6 +58,7 @@ public class OperacionesDirector {
                     case (1):
                         try {
                             while(opcion != 5) {
+                                System.out.println("*****ALTAS,BAJAS,MODIFICACIONES*****");
                                 System.out.println("1 - Menú Coches.");
                                 System.out.println("2 - Menú Vendedores.");
                                 System.out.println("3 - Menú Clientes.");
@@ -78,11 +79,18 @@ public class OperacionesDirector {
                                     case (4):
                                         opMecanicos.menuMecanico();
                                         break;
+                                    case (5):
+                                        break;
+                                    /*default:
+                                        System.out.println("Opción incorrecta. Por favor, elija una opción válida.");
+                                        break;*/
                                 }
                             }
                         } catch (Exception ex) {
                             System.out.println("Opción incorrecta: " + ex.getMessage());
+                            menuDirector();
                         }
+                        break;
 
                     case (2):
                         opVentas.menuVentas();

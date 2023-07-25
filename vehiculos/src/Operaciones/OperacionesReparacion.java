@@ -22,6 +22,7 @@ public class OperacionesReparacion {
         try {
             int opcion = 0;
             while (opcion != 4) {
+                System.out.println("*****MENU REPARACIONES*****");
                 System.out.println("1 - Agregar coche a reparar.");
                 System.out.println("2 - Modificar estado de la reparación.");
                 System.out.println("3 - Consultar reparaciones de un coche.");

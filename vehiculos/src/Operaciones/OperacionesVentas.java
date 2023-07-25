@@ -231,8 +231,9 @@ public class OperacionesVentas {
             System.out.println("Error: " +ex.getMessage());
         }
     }
+    
 
-    public void totalesVendedores(){
+    /*public void totalesVendedores(){
         HashMap<String, Venta> listaVentas = opConcesionario.listarVentas();
         List<Venta> lista = new ArrayList<>();
         for(Venta item : listaVentas.values()){
@@ -253,5 +254,5 @@ public class OperacionesVentas {
             System.out.println("Ha obtenido " + total + "€.");
         }
 
-    }
+    }*/
 }

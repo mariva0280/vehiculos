@@ -36,7 +36,7 @@ public class OperacionesCoches {
                 System.out.println("2 - Dar de baja.");
                 System.out.println("3 - Modificar.");
                 System.out.println("4 - Listado Coches.");
-                System.out.println("5 - Salir, menú vendedores.");
+                System.out.println("5 - Salir.");
                 System.out.println("");
                 System.out.print("Elija una opcion: ");
 
@@ -110,7 +110,7 @@ public class OperacionesCoches {
             }
             coche.setPrecioVenta(precioVenta);
 
-            System.out.print("Introduzca el tipo de coche: ");
+            System.out.print("Introduzca el tipo de coche,turismo,todoterreno o industrial: ");
             String tipoCocheStr = scan.next();
             TipoVehiculo tipoCoche = TipoVehiculo.valueOf(tipoCocheStr.toUpperCase());
             if (!validar.validarTipoVehiculo(tipoCoche)) {
@@ -183,7 +183,7 @@ public class OperacionesCoches {
                 Coche coche = indices.get(opcion - 1);
                 System.out.println("");
                 while (opcion != 8) {
-                    System.out.println("");
+                    System.out.println("*****MODIFICAR COCHE*****");
                     System.out.println("1 - Modificar marca. ");
                     System.out.println("2 - Modificar modelo.");
                     System.out.println("3 - Modificar matrícula.");
@@ -192,7 +192,7 @@ public class OperacionesCoches {
                     System.out.println("6 - Modificar tipo de vehículo.");
                     System.out.println("7 - Modificar estado del vehículo.");
                     System.out.println("8 - Guardar cambios");
-                    System.out.print("Elija una opcion: ");
+                    System.out.print("Elija una opción: ");
                     opcion = scan.nextInt();
                     scan = new Scanner(System.in);
                     switch (opcion) {
@@ -240,7 +240,7 @@ public class OperacionesCoches {
                             coche.setPrecioVenta(nuevoPrecioVenta);
                             break;
                         case 6:
-                            System.out.print("Nuevo tipo de vehículo: ");
+                            System.out.print("Nuevo tipo de vehículo,turismo,todoterreno o industrial: ");
                             String nuevoTipoStr = scan.next();
                             TipoVehiculo nuevoTipo = TipoVehiculo.valueOf(nuevoTipoStr.toUpperCase());
                             if (!validar.validarTipoVehiculo(nuevoTipo)) {
@@ -269,7 +269,7 @@ public class OperacionesCoches {
 
     }
 
-    public void agregarCocheExposicion() { //No lo retira del stock
+    public void agregarCocheExposicion() {
         try {
             Scanner scanner = new Scanner(System.in);
             System.out.println("Elija una exposición para agregar el coche");
@@ -365,7 +365,7 @@ public class OperacionesCoches {
             System.out.println(e.getMessage());
             removerCocheExposicion();
         }
-    } //No lo vuelve a agregar al stock porque nunca salió
+    }
 
     public void indicesCoches(ArrayList<Coche> indices) {
         System.out.println("");

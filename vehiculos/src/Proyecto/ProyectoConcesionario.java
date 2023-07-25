@@ -25,6 +25,7 @@ public class ProyectoConcesionario {
         System.out.println("");
         while (opcion != 5) {
             try {
+                System.out.println("*****MENU PRINCIPAL*****");
                 System.out.println("1 - Director.");
                 System.out.println("2 - Vendedor.");
                 System.out.println("3 - Cliente.");

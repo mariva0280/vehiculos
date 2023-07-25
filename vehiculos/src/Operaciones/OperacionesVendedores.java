@@ -35,23 +35,22 @@ public class OperacionesVendedores {
         System.out.println("");
         while (opcion != 6) {
             System.out.println("*****MENU VENDEDORES*****");
-            System.out.println("1 - Consultar ventas");
-            System.out.println("2 - Consultar reservas.");
-            System.out.println("3 - Consultar exposiciones.");
-            System.out.println("4 - Consultar coches.");
-            System.out.println("5 - Consultar clientes.");
-            System.out.println("6 - Salir,menú clientes.");
+            System.out.println("1 - Acceder a menú ventas.");
+            System.out.println("2 - Acceder a menú reservas.");
+            System.out.println("3 - Acceder a consultas exposiciones.");
+            System.out.println("4 - Acceder a consultas coches.");
+            System.out.println("5 - Acceder a consultas clientes.");
+            System.out.println("6 - Salir.");
             System.out.println("");
             System.out.print("Elija una opcion: ");
             try {
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case (1):
-                        opVentas.listarCochesPorVendedor();
-                        //opVentas.vender();
+                        opVentas.menuVentas();
                         break;
                     case (2):
-                        opReservas.listarReservas();
+                        opReservas.menuReservas();
                         break;
                     case (3):
                         opExposicion.listarExposiciones();
@@ -81,7 +80,7 @@ public class OperacionesVendedores {
             System.out.println("2 - Dar de baja.");
             System.out.println("3 - Modificar.");
             System.out.println("4 - Listado Vendedores.");
-            System.out.println("5 - Menú clientes.");
+            System.out.println("5 - Salir.");
             System.out.println("");
             System.out.print("Elija una opcion: ");
             try {
@@ -101,9 +100,9 @@ public class OperacionesVendedores {
                         break;
                     case (5):
                         break;
-                    default:
+                    /*default:
                         System.out.println("Opción invalida.");
-                        break;
+                        break;*/
                 }
             } catch (Exception ex) {
                 scan.nextLine();
