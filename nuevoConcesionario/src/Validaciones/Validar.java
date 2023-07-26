@@ -1,9 +1,6 @@
 package Validaciones;
 
-import Objetos.Cliente;
-import Objetos.Concesionario;
-import Objetos.Mecanico;
-import Objetos.Vendedor;
+import Objetos.*;
 import Operaciones.OperacionesConcesionario;
 
 import java.util.HashMap;

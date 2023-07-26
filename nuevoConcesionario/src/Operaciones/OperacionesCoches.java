@@ -118,7 +118,6 @@ public class OperacionesCoches {
             opConcesionario.agregarCoche(coche);
             System.out.println("Coche añadido correctamente.");
 
-
         } catch (EinvalidPropertyException ex) {
             System.out.println("Error: " + ex.getMessage());
             agregar();
@@ -302,9 +301,11 @@ public class OperacionesCoches {
 
                 } else {
                     Coche coche = indiceCoche.get(opcion - 1);
+                    coche.setEstado(Estado.EXPOSICION);
                     ArrayList<Coche> cochesExposicion = new ArrayList<>();
                     cochesExposicion.add(coche);
                     exposicion.setCochesExposicion(cochesExposicion);
+                    opConcesionario.eliminarCoche(coche);
                 }
             }
 
@@ -351,6 +352,8 @@ public class OperacionesCoches {
 
                 } else {
                     Coche coche = indiceCoche.get(opcion - 1);
+                    coche.setEstado(Estado.STOCK);
+                    opConcesionario.agregarCoche(coche);
                     ArrayList<Coche> cochesExposicion = new ArrayList<>();
                     cochesExposicion.remove(coche);
                     exposicion.setCochesExposicion(cochesExposicion);
