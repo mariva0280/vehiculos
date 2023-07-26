@@ -134,7 +134,7 @@ public class OperacionesDirector {
             System.out.print("Introduzca un DNI:");
             String dni = scanner.nextLine();
             if (!validar.validateDni(dni)) throw new Exception("El DNI no es correcto");
-            if (!validar.verificarDniRep(dni)) throw new Exception("El DNI introducido ya está dado de alta");
+            if (validar.verificarDniRep(dni)) throw new Exception("El DNI introducido ya está dado de alta");
             director.setDni(dni);
 
             System.out.print("Introduzca un número de teléfono:");
