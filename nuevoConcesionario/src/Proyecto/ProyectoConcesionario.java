@@ -13,7 +13,6 @@ public class ProyectoConcesionario {
     public static void main(String[] args) {
         mostrarMenu();
         System.out.println("Gracias por su visita.");
-
     }
     public static void mostrarMenu() {
         Concesionario concesionario = new Concesionario();
@@ -32,7 +31,7 @@ public class ProyectoConcesionario {
                 System.out.println("4 - Mecánico.");
                 System.out.println("5 - Salir.");
                 System.out.println(" ");
-                System.out.print("Eliga la opción: ");
+                System.out.print("Elija la opción: ");
                 opcion = scanner.nextInt();
 
                 if (opcion > 5) {

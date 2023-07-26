@@ -56,6 +56,8 @@ public class OperacionesReparacion {
             System.out.println("Debe ir al menú mecánicos y dar de alta al menos un mecánico.");
             return;
         }
+        Coche coche = coches.get(verCoches(coches));
+        reparacion.setCoche(coche);
         reparacion.setMecanico(mecanico);
         Scanner scan = new Scanner(System.in);
         System.out.print("Indique el tipo de reparación: ");
@@ -75,8 +77,8 @@ public class OperacionesReparacion {
             System.out.println("Error al leer la fecha. La reparación no se agregó.");
             return;
         }
-
         opConcesionario.agregarReparacion(reparacion);
+        opConcesionario.eliminarCoche(coche);
     }
 
     public void modificarEstado(){

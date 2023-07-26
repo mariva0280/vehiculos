@@ -2,12 +2,12 @@ package Operaciones;
 
 import Objetos.Concesionario;
 import Objetos.DirectorComercial;
+import Proyecto.ProyectoConcesionario;
 import Validaciones.Validar;
 
 import java.util.Scanner;
 
 public class OperacionesDirector {
-
     private Concesionario concesionario;
     private OperacionesConcesionario opConcesionario;
     private OperacionesCoches opCoches;
@@ -34,11 +34,13 @@ public class OperacionesDirector {
         this.opVendedores = new OperacionesVendedores(concesionario);
         this.opVentas = new OperacionesVentas(concesionario);
         this.opMecanicos = new OperacionesMecanicos(concesionario);
+        this.validar = new Validar(concesionario);
     }
 
     public void menuDirector() {
         Scanner scan = new Scanner(System.in);
         try {
+            comprobarDirector();
             int opcion = 0;
             while (opcion != 7) {
                 System.out.println("*****MENÚ DIRECTOR*****");
@@ -119,23 +121,23 @@ public class OperacionesDirector {
             else System.out.println("Introduzca los nuevos datos para modificar el director:");
 
             DirectorComercial director = new DirectorComercial();
-            System.out.println("Introduzca un nombre:");
+            System.out.print("Introduzca un nombre:");
             String nombre = scanner.nextLine();
             if (!validar.validateName(nombre)) throw new Exception("El nombre no es correcto");
             director.setNombre(nombre);
 
-            System.out.println("Introduzca una dirección:");
+            System.out.print("Introduzca una dirección:");
             String direccion = scanner.nextLine();
             if (!validar.validateDireccion(direccion)) throw new Exception("La dirección no es correcta");
             director.setDireccion(direccion);
 
-            System.out.println("Introduzca un DNI:");
+            System.out.print("Introduzca un DNI:");
             String dni = scanner.nextLine();
             if (!validar.validateDni(dni)) throw new Exception("El DNI no es correcto");
             if (!validar.verificarDniRep(dni)) throw new Exception("El DNI introducido ya está dado de alta");
             director.setDni(dni);
 
-            System.out.println("Introduzca un número de teléfono:");
+            System.out.print("Introduzca un número de teléfono:");
             String telefono = scanner.nextLine();
             if (!validar.validateTelefono(telefono)) throw new Exception("El número de teléfono no es correcto");
             int movil = Integer.parseInt(telefono);
@@ -144,6 +146,38 @@ public class OperacionesDirector {
             concesionario.setDirector(director);
 
         } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            menuDirector();
+        }
+    }
+    public void comprobarDirector(){
+        try{
+        Scanner scanner = new Scanner(System.in);
+        int opcion = 0;
+        if (concesionario.getDirector() == null) {
+            System.out.println("No existe ningún director dado de alta");
+            System.out.println("1 - Alta director");
+            System.out.println("2 - Salir");
+            opcion = scanner.nextInt();
+                switch (opcion) {
+                    case (1):
+                        agregarDirector();
+                        break;
+                    case (2):
+                        ProyectoConcesionario proyecto = new ProyectoConcesionario();
+                        proyecto.mostrarMenu();
+                        break;
+                }
+            }
+        else {
+            System.out.print("Identifíquese como director con su DNI:");
+            String dni = scanner.nextLine();
+            if(!validar.validateDni(dni)) throw new Exception("El DNI no es correcto");
+            if(!validar.verificarDniRep(dni)) throw new Exception("El DNI ya se encuentra registrado");
+            if(!concesionario.getDirector().getDni().equals(dni)) throw new Exception("El DNI no es correcto");
+        }
+    }
+        catch (Exception e){
             System.out.println("Error: " + e.getMessage());
             menuDirector();
         }

@@ -53,11 +53,11 @@ public class OperacionesReservas {
         HashMap<String, Cliente> clientes = opConcesionario.listarClientes();
 
         Reserva reserva = new Reserva();
-        reserva.setCoche(coches.get(verCoches(coches)));
         reserva.setCliente(clientes.get(verClientes(clientes)));
-
+        Coche coche = coches.get(verCoches(coches));
+        reserva.setCoche(coche);
         opConcesionario.agregarReserva(reserva);
-
+        opConcesionario.eliminarCoche(coche);
     }
     public void cancelar(){
         try{

@@ -18,7 +18,6 @@ public class OperacionesClientes {
     private Validar validar;
 
     public OperacionesClientes(Concesionario concesionario) {
-
         this.concesionario = concesionario;
         this.opConcesionario = new OperacionesConcesionario(concesionario);
         this.opCoches = new OperacionesCoches(concesionario);

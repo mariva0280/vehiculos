@@ -102,27 +102,29 @@ public class OperacionesExposicion {
 
         } catch (EinvalidPropertyException e) {
             System.out.println("Error: " + e.getMessage());
-            agregarExposicion();
+            menuExposiciones();
         }
     }
 
     public void removerExposicion() {
         try {
-            Scanner scanner = new Scanner(System.in);
-            opConcesionario = new OperacionesConcesionario(concesionario);
-            HashMap<Integer, Exposicion> exposiciones = concesionario.getExposiciones();
-            System.out.print("Introduzca el número de exposición a eliminar: ");
-            int numero = scanner.nextInt();
-            if (!exposiciones.containsKey(numero)) {
-                throw new EinvalidPropertyException("Número de exposición incorrecto.");
+            if (concesionario.getExposiciones().isEmpty()) throw new EinvalidPropertyException("No existen exposiciones");
+            else {
+                Scanner scanner = new Scanner(System.in);
+                opConcesionario = new OperacionesConcesionario(concesionario);
+                HashMap<Integer, Exposicion> exposiciones = concesionario.getExposiciones();
+                System.out.print("Introduzca el número de exposición a eliminar: ");
+                int numero = scanner.nextInt();
+                if (!exposiciones.containsKey(numero)) {
+                    throw new EinvalidPropertyException("Número de exposición incorrecto.");
+                }
+                Exposicion exposicion = exposiciones.get(numero);
+                int tamanio = exposicion.getCochesExposicion().size();
+                if (tamanio == 0) {
+                    opConcesionario.removerExposicion(exposicion);
+                    System.out.println("Exposición eliminada correctamente.");
+                } else throw new EinvalidPropertyException("No se puede eliminar la exposción tiene coches agregados.");
             }
-            Exposicion exposicion = exposiciones.get(numero);
-            int tamanio = exposicion.getCochesExposicion().size();
-            if(tamanio == 0){
-                opConcesionario.removerExposicion(exposicion);
-                System.out.println("Exposición eliminada correctamente.");
-            }else throw new EinvalidPropertyException("No se puede eliminar la exposción tiene coches agregados.");
-
         } catch (EinvalidPropertyException e) {
             System.out.println(e.getMessage());
             menuExposiciones();
@@ -199,7 +201,7 @@ public class OperacionesExposicion {
             }
         } catch (EinvalidPropertyException e) {
             System.out.println(e.getMessage());
-            modificarExposicion();
+            menuExposiciones();
         }
     }
     public void indicesExposiciones(ArrayList<Exposicion> indices){

@@ -22,6 +22,11 @@ public class Validar {
         if(nombre == null || nombre.isEmpty()){
             return false;
         }
+        for(char c : nombre.toCharArray()) {
+            if(Character.isDigit(c)){
+                return false;
+            }
+        }
         return true;
     }
     public  boolean validateDireccion(String direccion) {
@@ -46,10 +51,10 @@ public class Validar {
         HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
         HashMap<String, Mecanico> mecanicos = opConcesionario.listarMecanicos();
 
-        if(vendedores.containsKey(dni)) return true;
-        if(clientes.containsKey(dni)) return true;
-        if(mecanicos.containsKey(dni)) return true;
-        return false;
+        if(vendedores.containsKey(dni)) return false;
+        if(clientes.containsKey(dni)) return false;
+        if(mecanicos.containsKey(dni)) return false;
+        return true;
 
     }
     public  boolean validateTelefono(String telefono) {
