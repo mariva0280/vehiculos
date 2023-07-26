@@ -173,7 +173,6 @@ public class OperacionesDirector {
             System.out.print("Identifíquese como director con su DNI:");
             String dni = scanner.nextLine();
             if(!validar.validateDni(dni)) throw new Exception("El DNI no es correcto");
-            if(!validar.verificarDniRep(dni)) throw new Exception("El DNI ya se encuentra registrado");
             if(!concesionario.getDirector().getDni().equals(dni)) throw new Exception("El DNI no es correcto");
         }
     }

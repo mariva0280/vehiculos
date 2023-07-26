@@ -82,6 +82,10 @@ public class OperacionesReservas {
             if(opcion == lista.size()+1){
                 System.out.println("Volviendo al menú reservas.");
             }else if(opcion >= 1 && opcion <= lista.size()){
+                Reserva reserva = lista.get(opcion-1);
+                Coche coche = reserva.getCoche();
+                coche.setEstado(Estado.STOCK);
+                opConcesionario.agregarCoche(coche);
                 opConcesionario.eliminarReserva(lista.get(opcion - 1));
                 System.out.println("Reserva cancelada correctamente.");
             }else{
