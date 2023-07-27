@@ -57,7 +57,7 @@ public class OperacionesClientes {
                 System.out.println("2 - Dar de baja.");
                 System.out.println("3 - Modificar.");
                 System.out.println("4 - Listado Clientes.");
-                System.out.println("5 - Salir,menú director.");
+                System.out.println("5 - Salir.");
                 System.out.println("");
                 System.out.print("Elija una opcion: ");
 

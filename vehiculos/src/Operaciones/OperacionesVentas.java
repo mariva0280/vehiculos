@@ -20,7 +20,7 @@ public class OperacionesVentas {
         this.opConcesionario = new OperacionesConcesionario(concesionario);
     }
 
-    public void menuVentas(){
+    public void menuVentas() {
         Scanner scan = new Scanner(System.in);
         try {
             int opcion = 0;
@@ -48,24 +48,41 @@ public class OperacionesVentas {
                         break;
                 }
             }
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             scan.nextLine();
         }
     }
 
     public void vender() {
+        try {
 
-        HashMap<String, Cliente> clientes = opConcesionario.listarClientes();
-        HashMap<String, Vendedor> vendedores = opConcesionario.listarVendedores();
-        HashMap<String, Coche> coches = opConcesionario.listarCoches();
+            HashMap<String, Cliente> clientes = opConcesionario.listarClientes();
+            HashMap<String, Vendedor> vendedores = opConcesionario.listarVendedores();
+            HashMap<String, Coche> coches = opConcesionario.listarCoches();
 
-        Venta venta = new Venta();
-        venta.setCliente(clientes.get(verClientes(clientes)));
-        venta.setVendedor(vendedores.get(verVendedores(vendedores)));
-        Coche coche = coches.get(verCoches(coches));
-        venta.setCoche(coche);
-        opConcesionario.agregarVenta(venta);
-        opConcesionario.eliminarCoche(coche);
+            if (clientes.isEmpty() || clientes == null) {
+                System.out.println("Debes  tener al menos un cliente dado de alta.");
+                return;
+            }
+            if(vendedores.isEmpty() || vendedores == null) {
+                System.out.println("Debes tener al menos un vendedor dado de alta.");
+                return;
+            }
+            if(coches.isEmpty() || coches == null) {
+                System.out.println("Debes tener al menos un coche dado de alta.");
+                return;
+            }
+
+            Venta venta = new Venta();
+            venta.setCliente(clientes.get(verClientes(clientes)));
+            venta.setVendedor(vendedores.get(verVendedores(vendedores)));
+            Coche coche = coches.get(verCoches(coches));
+            venta.setCoche(coche);
+            opConcesionario.agregarVenta(venta);
+            opConcesionario.eliminarCoche(coche);
+        }catch (Exception ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
     }
 
     public String verClientes(HashMap<String, Cliente> clientes) {
@@ -83,21 +100,22 @@ public class OperacionesVentas {
         }
         System.out.println(lista.size() + 1 + " - Salir.");
         System.out.println("");
-        System.out.print("Elija de la lista el cliente que desea comprar el coche o pulse " + (lista.size()+1)+ " para salir: ");
+        System.out.print("Elija de la lista el cliente que desea comprar el coche o pulse " + (lista.size() + 1) + " para salir: ");
         try {
             int opcion = scan.nextInt();
-            if(opcion == lista.size() + 1) {
+            if (opcion == lista.size() + 1) {
 
-            }else {
+            } else {
                 cliente = lista.get(opcion - 1);
             }
             System.out.println("Cliente elegido correctamente.");
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
         }
         return cliente.getDni();
     }
+
     public String verVendedores(HashMap<String, Vendedor> vendedores) {
         ArrayList<Vendedor> lista = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
@@ -113,22 +131,23 @@ public class OperacionesVentas {
         }
         System.out.println(lista.size() + 1 + " - Salir");
         System.out.println("");
-        System.out.print("Elija el vendedor de la lista que va a realizar la venta o pulse " + (lista.size()+1) + " para salir: ");
+        System.out.print("Elija el vendedor de la lista que va a realizar la venta o pulse " + (lista.size() + 1) + " para salir: ");
         try {
             int opcion = scan.nextInt();
-            if(opcion == lista.size() + 1) {
+            if (opcion == lista.size() + 1) {
 
-            }else {
+            } else {
                 vendedor = lista.get(opcion - 1);
             }
             System.out.println("Vendedor elegido correctamente.");
 
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
         }
         return vendedor.getDni();
     }
+
     public String verCoches(HashMap<String, Coche> coches) {
         ArrayList<Coche> lista = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
@@ -144,22 +163,23 @@ public class OperacionesVentas {
         }
         System.out.println(lista.size() + 1 + " - Salir.");
         System.out.println("");
-        System.out.print("Elija el coche deseado por el cliente o pulse " + (lista.size()+1)+" para salir: ");
+        System.out.print("Elija el coche deseado por el cliente o pulse " + (lista.size() + 1) + " para salir: ");
         try {
             int opcion = scan.nextInt();
-            if(opcion == lista.size() + 1) {
+            if (opcion == lista.size() + 1) {
 
-            }else {
+            } else {
                 coche = lista.get(opcion - 1);
             }
             System.out.println("Coche añadido al cliente correctamente.");
 
 
-        }catch (Exception ex){
+        } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
         }
         return coche.getMatricula();
     }
+
     //LO DEJAMOS DE MOMENTO PERO NO VA A SER NECESARIO
     /*public void listarCochesVendidos() {
         System.out.println("");
@@ -177,57 +197,59 @@ public class OperacionesVentas {
         System.out.println("");
     }*/
     public void listarClientePorModelo() {
-        HashMap<String,Venta> ventas = opConcesionario.listarVentas();
+        HashMap<String, Venta> ventas = opConcesionario.listarVentas();
         ArrayList<Venta> lista = new ArrayList<>();
         for (Venta item : ventas.values()) {
             lista.add(item);
         }
         System.out.println("*****LISTA DE COCHES VENDIDOS*****");
-        for(int i = 0; i < lista.size(); i++){
+        for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).getCoche().toString());
         }
         System.out.println("");
-        System.out.print("Escoga el coche de la lista o pulse " + (lista.size()+1) + " para salir: ");
+        System.out.print("Escoga el coche de la lista o pulse " + (lista.size() + 1) + " para salir: ");
 
         Scanner scan = new Scanner(System.in);
 
-        try{
+        try {
             int opcion = scan.nextInt();
-            System.out.println("Cliente que ha comprado el coche: " + lista.get(opcion-1).getCliente().toString());
-        }catch (Exception ex){
-            System.out.println("Error: " +ex.getMessage());
+            System.out.println("Cliente que ha comprado el coche: " + lista.get(opcion - 1).getCliente().toString());
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
         }
     }
+
     public void listarCochesPorVendedor() {
-        HashMap<String,Venta> ventas = opConcesionario.listarVentas();
+        HashMap<String, Venta> ventas = opConcesionario.listarVentas();
         ArrayList<Venta> lista = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         for (Venta item : ventas.values()) {
             lista.add(item);
         }
         System.out.println("*****LISTA DE VENDEDORES*****");
-        for(int i = 0; i < lista.size(); i++){
+        for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).getVendedor().toString());
         }
         System.out.println("");
-        System.out.print("Escoga el vendedor de la lista para ver los coches que ha vendido o pulse " + (lista.size()+1) + " para salir: ");
+        System.out.print("Escoga el vendedor de la lista para ver los coches que ha vendido o pulse " + (lista.size() + 1) + " para salir: ");
 
-        try{
+        try {
             int opcion = scan.nextInt();
             int numCoche = 0;
             System.out.println("El vendedor ha vendido: ");
-            for(Venta venta : lista) {
-                if(venta.getVendedor().equals(lista.get(opcion - 1).getVendedor())){
+            for (Venta venta : lista) {
+                if (venta.getVendedor().equals(lista.get(opcion - 1).getVendedor())) {
                     System.out.println(venta.getCoche().toString());
-                    numCoche ++;
+                    numCoche++;
                 }
             }
             System.out.print("El total de ingresos por ventas del vendedor es: " + numCoche * 200 + " €.");
             System.out.println("");
-        }catch (Exception ex){
-            System.out.println("Error: " +ex.getMessage());
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
         }
     }
+
     public HashMap<String, Double> calcularTotalVentasPorVendedor() {
         HashMap<String, Double> volumenTotalVentas = new HashMap<>();
 
