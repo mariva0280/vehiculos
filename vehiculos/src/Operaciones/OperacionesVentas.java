@@ -180,22 +180,6 @@ public class OperacionesVentas {
         return coche.getMatricula();
     }
 
-    //LO DEJAMOS DE MOMENTO PERO NO VA A SER NECESARIO
-    /*public void listarCochesVendidos() {
-        System.out.println("");
-        System.out.println("------------LISTA COCHES VENDIDOS-------------------");
-        System.out.println("");
-        HashMap<String,Venta> ventas = opConcesionario.listarVentas();
-        if (ventas.isEmpty()) {
-            System.out.println("No hay coches vendidos.");
-        } else {
-            for (Venta venta : ventas.values()) {
-                System.out.println(venta.getCoche().toString());
-                System.out.println("----------------------------------------");
-            }
-        }
-        System.out.println("");
-    }*/
     public void listarClientePorModelo() {
         HashMap<String, Venta> ventas = opConcesionario.listarVentas();
         ArrayList<Venta> lista = new ArrayList<>();
@@ -297,28 +281,4 @@ public class OperacionesVentas {
             System.out.println("Vendedor DNI: " + dniVendedor + ", Volumen de ventas: " + totalVentas + "€");
         }
     }
-
-
-    /*public void totalesVendedores(){
-        HashMap<String, Venta> listaVentas = opConcesionario.listarVentas();
-        List<Venta> lista = new ArrayList<>();
-        for(Venta item : listaVentas.values()){
-            lista.add(item);
-        }
-        Vendedor vendedor = new Vendedor();
-        Double total = 0.0;
-
-        for(Venta venta : lista){
-            vendedor = venta.getVendedor();
-            System.out.println("El vendedor " + vendedor.getNombre());
-            for(int i = 0; i < lista.size(); i++){
-                if(lista.get(i).getVendedor().getDni().compareTo(vendedor.getDni()) == 0){
-                    total += 200;
-                    lista.remove(i);
-                }
-            }
-            System.out.println("Ha obtenido " + total + "€.");
-        }
-
-    }*/
 }
