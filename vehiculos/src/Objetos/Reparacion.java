@@ -72,7 +72,7 @@ public class Reparacion {
 
     @Override
     public String toString() {
-        String message = "Coche: " + coche.getMatricula() + " " + coche.getMarca() + " tipo reparación: " + tipoReparacion + " descripción: " + descripcion + " fecha: " + fecha + " ¿la reparación está resuelta?: ";
+        String message = " Coche: " + coche.getMatricula() + " " + coche.getMarca() + " tipo reparación: " + tipoReparacion + " descripción: " + descripcion + " fecha: " + fecha + " ¿la reparación está resuelta?: ";
         if(this.isResuelta()){
             message += "Resuelta.";
         }else{

@@ -22,7 +22,6 @@ public class ProyectoConcesionario {
         System.out.println("******************************************");
         System.out.println("*****Bienvenido al concesionario VV*****");
         System.out.println("*****Regístrese como director para continuar*****");
-        //System.out.println("*****Pulse la opción deseada para acceder*****");
         System.out.println("");
         while (opcion != 5) {
             try {

@@ -5,5 +5,5 @@ public enum TipoReparacion{
     ELECTRICA,
     MECANICA,
     REVISION,
-    NINGUNA
+
 }

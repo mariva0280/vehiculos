@@ -49,17 +49,24 @@ public class OperacionesReparacion {
         HashMap<String, Coche> coches = opConcesionario.listarCoches();
         HashMap<String,Mecanico> mecanicos = opConcesionario.listarMecanicos();
 
-        Reparacion reparacion = new Reparacion();
-        Mecanico mecanico = mecanicos.get(verMecanicos(mecanicos));
-        if(null == mecanico){
-            System.out.println("Debe ir al menú mecánicos y dar de alta al menos un mecánico.");
+        if(coches.isEmpty() || coches == null){
+            System.out.println("Debe tener al menos un coche dado de alta.");
             return;
         }
+
+        if(mecanicos.isEmpty() || mecanicos == null){
+            System.out.println("Debe tener al menos un mecánico dado de alta.");
+            return;
+        }
+
+        Reparacion reparacion = new Reparacion();
+        Mecanico mecanico = mecanicos.get(verMecanicos(mecanicos));
+
         Coche coche = coches.get(verCoches(coches));
         reparacion.setCoche(coche);
         reparacion.setMecanico(mecanico);
         Scanner scan = new Scanner(System.in);
-        System.out.print("Indique el tipo de reparación: ");
+        System.out.print("Indique el tipo de reparación,eléctrica,mecánica,chapa_pintura, revision: ");
         TipoReparacion tipoReparacion = TipoReparacion.valueOf(scan.nextLine().toUpperCase());
         System.out.print("Descripción de la reparación: ");
         String descripcion = scan.nextLine();
@@ -217,5 +224,4 @@ public class OperacionesReparacion {
             }
         }
     }
-
 }
