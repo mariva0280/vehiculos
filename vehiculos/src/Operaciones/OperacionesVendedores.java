@@ -100,9 +100,6 @@ public class OperacionesVendedores {
                         break;
                     case (5):
                         break;
-                    /*default:
-                        System.out.println("Opción invalida.");
-                        break;*/
                 }
             } catch (Exception ex) {
                 scan.nextLine();

@@ -128,18 +128,18 @@ public class OperacionesDirector {
 
             System.out.print("Introduzca una dirección: ");
             String direccion = scanner.nextLine();
-            if (!validar.validateDireccion(direccion)) throw new Exception("La dirección no es correcta");
+            if (!validar.validateDireccion(direccion)) throw new Exception("La dirección no es correcta.");
             director.setDireccion(direccion);
 
             System.out.print("Introduzca un DNI: ");
             String dni = scanner.nextLine();
-            if (!validar.validateDni(dni)) throw new Exception("El DNI no es correcto");
-            if (validar.verificarDniRep(dni)) throw new Exception("El DNI introducido ya está dado de alta");
+            if (!validar.validateDni(dni)) throw new Exception("El DNI no es correcto.");
+            if (validar.verificarDniRep(dni)) throw new Exception("El DNI introducido ya está dado de alta.");
             director.setDni(dni);
 
             System.out.print("Introduzca un número de teléfono:");
             String telefono = scanner.nextLine();
-            if (!validar.validateTelefono(telefono)) throw new Exception("El número de teléfono no es correcto");
+            if (!validar.validateTelefono(telefono)) throw new Exception("El número de teléfono no es correcto.");
             int movil = Integer.parseInt(telefono);
             director.setTelefono(movil);
 
@@ -174,7 +174,7 @@ public class OperacionesDirector {
                 System.out.print("Identifíquese como director con su DNI:");
                 String dni = scanner.nextLine();
                 if(!validar.validateDni(dni)) throw new Exception("El DNI no es correcto");
-                if(!concesionario.getDirector().getDni().equals(dni)) throw new Exception("El DNI no es correcto");
+                if(!concesionario.getDirector().getDni().equals(dni)) throw new Exception("El DNI no es correcto.");
             }
         }
         catch (Exception e){

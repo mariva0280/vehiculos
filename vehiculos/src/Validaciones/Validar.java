@@ -8,10 +8,12 @@ import java.util.HashMap;
 public class Validar {
     private OperacionesConcesionario opConcesionario;
     private Concesionario concesionario;
+    private DirectorComercial director;
 
     public Validar (Concesionario concesionario) {
         this.concesionario = concesionario;
         this.opConcesionario = new OperacionesConcesionario(this.concesionario);
+        this.director = concesionario.getDirector();
     }
 
 
@@ -48,9 +50,12 @@ public class Validar {
         HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
         HashMap<String, Mecanico> mecanicos = opConcesionario.listarMecanicos();
 
-        if(vendedores.containsKey(dni)) return true;
-        if(clientes.containsKey(dni)) return true;
-        if(mecanicos.containsKey(dni)) return true;
+        if(director != null && director.getDni().equals(dni)){
+            return true;
+        }
+        if(vendedores.containsKey(dni) || clientes.containsKey(dni) || mecanicos.containsKey(dni)){
+            return true;
+        }
         return false;
 
     }
@@ -70,9 +75,9 @@ public class Validar {
         HashMap<String,Vendedor> vendedores = opConcesionario.listarVendedores();
         HashMap<String,Mecanico> mecanicos = opConcesionario.listarMecanicos();
 
-        if(vendedores.containsKey(telefono)) return true;
-        if(clientes.containsKey(telefono)) return true;
-        if(mecanicos.containsKey(telefono)) return true;
+        if(vendedores.containsKey(telefono) || clientes.containsKey(telefono) || mecanicos.containsKey(telefono)){
+            return true;
+        }
         return false;
     }
     public  boolean validateMarca(String marca){
