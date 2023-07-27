@@ -54,14 +54,22 @@ public class OperacionesReservas {
         try {
             HashMap<String, Coche> coches = opConcesionario.listarCoches();
             HashMap<String, Cliente> clientes = opConcesionario.listarClientes();
-            if (clientes.isEmpty() || coches.isEmpty())
-                throw new Exception("Debes de tener un coche y un cliente dado de alta");
+            if (clientes.isEmpty() || clientes == null) {
+                System.out.println("Debes de tener al menos un cliente dado de alta.");
+                return;
+            }
+            if(coches.isEmpty() || coches == null) {
+                System.out.println("Debes tener al menos un coche dado de alta.");
+                return;
+            }
             Reserva reserva = new Reserva();
             reserva.setCliente(clientes.get(verClientes(clientes)));
             Coche coche = coches.get(verCoches(coches));
             reserva.setCoche(coche);
             opConcesionario.agregarReserva(reserva);
             opConcesionario.eliminarCoche(coche);
+            System.out.println("Reserva realizada correctamente.");
+
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             menuReservas();
@@ -162,7 +170,6 @@ public class OperacionesReservas {
             } else {
                 cliente = lista.get(opcion - 1);
             }
-            System.out.println("Reserva realizada correctamente.");
 
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
