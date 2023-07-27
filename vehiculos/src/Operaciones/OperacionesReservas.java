@@ -62,6 +62,18 @@ public class OperacionesReservas {
                 System.out.println("Debes tener al menos un coche dado de alta.");
                 return;
             }
+
+            String dniCliente = verClientes(clientes);
+            if (dniCliente == null) {
+                System.out.println("No se ha seleccionado ningún cliente. Volviendo al menú reservas.");
+                return;
+            }
+
+            String matriculaCoche = verCoches(coches);
+            if (matriculaCoche == null) {
+                System.out.println("No se ha seleccionado ningún coche. Volviendo al menú reservas.");
+                return;
+            }
             Reserva reserva = new Reserva();
             reserva.setCliente(clientes.get(verClientes(clientes)));
             Coche coche = coches.get(verCoches(coches));
@@ -125,6 +137,10 @@ public class OperacionesReservas {
         }
         System.out.println("*****LISTA COCHES PARA RESERVAR*****");
         System.out.println("");
+        if(lista.isEmpty()){
+            System.out.println("No hay coches para reservar.");
+            return null;
+        }
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
@@ -134,7 +150,7 @@ public class OperacionesReservas {
         try {
             int opcion = scan.nextInt();
             if (opcion == lista.size() + 1) {
-
+                return null;
             } else {
                 coche = lista.get(opcion - 1);
             }
@@ -156,6 +172,10 @@ public class OperacionesReservas {
         }
         System.out.println("*****LISTA CLIENTES*****");
         System.out.println("");
+        if(lista.isEmpty()){
+            System.out.println("No hay clientes dados de alta para realizar una reserva.");
+            return null;
+        }
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
@@ -166,7 +186,7 @@ public class OperacionesReservas {
         try {
             int opcion = scan.nextInt();
             if (opcion == lista.size() + 1) {
-
+                return null;
             } else {
                 cliente = lista.get(opcion - 1);
             }
