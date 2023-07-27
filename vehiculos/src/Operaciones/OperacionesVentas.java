@@ -8,10 +8,7 @@ import Objetos.*;
 import Exception.EinvalidPropertyException;
 
 import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class OperacionesVentas {
     private Concesionario concesionario;
@@ -231,7 +228,54 @@ public class OperacionesVentas {
             System.out.println("Error: " +ex.getMessage());
         }
     }
-    
+    public HashMap<String, Double> calcularTotalVentasPorVendedor() {
+        HashMap<String, Double> volumenTotalVentas = new HashMap<>();
+
+        // Obtener todas las ventas
+        HashMap<String, Venta> ventas = opConcesionario.listarVentas();
+
+        // Calcular el volumen total de ventas por vendedor
+        for (Venta venta : ventas.values()) {
+            String dniVendedor = venta.getVendedor().getDni();
+            double precioCoche = venta.getCoche().getPrecioVenta();
+            double volumenVenta = 200.0; // Suponiendo que cada venta tiene un volumen de 200€
+
+            if (volumenTotalVentas.containsKey(dniVendedor)) {
+                double volumenTotal = volumenTotalVentas.get(dniVendedor);
+                volumenTotal += volumenVenta;
+                volumenTotalVentas.put(dniVendedor, volumenTotal);
+            } else {
+                volumenTotalVentas.put(dniVendedor, volumenVenta);
+            }
+        }
+
+        return volumenTotalVentas;
+    }
+
+    public void totalesVendedores() {
+        HashMap<String, Double> volumenTotalVentas = calcularTotalVentasPorVendedor();
+
+        // Crear un TreeSet utilizando un Comparator para ordenar por volumen de ventas
+        TreeSet<Map.Entry<String, Double>> treeSet = new TreeSet<>(new Comparator<Map.Entry<String, Double>>() {
+            @Override
+            public int compare(Map.Entry<String, Double> entry1, Map.Entry<String, Double> entry2) {
+                // Ordenar de mayor a menor (reverse order)
+                return entry2.getValue().compareTo(entry1.getValue());
+            }
+        });
+
+        // Agregar todas las entradas del HashMap al TreeSet
+        treeSet.addAll(volumenTotalVentas.entrySet());
+
+        // Imprimir el resultado ordenado
+        System.out.println("*****LISTA DE VENDEDORES POR VOLUMEN DE VENTAS*****");
+        for (Map.Entry<String, Double> entry : treeSet) {
+            String dniVendedor = entry.getKey();
+            double totalVentas = entry.getValue();
+            System.out.println("Vendedor DNI: " + dniVendedor + ", Volumen de ventas: " + totalVentas + "€");
+        }
+    }
+
 
     /*public void totalesVendedores(){
         HashMap<String, Venta> listaVentas = opConcesionario.listarVentas();

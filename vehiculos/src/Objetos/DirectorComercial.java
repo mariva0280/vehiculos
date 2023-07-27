@@ -8,4 +8,5 @@ public class DirectorComercial extends Persona{
         super(nombre, direccion, dni, Integer.valueOf(telefono));
     }
 
+
 }

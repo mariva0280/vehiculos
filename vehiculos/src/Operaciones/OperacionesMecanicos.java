@@ -92,6 +92,9 @@ public class OperacionesMecanicos {
             if(!validar.validateDni(dni)){
                 throw new EinvalidPropertyException("DNI incorrecto.");
             }
+            if(validar.verificarDniRep(dni)){
+                throw new EinvalidPropertyException("DNI duplicado.");
+            }
             mecanico.setDni(dni);
 
             System.out.print("Introduzca el teléfono del mecánico: ");
@@ -100,6 +103,9 @@ public class OperacionesMecanicos {
                 throw new EinvalidPropertyException("Teléfono incorrecto.");
             }
             int telefono = Integer.parseInt(telefonoStr);
+            if(validar.verificarTlfRep((telefono))){
+                throw new EinvalidPropertyException("Teléfono duplicado.");
+            }
             mecanico.setTelefono(telefono);
 
             opConcesionario.agregarMecanico(mecanico);

@@ -146,8 +146,8 @@ public class OperacionesVendedores {
                 throw new EinvalidPropertyException("Teléfono incorrecto.");
             }
             int telefono = Integer.parseInt(telefonoStr);
-            if (verificarTlfRep(telefono)) {
-                throw new EinvalidPropertyException("Teléfono duplicado");
+            if(validar.verificarTlfRep(telefono)){
+                throw new EinvalidPropertyException("Teléfono duplicado.");
             }
             vendedor.setTelefono(telefono);
 
@@ -249,8 +249,8 @@ public class OperacionesVendedores {
                                 throw new Exception("Teléfono incorrecto.");
                             }
                             int telefonoNuevo = Integer.parseInt(nuevoTelefono);
-                            if(verificarTlfRep(telefonoNuevo)){
-                                throw new Exception("Teléfono duplicado.");
+                            if(validar.verificarTlfRep((telefonoNuevo))){
+                                throw new EinvalidPropertyException("Teléfono duplicado.");
                             }
                             vendedor.setTelefono(telefonoNuevo);
                             break;
@@ -290,14 +290,5 @@ public class OperacionesVendedores {
             }
         }
         System.out.println("");
-    }
-    public boolean verificarTlfRep(int telefono){
-        HashMap<String,Vendedor> vendedores = opConcesionario.listarVendedores();
-        for(Vendedor vendedor : vendedores.values()){
-            if(vendedor.getTelefono() == telefono){
-                return true;
-            }
-        }
-        return false;
     }
 }

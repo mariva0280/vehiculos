@@ -1,12 +1,8 @@
 package Operaciones;
 import Objetos.*;
-import Operaciones.OperacionesConcesionario;
-import Exception.EinvalidPropertyException;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
-
-import  Validaciones.Validar;
 
 public class OperacionesReparacion {
     private  Concesionario concesionario;
@@ -44,7 +40,7 @@ public class OperacionesReparacion {
                 }
             }
         }catch (Exception ex) {
-                scan.nextLine();
+            scan.nextLine();
         }
 
     }
@@ -54,12 +50,13 @@ public class OperacionesReparacion {
         HashMap<String,Mecanico> mecanicos = opConcesionario.listarMecanicos();
 
         Reparacion reparacion = new Reparacion();
-        reparacion.setCoche(coches.get(verCoches(coches)));
         Mecanico mecanico = mecanicos.get(verMecanicos(mecanicos));
         if(null == mecanico){
             System.out.println("Debe ir al menú mecánicos y dar de alta al menos un mecánico.");
             return;
         }
+        Coche coche = coches.get(verCoches(coches));
+        reparacion.setCoche(coche);
         reparacion.setMecanico(mecanico);
         Scanner scan = new Scanner(System.in);
         System.out.print("Indique el tipo de reparación: ");
@@ -79,8 +76,8 @@ public class OperacionesReparacion {
             System.out.println("Error al leer la fecha. La reparación no se agregó.");
             return;
         }
-
         opConcesionario.agregarReparacion(reparacion);
+        opConcesionario.eliminarCoche(coche);
     }
 
     public void modificarEstado(){
@@ -106,6 +103,9 @@ public class OperacionesReparacion {
                 System.out.println("Volviendo al menú reparaciones.");
             } else if (opcion >=1 && opcion <= lista.size()) {
                 Reparacion reparacionSeleccionada = lista.get(opcion - 1);
+                Coche coche = reparacionSeleccionada.getCoche();
+                coche.setEstado(Estado.STOCK);
+                opConcesionario.agregarCoche(coche);
                 opConcesionario.cambiarEstadoReparacion(reparacionSeleccionada);
                 opConcesionario.eliminarReparacion(reparacionSeleccionada);
                 System.out.println("Reparación modificada correctamente.");
@@ -219,6 +219,3 @@ public class OperacionesReparacion {
     }
 
 }
-
-
-

@@ -1,17 +1,14 @@
 package Operaciones;
 
-import Objetos.Cliente;
 import Objetos.Concesionario;
 import Objetos.DirectorComercial;
+import Proyecto.ProyectoConcesionario;
 import Validaciones.Validar;
-import Exception.EinvalidPropertyException;
 
-import java.util.HashMap;
 import java.util.Scanner;
 
 public class OperacionesDirector {
-
-    private  Concesionario concesionario;
+    private Concesionario concesionario;
     private OperacionesConcesionario opConcesionario;
     private OperacionesCoches opCoches;
     private OperacionesClientes opClientes;
@@ -22,6 +19,7 @@ public class OperacionesDirector {
     private OperacionesVendedores opVendedores;
     private OperacionesVentas opVentas;
     private OperacionesMecanicos opMecanicos;
+    private Validar validar;
 
 
     public OperacionesDirector(Concesionario concesionario) {
@@ -36,11 +34,13 @@ public class OperacionesDirector {
         this.opVendedores = new OperacionesVendedores(concesionario);
         this.opVentas = new OperacionesVentas(concesionario);
         this.opMecanicos = new OperacionesMecanicos(concesionario);
+        this.validar = new Validar(concesionario);
     }
 
     public void menuDirector() {
         Scanner scan = new Scanner(System.in);
         try {
+            comprobarDirector();
             int opcion = 0;
             while (opcion != 7) {
                 System.out.println("*****MENÚ DIRECTOR*****");
@@ -57,7 +57,7 @@ public class OperacionesDirector {
                 switch (opcion) {
                     case (1):
                         try {
-                            while(opcion != 5) {
+                            while (opcion != 5) {
                                 System.out.println("*****ALTAS,BAJAS,MODIFICACIONES*****");
                                 System.out.println("1 - Menú Coches.");
                                 System.out.println("2 - Menú Vendedores.");
@@ -66,7 +66,7 @@ public class OperacionesDirector {
                                 System.out.println("5 - Salir.");
                                 System.out.print("Elija una opción: ");
                                 opcion = scan.nextInt();
-                                switch (opcion){
+                                switch (opcion) {
                                     case (1):
                                         opCoches.menuCoches();
                                         break;
@@ -81,9 +81,6 @@ public class OperacionesDirector {
                                         break;
                                     case (5):
                                         break;
-                                    /*default:
-                                        System.out.println("Opción incorrecta. Por favor, elija una opción válida.");
-                                        break;*/
                                 }
                             }
                         } catch (Exception ex) {
@@ -111,10 +108,80 @@ public class OperacionesDirector {
                         break;
                 }
             }
-        }    catch (Exception ex) {
-                scan.nextLine();
-            }
+        } catch (Exception ex) {
+            scan.nextLine();
         }
     }
+
+    public void agregarDirector() {
+        try {
+            Scanner scanner = new Scanner(System.in);
+            if (concesionario.getDirector() == null)
+                System.out.println("Introduzca los datos para agregar un director");
+            else System.out.println("Introduzca los nuevos datos para modificar el director.");
+
+            DirectorComercial director = new DirectorComercial();
+            System.out.print("Introduzca un nombre: ");
+            String nombre = scanner.nextLine();
+            if (!validar.validateName(nombre)) throw new Exception("El nombre no es correcto.");
+            director.setNombre(nombre);
+
+            System.out.print("Introduzca una dirección: ");
+            String direccion = scanner.nextLine();
+            if (!validar.validateDireccion(direccion)) throw new Exception("La dirección no es correcta");
+            director.setDireccion(direccion);
+
+            System.out.print("Introduzca un DNI: ");
+            String dni = scanner.nextLine();
+            if (!validar.validateDni(dni)) throw new Exception("El DNI no es correcto");
+            if (validar.verificarDniRep(dni)) throw new Exception("El DNI introducido ya está dado de alta");
+            director.setDni(dni);
+
+            System.out.print("Introduzca un número de teléfono:");
+            String telefono = scanner.nextLine();
+            if (!validar.validateTelefono(telefono)) throw new Exception("El número de teléfono no es correcto");
+            int movil = Integer.parseInt(telefono);
+            director.setTelefono(movil);
+
+            concesionario.setDirector(director);
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            menuDirector();
+        }
+    }
+    public void comprobarDirector(){
+        try{
+            Scanner scanner = new Scanner(System.in);
+            int opcion = 0;
+            if (concesionario.getDirector() == null) {
+                System.out.println("No existe ningún director dado de alta,debe dar de alta al menos un director.");
+                System.out.println("1 - Alta director");
+                System.out.println("2 - Salir");
+                System.out.print("Elija la opcion: ");
+                opcion = scanner.nextInt();
+                switch (opcion) {
+                    case (1):
+                        agregarDirector();
+                        break;
+                    case (2):
+                        ProyectoConcesionario proyecto = new ProyectoConcesionario();
+                        proyecto.mostrarMenu();
+                        break;
+                }
+            }
+            else {
+                System.out.print("Identifíquese como director con su DNI:");
+                String dni = scanner.nextLine();
+                if(!validar.validateDni(dni)) throw new Exception("El DNI no es correcto");
+                if(!concesionario.getDirector().getDni().equals(dni)) throw new Exception("El DNI no es correcto");
+            }
+        }
+        catch (Exception e){
+            System.out.println("Error: " + e.getMessage());
+            menuDirector();
+        }
+    }
+}
 
 

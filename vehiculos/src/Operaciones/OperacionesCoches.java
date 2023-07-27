@@ -1,8 +1,4 @@
-/*
-ESTA CLASE EN PRINCIPIO FUNCIONA PORQUE LA HE IDO PROBANDO POCO A POCO Y EN EL
-METODO LLENAR CONCESIONARIO ME HA FUNCIONADA AL AGREGAR COCHES, PERO SERÁ LA
-ULTIMA QUE COMPROBAREMOS CUANDO TERMINEMOS
- */
+
 package Operaciones;
 
 import Objetos.*;
@@ -90,7 +86,7 @@ public class OperacionesCoches {
             if (!validar.validarMatricula(matricula)) {
                 throw new EinvalidPropertyException("Matricula incorrecta.");
             }
-            if (verificarMatriculaRep(matricula)) {
+            if (validar.verificarMatriculaRep(matricula)) {
                 throw new EinvalidPropertyException("Matrícula repetida.");
             }
 
@@ -122,7 +118,6 @@ public class OperacionesCoches {
 
             opConcesionario.agregarCoche(coche);
             System.out.println("Coche añadido correctamente.");
-
 
         } catch (EinvalidPropertyException ex) {
             System.out.println("Error: " + ex.getMessage());
@@ -218,7 +213,7 @@ public class OperacionesCoches {
                             if (!validar.validarMatricula(nuevaMatricula)) {
                                 throw new EinvalidPropertyException("Matrícula incorrecta.");
                             }
-                            if (verificarMatriculaRep(nuevaMatricula)) {
+                            if (validar.verificarMatriculaRep(nuevaMatricula)) {
                                 throw new EinvalidPropertyException("La matrícula está repetida.");
                             }
                             coche.setMatricula(nuevaMatricula);
@@ -272,7 +267,7 @@ public class OperacionesCoches {
     public void agregarCocheExposicion() {
         try {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Elija una exposición para agregar el coche");
+            System.out.print("Elija una exposición para agregar el coche: ");
             int opcion;
             HashMap<Integer, Exposicion> exposiciones = concesionario.getExposiciones();
             ArrayList<Exposicion> indices = new ArrayList<>();
@@ -284,7 +279,7 @@ public class OperacionesCoches {
             opConcesionario = new OperacionesConcesionario(concesionario);
             opcion = scanner.nextInt();
             if (opcion > (indices.size() + 1)) {
-                System.out.println("Opcion Incorrecta !!");
+                System.out.println("Opción incorrecta.");
                 agregarCocheExposicion();
             } else if (opcion == indices.size() + 1) {
 
@@ -292,7 +287,7 @@ public class OperacionesCoches {
                 Exposicion exposicion = indices.get(opcion - 1);
                 System.out.println("");
 
-                System.out.println("Elija el coche a agregar a la exposición");
+                System.out.print("Elija el coche a agregar a la exposición: ");
                 HashMap<String, Coche> coches = concesionario.getCoches();
                 ArrayList<Coche> indiceCoche = new ArrayList<>();
                 for (Coche coche : coches.values()) {
@@ -301,15 +296,18 @@ public class OperacionesCoches {
                 indicesCoches(indiceCoche);
                 opcion = scanner.nextInt();
                 if (opcion > (indiceCoche.size() + 1)) {
-                    System.out.println("Opcion Incorrecta !!");
+                    System.out.println("Opción incorrecta.");
                     agregarCocheExposicion();
                 } else if (opcion == indiceCoche.size() + 1) {
 
                 } else {
                     Coche coche = indiceCoche.get(opcion - 1);
+                    coche.setEstado(Estado.EXPOSICION);
                     ArrayList<Coche> cochesExposicion = new ArrayList<>();
                     cochesExposicion.add(coche);
                     exposicion.setCochesExposicion(cochesExposicion);
+                    opConcesionario.eliminarCoche(coche);
+                    System.out.println("El coche se ha agregado a la exposición correctamente.");
                 }
             }
 
@@ -322,7 +320,7 @@ public class OperacionesCoches {
     public void removerCocheExposicion() {
         try {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Elija una exposición para remover el coche");
+            System.out.print("Elija la exposición de la que va a eliminar el coche: ");
             int opcion;
             HashMap<Integer, Exposicion> exposiciones = concesionario.getExposiciones();
             ArrayList<Exposicion> indices = new ArrayList<>();
@@ -334,31 +332,33 @@ public class OperacionesCoches {
             opConcesionario = new OperacionesConcesionario(concesionario);
             opcion = scanner.nextInt();
             if (opcion > (indices.size() + 1)) {
-                System.out.println("Opcion Incorrecta !!");
+                System.out.println("Opción incorrecta.");
                 agregarCocheExposicion();
             } else if (opcion == indices.size() + 1) {
 
             } else {
                 Exposicion exposicion = indices.get(opcion - 1);
                 System.out.println("");
-                System.out.println("Elija el coche a remover a la exposición");
+                System.out.print("Elija el coche a eliminar de la exposición: ");
                 HashMap<String, Coche> coches = concesionario.getCoches();
-                ArrayList<Coche> indiceCoche = new ArrayList<>();
+                ArrayList<Coche> cochesExposicion = exposicion.getCochesExposicion();
                 for (Coche coche : coches.values()) {
-                    indiceCoche.add(coche);
+                    cochesExposicion.add(coche);
                 }
-                indicesCoches(indiceCoche);
+                indicesCoches(cochesExposicion);
                 opcion = scanner.nextInt();
-                if (opcion > (indiceCoche.size() + 1)) {
-                    System.out.println("Opcion Incorrecta !!");
+                if (opcion > (cochesExposicion.size() + 1)) {
+                    System.out.println("Opción incorrecta.");
                     agregarCocheExposicion();
-                } else if (opcion == indiceCoche.size() + 1) {
+                } else if (opcion == cochesExposicion.size() + 1) {
 
                 } else {
-                    Coche coche = indiceCoche.get(opcion - 1);
-                    ArrayList<Coche> cochesExposicion = new ArrayList<>();
+                    Coche coche = cochesExposicion.get(opcion - 1);
+                    coche.setEstado(Estado.STOCK);
+                    opConcesionario.agregarCoche(coche);
                     cochesExposicion.remove(coche);
-                    exposicion.setCochesExposicion(cochesExposicion);
+                    System.out.println("El coche se ha eliminado correctamente de la exposición.");
+
                 }
             }
         } catch (Exception e) {
@@ -392,15 +392,5 @@ public class OperacionesCoches {
             }
         }
         System.out.println("");
-    }
-
-    public boolean verificarMatriculaRep(String matricula) {
-        HashMap<String, Coche> coches = opConcesionario.listarCoches();
-        for (Coche coche : coches.values()) {
-            if (coche.getMatricula().equalsIgnoreCase(matricula)) {
-                return true; // Matrícula repetida
-            }
-        }
-        return false; // Matrícula no repetida
     }
 }

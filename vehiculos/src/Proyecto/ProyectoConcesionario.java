@@ -21,7 +21,8 @@ public class ProyectoConcesionario {
         int opcion = 0;
         System.out.println("******************************************");
         System.out.println("*****Bienvenido al concesionario VV*****");
-        System.out.println("*****Pulse la opción deseada para acceder*****");
+        System.out.println("*****Regístrese como director para continuar*****");
+        //System.out.println("*****Pulse la opción deseada para acceder*****");
         System.out.println("");
         while (opcion != 5) {
             try {
@@ -57,7 +58,7 @@ public class ProyectoConcesionario {
                             opMecanicos.menuFinalMecanico();
                             break;
                         case (5):
-                            System.exit(0);
+                            break;
                     }
                 }
             } catch (Exception ex) {

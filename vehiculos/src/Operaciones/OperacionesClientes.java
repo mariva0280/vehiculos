@@ -1,10 +1,5 @@
-/*
-REVISAR EL METODO ELIMINAR CLIENTE PORQUE NO ME FUNCIONA BIEN CUANDO HAY CLIENTES CON COCHES RESERVADOS O COMPRADOS, PORQUE ME SALTA EL SOUT
-OPCION INCORRECTA PERO AL FINAL SI QUE ELIMINA AL CLIENTE DE LA LISTA, LO DEMÁS FUNCIONA, FALTA IMPLEMENTAR EL MENÚ DEFINITIVO QUE ES AL QUE TIENEN
-ACCESO LOS CLIENTES EN EL QUE SOLO PUEDEN CONSULTAR LOS COCHES EN STOCK
- */
-package Operaciones;
 
+package Operaciones;
 
 import Objetos.Reserva;
 import Objetos.Venta;
@@ -24,7 +19,6 @@ public class OperacionesClientes {
     private Validar validar;
 
     public OperacionesClientes(Concesionario concesionario) {
-
         this.concesionario = concesionario;
         this.opConcesionario = new OperacionesConcesionario(concesionario);
         this.opCoches = new OperacionesCoches(concesionario);
@@ -129,7 +123,7 @@ public class OperacionesClientes {
                 throw new EinvalidPropertyException("Teléfono incorrecto.");
             }
             int telefono = Integer.parseInt(telefonoStr);
-            if(verificarTlfRep(telefono)){
+            if(validar.verificarTlfRep(telefono)){
                 throw new EinvalidPropertyException("Teléfono duplicado.");
             }
             cliente.setTelefono(telefono);
@@ -249,7 +243,7 @@ public class OperacionesClientes {
                                 throw new EinvalidPropertyException("Teléfono incorrecto.");
                             }
                             int telefonoNuevo = Integer.parseInt(nuevoTelefono);
-                            if(verificarTlfRep(telefonoNuevo)){
+                            if(validar.verificarTlfRep((telefonoNuevo))){
                                 throw new EinvalidPropertyException("Teléfono duplicado.");
                             }
                             cliente.setTelefono(telefonoNuevo);
@@ -290,14 +284,5 @@ public class OperacionesClientes {
             }
         }
         System.out.println("");
-    }
-    public boolean verificarTlfRep(int telefono){
-        HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
-        for(Cliente cliente : clientes.values()){
-            if(cliente.getTelefono() == telefono){
-                return true;
-            }
-        }
-        return false;
     }
 }

@@ -1,7 +1,3 @@
-/*
-ESTA CLASE LA USAMOS COMO INTERMEDIARIA Y PUNTO DE UNION ENTRE LOS OBJETOS Y EL MAIN
- */
-
 
 package Operaciones;
 
@@ -135,12 +131,4 @@ public class OperacionesConcesionario {
         concesionario.setMecanicos(listaMecanicos);
     }
     public HashMap listarMecanicos(){return concesionario.getMecanicos();}
-    /*public void agregarDirector(DirectorComercial director) {
-        HashMap<String,DirectorComercial> listaMecanicos = concesionario.getMecanicos();
-        listaMecanicos.put(mecanico.getDni(),mecanico);
-        concesionario.setMecanicos(listaMecanicos);
-    }*/
-
-
-
 }

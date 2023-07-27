@@ -1,9 +1,6 @@
 package Validaciones;
 
-import Objetos.Cliente;
-import Objetos.Concesionario;
-import Objetos.Mecanico;
-import Objetos.Vendedor;
+import Objetos.*;
 import Operaciones.OperacionesConcesionario;
 
 import java.util.HashMap;
@@ -18,9 +15,14 @@ public class Validar {
     }
 
 
-    public  boolean validateName(String nombre){
+    public boolean validateName(String nombre){
         if(nombre == null || nombre.isEmpty()){
             return false;
+        }
+        for(char c : nombre.toCharArray()) {
+            if(Character.isDigit(c)){
+                return false;
+            }
         }
         return true;
     }
@@ -63,6 +65,16 @@ public class Validar {
         }
         return true;
     }
+    public boolean verificarTlfRep(int telefono){
+        HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
+        HashMap<String,Vendedor> vendedores = opConcesionario.listarVendedores();
+        HashMap<String,Mecanico> mecanicos = opConcesionario.listarMecanicos();
+
+        if(vendedores.containsKey(telefono)) return true;
+        if(clientes.containsKey(telefono)) return true;
+        if(mecanicos.containsKey(telefono)) return true;
+        return false;
+    }
     public  boolean validateMarca(String marca){
         if(marca == null || marca.isEmpty()){
             return false;
@@ -77,6 +89,15 @@ public class Validar {
     }
     public  boolean validarMatricula(String matricula){
         return matricula.matches("\\d{4}[A-Z]{3}");
+    }
+    public boolean verificarMatriculaRep(String matricula) {
+        HashMap<String, Coche> coches = opConcesionario.listarCoches();
+        for (Coche coche : coches.values()) {
+            if (coche.getMatricula().equalsIgnoreCase(matricula)) {
+                return true; // Matrícula repetida
+            }
+        }
+        return false; // Matrícula no repetida
     }
     public  boolean validarPrecioCompra(double precioCompra){
         if(precioCompra == 0){
@@ -99,7 +120,7 @@ public class Validar {
     }
     public  boolean validarNumero (int numero){
         if (numero < 1 || numero > 99) return false;
-         else return true;
+        else return true;
     }
     public  boolean validateCiudad(String ciudad) {
         for (char caracter : ciudad.toCharArray()) {
