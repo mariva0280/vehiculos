@@ -79,6 +79,10 @@ public class OperacionesExposicion {
             if (!validar.validarNumero(numero)) {
                 throw new EinvalidPropertyException("Introduzca un número de exposición válido.");
             }
+            if (validar.verificarNumRep(numero)) {
+                System.out.println("El número de exposición ya está en uso. Introduzca un número diferente.");
+                return;
+            }
             exposicion.setNumeroExposicion(numero);
             scan.nextLine();
 

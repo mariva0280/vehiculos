@@ -127,6 +127,10 @@ public class Validar {
         if (numero < 1 || numero > 99) return false;
         else return true;
     }
+    public boolean verificarNumRep (int numero){
+        HashMap<Integer, Exposicion> exposiciones = concesionario.getExposiciones();
+        return exposiciones.containsKey(numero);
+    }
     public  boolean validateCiudad(String ciudad) {
         for (char caracter : ciudad.toCharArray()) {
             if (Character.isDigit(caracter)) {

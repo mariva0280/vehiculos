@@ -338,20 +338,18 @@ public class OperacionesCoches {
 
             } else {
                 Exposicion exposicion = indices.get(opcion - 1);
+                ArrayList<Coche> cochesExposicion = exposicion.getCochesExposicion();
+                if(cochesExposicion.isEmpty()){
+                    System.out.println("La exposición no tiene ningún coche.");
+                    return;
+                }
                 System.out.println("");
                 System.out.print("Elija el coche a eliminar de la exposición: ");
-                HashMap<String, Coche> coches = concesionario.getCoches();
-                ArrayList<Coche> cochesExposicion = exposicion.getCochesExposicion();
-                for (Coche coche : coches.values()) {
-                    cochesExposicion.add(coche);
-                }
                 indicesCoches(cochesExposicion);
                 opcion = scanner.nextInt();
-                if (opcion > (cochesExposicion.size() + 1)) {
+                if (opcion > (cochesExposicion.size()) || opcion < 1){
                     System.out.println("Opción incorrecta.");
-                    agregarCocheExposicion();
-                } else if (opcion == cochesExposicion.size() + 1) {
-
+                    removerCocheExposicion();
                 } else {
                     Coche coche = cochesExposicion.get(opcion - 1);
                     coche.setEstado(Estado.STOCK);
