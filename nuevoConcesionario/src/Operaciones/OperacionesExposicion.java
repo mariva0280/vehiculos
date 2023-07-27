@@ -11,24 +11,27 @@ import java.util.Scanner;
 public class OperacionesExposicion {
     private Concesionario concesionario;
     private OperacionesConcesionario opConcesionario;
+    private OperacionesCoches opCoches;
     private Validar validar;
 
     public OperacionesExposicion(Concesionario concesionario) {
         this.concesionario = concesionario;
         this.opConcesionario = new OperacionesConcesionario(concesionario);
+        this.opCoches = new OperacionesCoches(concesionario);
         this.validar = new Validar(concesionario);
     }
     public void menuExposiciones(){
         int opcion = 0;
         Scanner scan = new Scanner(System.in);
         System.out.println("");
-        while (opcion != 5) {
+        while (opcion != 6) {
             System.out.println("*****MENU EXPOSICIONES*****");
             System.out.println("1 - Dar de alta Exposición.");
             System.out.println("2 - Dar de baja Exposición.");
             System.out.println("3 - Modificar Exposición.");
             System.out.println("4 - Listado Exposiciones.");
-            System.out.println("5 - Salir.");
+            System.out.println("5 - Eliminar coche exposición.");
+            System.out.println("6 - Salir.");
             System.out.println("");
             System.out.print("Elija una opcion: ");
             try {
@@ -46,8 +49,13 @@ public class OperacionesExposicion {
                     case (4):
                         listarExposiciones();
                         break;
-                    /*case (5):
-                        break;*/
+                    case (5):
+                        opCoches.removerCocheExposicion();
+                        break;
+                    case (6):
+                        break;
+
+
                 }
             } catch (Exception ex) {
                 scan.nextLine();
@@ -60,11 +68,20 @@ public class OperacionesExposicion {
 
             Scanner scan = new Scanner(System.in);
             opConcesionario = new OperacionesConcesionario(concesionario);
+            HashMap<String,Coche> cochesStock = opConcesionario.listarCoches();
+            if(cochesStock.isEmpty()){
+                System.out.println("No hay coches disponibles.Debes dar de alta al menos un coche.");
+                return;
+            }
             Exposicion exposicion = new Exposicion();
             System.out.print("Introduzca un número a la exposición: ");
             int numero = scan.nextInt();
             if (!validar.validarNumero(numero)) {
                 throw new EinvalidPropertyException("Introduzca un número de exposición válido.");
+            }
+            if (validar.verificarNumRep(numero)) {
+                System.out.println("El número de exposición ya está en uso. Introduzca un número diferente.");
+                return;
             }
             exposicion.setNumeroExposicion(numero);
             scan.nextLine();
@@ -81,6 +98,8 @@ public class OperacionesExposicion {
             if (!validar.validateTelefono(telefono)) {
                 throw new EinvalidPropertyException("Teléfono incorrecto.");
             }
+            int movil = Integer.parseInt(telefono);
+            if(!validar.verificarTlfRep(movil)) throw new EinvalidPropertyException("El teléfono ya está registrado");
             exposicion.setTelefono(telefono);
 
             System.out.print("Introduzca una ciudad de destino: ");
@@ -93,9 +112,9 @@ public class OperacionesExposicion {
             opConcesionario.agregarExposicion(exposicion);
             System.out.println("Exposición agregada correctamente.");
 
-            System.out.println("¿Desea agregar un coche a la exposición? (S / N)");
+            System.out.print("¿Desea agregar un coche a la exposición? (S / N): ");
             String respuesta = scan.nextLine();
-            if(respuesta.equalsIgnoreCase("S")){
+            if(respuesta.equalsIgnoreCase("S")) {
                 OperacionesCoches opCoches = new OperacionesCoches(concesionario);
                 opCoches.agregarCocheExposicion();
             }
@@ -185,6 +204,8 @@ public class OperacionesExposicion {
                             if (!validar.validateTelefono(telefono)) {
                                 throw new EinvalidPropertyException("Teléfono incorrecto.");
                             }
+                            int movil = Integer.parseInt(telefono);
+                            if(!validar.verificarTlfRep(movil)) throw new EinvalidPropertyException("El teléfono ya está registrado");
                             exposicion.setTelefono(telefono);
                             break;
                         case 4:

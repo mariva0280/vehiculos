@@ -2,8 +2,7 @@ package Objetos;
 
 public enum TipoReparacion{
     CHAPA_PINTURA,
-    ELECTRICAS,
-    MECANICAS,
+    ELECTRICA,
+    MECANICA,
     REVISION,
-    NINGUNA
 }

@@ -92,21 +92,25 @@ public class OperacionesMecanicos {
             if(!validar.validateDni(dni)){
                 throw new EinvalidPropertyException("DNI incorrecto.");
             }
+            if(validar.verificarDniRep(dni)){
+                throw new EinvalidPropertyException("DNI duplicado.");
+            }
             mecanico.setDni(dni);
 
             System.out.print("Introduzca el teléfono del mecánico: ");
-            String telefonoStr =scan.nextLine();
+            String telefonoStr = scan.nextLine();
             if(!validar.validateTelefono(telefonoStr)){
                 throw new EinvalidPropertyException("Teléfono incorrecto.");
             }
             int telefono = Integer.parseInt(telefonoStr);
+            if(!validar.verificarTlfRep(telefono)) throw new EinvalidPropertyException("El teléfono ya está registrado");
             mecanico.setTelefono(telefono);
 
             opConcesionario.agregarMecanico(mecanico);
             System.out.println("Mecánico  agregado correctamente.");
         } catch (EinvalidPropertyException ex){
             System.out.println("Error: " + ex.getMessage());
-            agregarM();
+            menuFinalMecanico();
         }
     }
 }

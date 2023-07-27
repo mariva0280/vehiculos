@@ -1,3 +1,6 @@
+/*
+ESTA CLASE FUNCIONAN TODAS MENOS COCHES EN REPARACIÓN PORQUE TODAVIA NO ESTÁ HECHA
+ */
 package Operaciones;
 
 import Objetos.*;
@@ -11,6 +14,7 @@ public class OperacionesInformes {
     private OperacionesVentas opVentas;
     private OperacionesReservas opReservas;
     private OperacionesReparacion opReparaciones;
+    private OperacionesExposicion opExposicion;
 
     public OperacionesInformes(Concesionario concesionario) {
 
@@ -20,22 +24,24 @@ public class OperacionesInformes {
         this.opVentas = new OperacionesVentas(concesionario);
         this.opReservas = new OperacionesReservas(concesionario);
         this.opReparaciones = new OperacionesReparacion(concesionario);
+        this.opExposicion = new OperacionesExposicion(concesionario);
     }
     public void menuInformes(){
         Scanner scan = new Scanner(System.in);
         try{
             int opcion = 0;
             System.out.println("");
-            while (opcion != 8) {
+            while (opcion != 9) {
                 System.out.println("*****MENU INFORMES*****");
                 System.out.println("1 - Coches en venta.");
                 System.out.println("2 - Coches reservados.");
                 System.out.println("3 - Coches en reparación.");
-                System.out.println("4 - Clientes coches reservados.");
-                System.out.println("5 - Clientes coches comprados.");
-                System.out.println("6 - Vendedores coches vendidos.");
-                System.out.println("7 - Totales por vendedor.");
-                System.out.println("8 - Salir.");
+                System.out.println("4 - Coches en exposición.");
+                System.out.println("5 - Clientes coches reservados.");
+                System.out.println("6 - Clientes coches comprados.");
+                System.out.println("7 - Vendedores coches vendidos.");
+                System.out.println("8 - Totales por vendedor.");
+                System.out.println("9 - Salir.");
                 System.out.println("");
                 System.out.print("Elija una opcion: ");
 
@@ -51,16 +57,21 @@ public class OperacionesInformes {
                         opReparaciones.listarReparaciones();
                         break;
                     case (4):
-                        opReservas.listarReservasCliente();
+                        opExposicion.listarExposiciones();
                         break;
                     case (5):
-                        opVentas.listarClientePorModelo();
+                        opReservas.listarReservasCliente();
                         break;
                     case (6):
-                        opVentas.listarCochesPorVendedor();
+                        opVentas.listarClientePorModelo();
                         break;
                     case (7):
+                        opVentas.listarCochesPorVendedor();
+                        break;
+                    case (8):
                         opVentas.totalesVendedores();
+                        break;
+                    case (9):
                         break;
                 }
             }

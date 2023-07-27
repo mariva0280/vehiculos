@@ -47,10 +47,14 @@ public class Validar {
         HashMap<String, Vendedor> vendedores = opConcesionario.listarVendedores();
         HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
         HashMap<String, Mecanico> mecanicos = opConcesionario.listarMecanicos();
+        DirectorComercial director = concesionario.getDirector();
 
-        if(vendedores.containsKey(dni)) return true;
-        if(clientes.containsKey(dni)) return true;
-        if(mecanicos.containsKey(dni)) return true;
+        if(director.getDni().equals(dni)){
+            return true;
+        }
+        if(vendedores.containsKey(dni) || clientes.containsKey(dni) || mecanicos.containsKey(dni)){
+            return true;
+        }
         return false;
 
     }
@@ -61,6 +65,39 @@ public class Validar {
         for(char c : telefono.toCharArray()) {
             if(!Character.isDigit(c)){
                 return false;
+            }
+        }
+        return true;
+    }
+    public boolean verificarTlfRep(int telefono){
+        HashMap<String, Vendedor> vendedores = concesionario.getVendedores();
+        HashMap<String,Cliente> clientes = concesionario.getClientes();
+        HashMap<String, Mecanico> mecanicos = concesionario.getMecanicos();
+        HashMap<Integer, Exposicion> exposiciones = concesionario.getExposiciones();
+
+
+        if(concesionario.getDirector() == null) return true;
+        if(concesionario.getDirector().getTelefono() == telefono) return false;
+
+        if(!vendedores.isEmpty()){
+            for(Vendedor vendedor : vendedores.values()){
+                if(vendedor.getTelefono() == telefono) return false;
+            }
+        }
+        if(!clientes.isEmpty()){
+            for(Cliente cliente : clientes.values()){
+                if(cliente.getTelefono() == telefono) return false;
+            }
+        }
+        if(!mecanicos.isEmpty()){
+            for(Mecanico mecanico : mecanicos.values()){
+                if(mecanico.getTelefono() == telefono) return false;
+            }
+        }
+        if(!exposiciones.isEmpty()){
+            for(Exposicion exposicion : exposiciones.values()){
+                int numero = Integer.parseInt(exposicion.getTelefono());
+                if(numero == telefono) return false;
             }
         }
         return true;
@@ -79,6 +116,15 @@ public class Validar {
     }
     public  boolean validarMatricula(String matricula){
         return matricula.matches("\\d{4}[A-Z]{3}");
+    }
+    public boolean verificarMatriculaRep(String matricula) {
+        HashMap<String, Coche> coches = opConcesionario.listarCoches();
+        for (Coche coche : coches.values()) {
+            if (coche.getMatricula().equalsIgnoreCase(matricula)) {
+                return true; // Matrícula repetida
+            }
+        }
+        return false; // Matrícula no repetida
     }
     public  boolean validarPrecioCompra(double precioCompra){
         if(precioCompra == 0){
@@ -102,6 +148,10 @@ public class Validar {
     public  boolean validarNumero (int numero){
         if (numero < 1 || numero > 99) return false;
         else return true;
+    }
+    public boolean verificarNumRep (int numero){
+        HashMap<Integer, Exposicion> exposiciones = concesionario.getExposiciones();
+        return exposiciones.containsKey(numero);
     }
     public  boolean validateCiudad(String ciudad) {
         for (char caracter : ciudad.toCharArray()) {

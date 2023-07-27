@@ -1,3 +1,4 @@
+
 package Operaciones;
 
 import Objetos.Reserva;
@@ -56,7 +57,7 @@ public class OperacionesClientes {
                 System.out.println("2 - Dar de baja.");
                 System.out.println("3 - Modificar.");
                 System.out.println("4 - Listado Clientes.");
-                System.out.println("5 - Salir,menú director.");
+                System.out.println("5 - Salir.");
                 System.out.println("");
                 System.out.print("Elija una opcion: ");
 
@@ -111,9 +112,7 @@ public class OperacionesClientes {
             if(!validar.validateDni(dni)){
                 throw new EinvalidPropertyException("DNI incorrecto.");
             }
-            if(validar.verificarDniRep(dni)){
-                throw new EinvalidPropertyException("DNI duplicado.");
-            }
+            if(validar.verificarDniRep(dni)) throw new EinvalidPropertyException("DNI duplicado.");
             cliente.setDni(dni);
 
             System.out.print("Introduzca el teléfono del cliente: ");
@@ -122,16 +121,14 @@ public class OperacionesClientes {
                 throw new EinvalidPropertyException("Teléfono incorrecto.");
             }
             int telefono = Integer.parseInt(telefonoStr);
-            if(verificarTlfRep(telefono)){
-                throw new EinvalidPropertyException("Teléfono duplicado.");
-            }
+            if(!validar.verificarTlfRep(telefono)) throw new EinvalidPropertyException("El teléfono ya está registrado");
             cliente.setTelefono(telefono);
 
             opConcesionario.agregarCliente(cliente);
             System.out.println("Cliente agregado correctamente.");
         } catch (EinvalidPropertyException ex){
             System.out.println("Error: " + ex.getMessage());
-            agregar();
+            menuClientes();
         }
     }
 
@@ -182,7 +179,7 @@ public class OperacionesClientes {
 
         } catch (Exception ex) {
             System.out.println("Opcion incorrecta.");
-            eliminar();
+            menuClientes();
         }
     }
 
@@ -242,9 +239,10 @@ public class OperacionesClientes {
                                 throw new EinvalidPropertyException("Teléfono incorrecto.");
                             }
                             int telefonoNuevo = Integer.parseInt(nuevoTelefono);
-                            if(verificarTlfRep(telefonoNuevo)){
+                            if(validar.verificarTlfRep((telefonoNuevo))){
                                 throw new EinvalidPropertyException("Teléfono duplicado.");
                             }
+                            if(!validar.verificarTlfRep(telefonoNuevo)) throw new EinvalidPropertyException("El teléfono ya está registrado");
                             cliente.setTelefono(telefonoNuevo);
                             break;
                     }
@@ -255,7 +253,7 @@ public class OperacionesClientes {
 
         } catch (EinvalidPropertyException ex) {
             System.out.println("Error: " + ex.getMessage());
-            modificar();
+            menuClientes();
         }
     }
 
@@ -283,14 +281,5 @@ public class OperacionesClientes {
             }
         }
         System.out.println("");
-    }
-    public boolean verificarTlfRep(int telefono){
-        HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
-        for(Cliente cliente : clientes.values()){
-            if(cliente.getTelefono() == telefono){
-                return true;
-            }
-        }
-        return false;
     }
 }

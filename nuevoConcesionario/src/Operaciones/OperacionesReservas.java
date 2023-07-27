@@ -1,3 +1,4 @@
+
 package Operaciones;
 
 import Objetos.*;
@@ -53,14 +54,34 @@ public class OperacionesReservas {
         try {
             HashMap<String, Coche> coches = opConcesionario.listarCoches();
             HashMap<String, Cliente> clientes = opConcesionario.listarClientes();
-            if (clientes.isEmpty() || coches.isEmpty())
-                throw new Exception("Debes de tener un coche y un cliente dado de alta");
+            if (clientes.isEmpty() || clientes == null) {
+                System.out.println("Debes de tener al menos un cliente dado de alta.");
+                return;
+            }
+            if(coches.isEmpty() || coches == null) {
+                System.out.println("Debes tener al menos un coche dado de alta.");
+                return;
+            }
+
+            String dniCliente = verClientes(clientes);
+            if (dniCliente == null) {
+                System.out.println("No se ha seleccionado ningún cliente. Volviendo al menú reservas.");
+                return;
+            }
+
+            String matriculaCoche = verCoches(coches);
+            if (matriculaCoche == null) {
+                System.out.println("No se ha seleccionado ningún coche. Volviendo al menú reservas.");
+                return;
+            }
             Reserva reserva = new Reserva();
             reserva.setCliente(clientes.get(verClientes(clientes)));
             Coche coche = coches.get(verCoches(coches));
             reserva.setCoche(coche);
             opConcesionario.agregarReserva(reserva);
             opConcesionario.eliminarCoche(coche);
+            System.out.println("Reserva realizada correctamente.");
+
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             menuReservas();
@@ -102,7 +123,7 @@ public class OperacionesReservas {
 
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
-            cancelar();
+            menuReservas();
         }
     }
 
@@ -116,6 +137,10 @@ public class OperacionesReservas {
         }
         System.out.println("*****LISTA COCHES PARA RESERVAR*****");
         System.out.println("");
+        if(lista.isEmpty()){
+            System.out.println("No hay coches para reservar.");
+            return null;
+        }
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
@@ -125,7 +150,7 @@ public class OperacionesReservas {
         try {
             int opcion = scan.nextInt();
             if (opcion == lista.size() + 1) {
-
+                return null;
             } else {
                 coche = lista.get(opcion - 1);
             }
@@ -147,6 +172,10 @@ public class OperacionesReservas {
         }
         System.out.println("*****LISTA CLIENTES*****");
         System.out.println("");
+        if(lista.isEmpty()){
+            System.out.println("No hay clientes dados de alta para realizar una reserva.");
+            return null;
+        }
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
@@ -157,11 +186,10 @@ public class OperacionesReservas {
         try {
             int opcion = scan.nextInt();
             if (opcion == lista.size() + 1) {
-
+                return null;
             } else {
                 cliente = lista.get(opcion - 1);
             }
-            System.out.println("Reserva realizada correctamente.");
 
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
@@ -207,5 +235,4 @@ public class OperacionesReservas {
             System.out.println("Error: " + ex.getMessage());
         }
     }
-
 }
