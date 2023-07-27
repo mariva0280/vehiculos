@@ -58,15 +58,26 @@ public class OperacionesReparacion {
             System.out.println("Debe tener al menos un mecánico dado de alta.");
             return;
         }
+        String matriculaCoche = verCoches(coches);
+        if(matriculaCoche == null){
+            System.out.println("No ha seleccionado ningún coche.Volviendo al menú reparaciones.");
+            return;
+        }
+        String dniMecanico = verMecanicos(mecanicos);
+        if(dniMecanico == null){
+            System.out.println("No ha seleccionado ningún mecánico.Volviendo al menú reparaciones.");
+            return;
+        }
 
         Reparacion reparacion = new Reparacion();
-        Mecanico mecanico = mecanicos.get(verMecanicos(mecanicos));
-
-        Coche coche = coches.get(verCoches(coches));
+        //Mecanico mecanico = mecanicos.get(verMecanicos(mecanicos));
+        Mecanico mecanico = mecanicos.get(dniMecanico);
+        //Coche coche = coches.get(verCoches(coches));
+        Coche coche = coches.get(matriculaCoche);
         reparacion.setCoche(coche);
         reparacion.setMecanico(mecanico);
         Scanner scan = new Scanner(System.in);
-        System.out.print("Indique el tipo de reparación,eléctrica,mecánica,chapa_pintura, revision: ");
+        System.out.print("Indique el tipo de reparación:(eléctrica,mecánica,chapa_pintura, revision): ");
         TipoReparacion tipoReparacion = TipoReparacion.valueOf(scan.nextLine().toUpperCase());
         System.out.print("Descripción de la reparación: ");
         String descripcion = scan.nextLine();
@@ -158,6 +169,10 @@ public class OperacionesReparacion {
         }
         System.out.println("*****LISTA COCHES*****");
         System.out.println("");
+        if(lista.isEmpty()){
+            System.out.println("No hay coches disponibles para reparar.");
+            return null;
+        }
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
@@ -167,7 +182,7 @@ public class OperacionesReparacion {
         try {
             int opcion = scan.nextInt();
             if(opcion == lista.size() + 1) {
-
+                return null;
             }else {
                 coche = lista.get(opcion - 1);
             }
@@ -187,11 +202,16 @@ public class OperacionesReparacion {
         for (Mecanico item : mecanicos.values()) {
             lista.add(item);
         }
-        if(lista.size() == 0) return null;
+
         System.out.println("*****LISTA MECÁNICOS*****");
         System.out.println("");
+        if(lista.isEmpty()){
+            System.out.println("No hay mecánicos para realizar la reparación.");
+            return null;
+        }
         for (int i = 0; i < lista.size(); i++) {
-            System.out.println((i + 1) + " - " + lista.get(i).toString());
+            mecanico = lista.get(i);
+            System.out.println((i + 1) + " - Nombre: " +  mecanico.getNombre() + ", Teléfono: " + mecanico.getTelefono() + ", DNI: " + mecanico.getDni());
         }
         System.out.println(lista.size() + 1 + " - Salir.");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
         System.out.println("");
@@ -200,7 +220,7 @@ public class OperacionesReparacion {
         try {
             int opcion = scan.nextInt();
             if(opcion == lista.size() + 1) {
-
+                return null;
             }else {
                 mecanico = lista.get(opcion - 1);
             }
