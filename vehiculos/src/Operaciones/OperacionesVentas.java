@@ -1,6 +1,4 @@
-/*
-ESTA CLASE ESTA TERMINADA Y FUNCIONA
- */
+
 
 package Operaciones;
 
@@ -76,7 +74,13 @@ public class OperacionesVentas {
             Venta venta = new Venta();
             venta.setCliente(clientes.get(verClientes(clientes)));
             venta.setVendedor(vendedores.get(verVendedores(vendedores)));
-            Coche coche = coches.get(verCoches(coches));
+            String matriculaCoche = verCoches(coches);
+            if(matriculaCoche == null) {
+                System.out.println("Venta cancelada, no ha seleccionado ningún coche.");
+                return;
+            }
+            //Coche coche = coches.get(verCoches(coches));
+            Coche coche = coches.get(matriculaCoche);
             venta.setCoche(coche);
             opConcesionario.agregarVenta(venta);
             opConcesionario.eliminarCoche(coche);
@@ -104,7 +108,7 @@ public class OperacionesVentas {
         try {
             int opcion = scan.nextInt();
             if (opcion == lista.size() + 1) {
-
+                return null;
             } else {
                 cliente = lista.get(opcion - 1);
             }
@@ -135,7 +139,7 @@ public class OperacionesVentas {
         try {
             int opcion = scan.nextInt();
             if (opcion == lista.size() + 1) {
-
+                return null;
             } else {
                 vendedor = lista.get(opcion - 1);
             }
@@ -167,7 +171,7 @@ public class OperacionesVentas {
         try {
             int opcion = scan.nextInt();
             if (opcion == lista.size() + 1) {
-
+                return null;
             } else {
                 coche = lista.get(opcion - 1);
             }
