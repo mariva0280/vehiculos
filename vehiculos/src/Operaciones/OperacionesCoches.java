@@ -344,7 +344,7 @@ public class OperacionesCoches {
             } else {
                 Exposicion exposicion = indices.get(opcion - 1);
                 ArrayList<Coche> cochesExposicion = exposicion.getCochesExposicion();
-                if(cochesExposicion.isEmpty()){
+                if(cochesExposicion.isEmpty() || cochesExposicion == null){
                     System.out.println("La exposición no tiene ningún coche.");
                     return;
                 }

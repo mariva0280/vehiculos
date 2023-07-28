@@ -112,12 +112,17 @@ public class OperacionesExposicion {
             opConcesionario.agregarExposicion(exposicion);
             System.out.println("Exposición agregada correctamente.");
 
-            System.out.print("¿Desea agregar un coche a la exposición? (S / N): ");
+            opCoches.agregarCocheExposicion();
+            //ESTO FUERA BUSCA OTRO COMENTARIO MAS ABAJO DE OTRO CAMBIO VALE
+            /*System.out.print("¿Desea agregar un coche a la exposición? (S / N): ");
             String respuesta = scan.nextLine();
             if(respuesta.equalsIgnoreCase("S")) {
                 OperacionesCoches opCoches = new OperacionesCoches(concesionario);
                 opCoches.agregarCocheExposicion();
-            }
+            }else {
+                removerExposicion();
+                System.out.println("Exposición ");
+            }*/
 
         } catch (EinvalidPropertyException e) {
             System.out.println("Error: " + e.getMessage());
@@ -146,7 +151,9 @@ public class OperacionesExposicion {
             }
         } catch (EinvalidPropertyException e) {
             System.out.println(e.getMessage());
-            menuExposiciones();
+            return;
+            //menuExposiciones();
+
         }
     }
 
@@ -222,7 +229,8 @@ public class OperacionesExposicion {
             }
         } catch (EinvalidPropertyException e) {
             System.out.println(e.getMessage());
-            menuExposiciones();
+            return;
+            //menuExposiciones();
         }
     }
     public void indicesExposiciones(ArrayList<Exposicion> indices){
@@ -236,15 +244,20 @@ public class OperacionesExposicion {
         System.out.println(indices.size() + 1 + " - Salir.");
         System.out.println("");
     }
+    /*
+    AQUI HE MODIFICADO EL LUGAR DE LA COMPROBACIÓN DEL EMPTY SOLO HE CAMBIADO EL ORDEN PORQUE NO LO HACIA BIEN VALE Y EN LOS METODOS
+    DE REMOVER Y MODIFICAR EXPOSICION HE COMENTADO LA LLAMADA AL MENU EXPOSCIONES Y PUSE UN RETURN QUE REALMENTE NO ESTA USANDO PERO
+    ESO HACE QUE NO NOS DE EL ERROR DE QUE NOS REPITA EL MENU EXPOSCIONES DOS VECES
+     */
     public void listarExposiciones() {
-        System.out.println("");
-        System.out.println("*****LISTA EXPOSICIONES*****");
-        System.out.println("");
         HashMap<Integer, Exposicion> exposiciones = opConcesionario.listarExposiciones();
 
         if (exposiciones.isEmpty()) {
             System.out.println("No hay exposiciones registradas.");
         } else {
+            System.out.println("");
+            System.out.println("*****LISTA EXPOSICIONES*****");
+            System.out.println("");
             for (Exposicion exposicion : exposiciones.values()) {
                 System.out.println(exposicion.toString());
                 System.out.println("");
