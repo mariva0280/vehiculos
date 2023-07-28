@@ -110,7 +110,6 @@ public class OperacionesMecanicos {
             System.out.println("Mecánico  agregado correctamente.");
         } catch (EinvalidPropertyException ex){
             System.out.println("Error: " + ex.getMessage());
-            menuFinalMecanico();
         }
     }
 }

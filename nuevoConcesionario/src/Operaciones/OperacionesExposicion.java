@@ -54,8 +54,6 @@ public class OperacionesExposicion {
                         break;
                     case (6):
                         break;
-
-
                 }
             } catch (Exception ex) {
                 scan.nextLine();
@@ -121,7 +119,6 @@ public class OperacionesExposicion {
 
         } catch (EinvalidPropertyException e) {
             System.out.println("Error: " + e.getMessage());
-            menuExposiciones();
         }
     }
 
@@ -146,7 +143,6 @@ public class OperacionesExposicion {
             }
         } catch (EinvalidPropertyException e) {
             System.out.println(e.getMessage());
-            menuExposiciones();
         }
     }
 
@@ -222,7 +218,6 @@ public class OperacionesExposicion {
             }
         } catch (EinvalidPropertyException e) {
             System.out.println(e.getMessage());
-            menuExposiciones();
         }
     }
     public void indicesExposiciones(ArrayList<Exposicion> indices){

@@ -29,13 +29,4 @@ public class Cliente extends Persona{
     public void setCochesReservados(ArrayList<Coche> cochesReservados) {
         this.cochesReservados = cochesReservados;
     }
-
-    /*@Override
-    public String toString() {
-        return "Cliente tiene comprados" + cochesComprados + " y reservados " + cochesReservados;
-        return "Cliente{" +
-                "cochesComprados=" + cochesComprados +
-                ", cochesReservados=" + cochesReservados +
-                '}';
-    }*/
 }

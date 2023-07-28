@@ -153,7 +153,6 @@ public class OperacionesVendedores {
             agregar();
         } catch (Exception ex) {
             System.out.println("Error desconocido: " + ex.getMessage());
-            menuVendedores();
         }
 
     }
@@ -184,7 +183,6 @@ public class OperacionesVendedores {
 
         } catch (Exception ex) {
             System.out.println("Opción incorrecta.");
-            menuVendedores();
         }
     }
 
@@ -256,7 +254,6 @@ public class OperacionesVendedores {
 
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
-            menuVendedores();
         }
     }
     public void indicesVendedores(ArrayList<Vendedor> lista) {

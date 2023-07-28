@@ -106,6 +106,9 @@ public class Validar {
         if(marca == null || marca.isEmpty()){
             return false;
         }
+        if (marca.matches(".*\\d+.*")) {
+            return false;
+        }
         return true;
     }
     public  boolean validateModelo(String modelo){

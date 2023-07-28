@@ -70,7 +70,7 @@ public class OperacionesCoches {
             System.out.print("Introduzca la marca del coche: ");
             String marca = scan.nextLine();
             if (!validar.validateMarca(marca)) {
-                throw new EinvalidPropertyException("Marca incorrecta no admite campos nulos.");
+                throw new EinvalidPropertyException("Marca incorrecta.");
             }
             coche.setMarca(marca);
 
@@ -121,7 +121,6 @@ public class OperacionesCoches {
 
         } catch (EinvalidPropertyException ex) {
             System.out.println("Error: " + ex.getMessage());
-            menuCoches();
         }
     }
 
@@ -151,7 +150,6 @@ public class OperacionesCoches {
             }
         } catch (Exception ex) {
             System.out.println("Opción incorrecta.");
-            menuCoches();
         }
 
     }
@@ -259,7 +257,6 @@ public class OperacionesCoches {
             }
         } catch (EinvalidPropertyException ex) {
             System.out.println("Opción incorrecta.");
-            menuCoches();
         }
 
     }
@@ -313,7 +310,6 @@ public class OperacionesCoches {
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            agregarCocheExposicion();
         }
     }
 
@@ -361,7 +357,6 @@ public class OperacionesCoches {
             }
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            removerCocheExposicion();
         }
     }
 

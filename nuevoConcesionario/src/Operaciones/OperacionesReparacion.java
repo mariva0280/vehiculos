@@ -133,7 +133,6 @@ public class OperacionesReparacion {
 
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
-            menuReparaciones();
         }
     }
 

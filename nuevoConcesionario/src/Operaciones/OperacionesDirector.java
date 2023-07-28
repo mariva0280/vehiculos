@@ -85,7 +85,6 @@ public class OperacionesDirector {
                             }
                         } catch (Exception ex) {
                             System.out.println("Opción incorrecta: " + ex.getMessage());
-                            menuDirector();
                         }
                         break;
 
@@ -147,7 +146,7 @@ public class OperacionesDirector {
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-            menuDirector();
+            comprobarDirector();
         }
     }
     public void comprobarDirector(){
@@ -179,7 +178,6 @@ public class OperacionesDirector {
         }
         catch (Exception e){
             System.out.println("Error: " + e.getMessage());
-            menuDirector();
         }
     }
 }

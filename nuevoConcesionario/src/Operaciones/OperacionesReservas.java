@@ -84,7 +84,6 @@ public class OperacionesReservas {
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
-            menuReservas();
         }
     }
 
@@ -123,7 +122,6 @@ public class OperacionesReservas {
 
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
-            menuReservas();
         }
     }
 

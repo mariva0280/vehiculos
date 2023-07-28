@@ -108,7 +108,7 @@ public class OperacionesClientes {
             cliente.setDireccion(direccion);
 
             System.out.print("Introduzca el DNI del cliente: ");
-            String dni =(scan.nextLine());
+            String dni = scan.nextLine();
             if(!validar.validateDni(dni)){
                 throw new EinvalidPropertyException("DNI incorrecto.");
             }
@@ -116,7 +116,7 @@ public class OperacionesClientes {
             cliente.setDni(dni);
 
             System.out.print("Introduzca el teléfono del cliente: ");
-            String telefonoStr =scan.nextLine();
+            String telefonoStr = scan.nextLine();
             if(!validar.validateTelefono(telefonoStr)){
                 throw new EinvalidPropertyException("Teléfono incorrecto.");
             }
@@ -128,7 +128,6 @@ public class OperacionesClientes {
             System.out.println("Cliente agregado correctamente.");
         } catch (EinvalidPropertyException ex){
             System.out.println("Error: " + ex.getMessage());
-            menuClientes();
         }
     }
 
@@ -179,7 +178,6 @@ public class OperacionesClientes {
 
         } catch (Exception ex) {
             System.out.println("Opcion incorrecta.");
-            menuClientes();
         }
     }
 
@@ -253,7 +251,6 @@ public class OperacionesClientes {
 
         } catch (EinvalidPropertyException ex) {
             System.out.println("Error: " + ex.getMessage());
-            menuClientes();
         }
     }
 
