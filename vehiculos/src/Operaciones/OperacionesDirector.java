@@ -52,7 +52,7 @@ public class OperacionesDirector {
                 System.out.println("6 - Acceso a menú informes.");
                 System.out.println("7 - Salir.");
                 System.out.println("");
-                System.out.print("Elija una opcion: ");
+                System.out.print("Elija una opción: ");
                 opcion = scan.nextInt();
                 switch (opcion) {
                     case (1):
@@ -117,7 +117,7 @@ public class OperacionesDirector {
         try {
             Scanner scanner = new Scanner(System.in);
             if (concesionario.getDirector() == null)
-                System.out.println("Introduzca los datos para agregar un director");
+                System.out.println("Introduzca los datos para agregar un director.");
             else System.out.println("Introduzca los nuevos datos para modificar el director.");
 
             DirectorComercial director = new DirectorComercial();
@@ -134,7 +134,7 @@ public class OperacionesDirector {
             System.out.print("Introduzca un DNI: ");
             String dni = scanner.nextLine();
             if (!validar.validateDni(dni)) throw new Exception("El DNI no es correcto.");
-            if (validar.verificarDniRep(dni)) throw new Exception("El DNI introducido ya está dado de alta.");
+            //if (validar.verificarDniRep(dni)) throw new Exception("El DNI introducido ya está dado de alta.");
             director.setDni(dni);
 
             System.out.print("Introduzca un número de teléfono:");

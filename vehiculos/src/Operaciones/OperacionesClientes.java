@@ -59,7 +59,7 @@ public class OperacionesClientes {
                 System.out.println("4 - Listado Clientes.");
                 System.out.println("5 - Salir.");
                 System.out.println("");
-                System.out.print("Elija una opcion: ");
+                System.out.print("Elija una opción: ");
 
                 opcion = scan.nextInt();
                 switch (opcion) {
@@ -77,9 +77,9 @@ public class OperacionesClientes {
                         break;
                     case (5):
                         break;
-                    default:
+                    /*default:
                         System.out.println("Opción inválida.");
-                        break;
+                        break;*/
                 }
             }
         } catch (Exception ex) {
@@ -87,54 +87,71 @@ public class OperacionesClientes {
         }
     }
 
-    public void agregar() {
-        try{
-            opConcesionario = new OperacionesConcesionario(concesionario);
-            Cliente cliente = new Cliente();
-            Scanner scan = new Scanner(System.in);
+   public void agregar() {
+       try {
+           opConcesionario = new OperacionesConcesionario(concesionario);
+           Cliente cliente = new Cliente();
+           Scanner scan = new Scanner(System.in);
 
-            System.out.print("Introduzca el nombre del cliente: ");
-            String nombre = scan.nextLine();
-            if(!validar.validateName(nombre)){
-                throw new EinvalidPropertyException("Nombre incorrecto.");
-            }
-            cliente.setNombre(nombre);
+           String nombre, direccion, dni, telefonoStr;
+           int telefono;
 
-            System.out.print("Introduzca la dirección del cliente: ");
-            String direccion = scan.nextLine();
-            if(!validar.validateDireccion(direccion)){
-                throw new EinvalidPropertyException("Dirección incorrecta.");
-            }
-            cliente.setDireccion(direccion);
+           System.out.print("Introduzca el nombre del cliente: ");
+           while (true) {
+               nombre = scan.nextLine();
+               if (!validar.validateName(nombre)) {
+                   throw new EinvalidPropertyException("Nombre incorrecto.Ingrese el nombre de nuevo");
+               }else break;
+           }
+           cliente.setNombre(nombre);
 
-            System.out.print("Introduzca el DNI del cliente: ");
-            String dni =(scan.nextLine());
-            if(!validar.validateDni(dni)){
-                throw new EinvalidPropertyException("DNI incorrecto.");
-            }
-            if(validar.verificarDniRep(dni)){
-                throw new EinvalidPropertyException("DNI duplicado.");
-            }
-            cliente.setDni(dni);
 
-            System.out.print("Introduzca el teléfono del cliente: ");
-            String telefonoStr =scan.nextLine();
-            if(!validar.validateTelefono(telefonoStr)){
-                throw new EinvalidPropertyException("Teléfono incorrecto.");
-            }
-            int telefono = Integer.parseInt(telefonoStr);
-            if(validar.verificarTlfRep(telefono)){
-                throw new EinvalidPropertyException("Teléfono duplicado.");
-            }
-            cliente.setTelefono(telefono);
+           while(true) {
+               System.out.print("Introduzca la dirección del cliente: ");
+               direccion = scan.nextLine();
+               if (!validar.validateDireccion(direccion)) {
+                   throw new EinvalidPropertyException("Dirección incorrecta.Ingrese la dirección de nuevo.");
+               } else break;
+           }
+           cliente.setDireccion(direccion);
 
-            opConcesionario.agregarCliente(cliente);
-            System.out.println("Cliente agregado correctamente.");
-        } catch (EinvalidPropertyException ex){
-            System.out.println("Error: " + ex.getMessage());
-            agregar();
-        }
-    }
+           System.out.print("Introduzca el DNI del cliente: ");
+           while (true) {
+               dni = scan.nextLine();
+               if (!validar.validateDni(dni)) {
+                   System.out.println("DNI incorrecto.Ingrese el DNI de nuevo.");
+               } else if (validar.verificarDniRep(dni)) {
+                   System.out.println("DNI duplicado.Ingrese el DNI de nuevo.");
+               } else {
+                   break;
+               }
+           }
+           cliente.setDni(dni);
+
+           System.out.print("Introduzca el teléfono del cliente: ");
+           while (true) {
+               telefonoStr = scan.nextLine();
+               if (!validar.validateTelefono(telefonoStr)) {
+                   System.out.println("Error: Teléfono incorrecto.Ingrese el teléfono de nuevo.");
+               } else {
+                   telefono = Integer.parseInt(telefonoStr);
+                   if (!validar.verificarTlfRep(telefono)) {
+                       System.out.println("Error: Teléfono duplicado.Ingrese el teléfono de nuevo.");
+                   } else {
+                       break;
+                   }
+               }
+           }
+           cliente.setTelefono(telefono);
+
+           opConcesionario.agregarCliente(cliente);
+           System.out.println("Cliente agregado correctamente.");
+       } catch (EinvalidPropertyException ex) {
+           System.out.println("Error: " + ex.getMessage());
+           agregar();
+       }
+   }
+
 
     public void eliminar() {
         try{
@@ -150,7 +167,7 @@ public class OperacionesClientes {
             System.out.print("Elija el número del cliente a eliminar: ");
             opcion = scan.nextInt();
             if (opcion > (lista.size() + 1)) {
-                System.out.println("Opcion incorrecta.");
+                System.out.println("Opción incorrecta.");
                 eliminar();
             } else if (opcion == lista.size() + 1) {
 
@@ -182,8 +199,9 @@ public class OperacionesClientes {
             }
 
         } catch (Exception ex) {
-            System.out.println("Opcion incorrecta.");
-            eliminar();
+            System.out.println("Opción incorrecta.");
+            //eliminar();
+            menuClientes();
         }
     }
 
@@ -203,7 +221,7 @@ public class OperacionesClientes {
 
             opcion = scan.nextInt();
             if (opcion > (lista.size() + 1)) {
-                System.out.println("Opcion incorrecta.");
+                System.out.println("Opción incorrecta.");
                 modificar();
             } else if (opcion == lista.size() + 1) {
 
@@ -215,7 +233,7 @@ public class OperacionesClientes {
                     System.out.println("2 - Modificar dirección.");
                     System.out.println("3 - Modificar teléfono.");
                     System.out.println("4 - Guardar cambios.");
-                    System.out.print("Elija una opcion: ");
+                    System.out.print("Elija una opción: ");
                     opcion = scan.nextInt();
 
                     scan = new Scanner(System.in);
@@ -246,6 +264,9 @@ public class OperacionesClientes {
                             if(validar.verificarTlfRep((telefonoNuevo))){
                                 throw new EinvalidPropertyException("Teléfono duplicado.");
                             }
+                            if(!validar.verificarTlfRep(telefonoNuevo)){
+                                throw new EinvalidPropertyException("El teléfono ya está registrado.");
+                            }
                             cliente.setTelefono(telefonoNuevo);
                             break;
                     }
@@ -256,7 +277,8 @@ public class OperacionesClientes {
 
         } catch (EinvalidPropertyException ex) {
             System.out.println("Error: " + ex.getMessage());
-            modificar();
+            //modificar();
+            menuClientes();
         }
     }
 

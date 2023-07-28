@@ -4,6 +4,7 @@ ESTA CLASE EN PRINCIPIO FUNCIONA Y NO HAY NADA QUE REVISAR LOS SOUTS ESTÁN BIEN
 package Operaciones;
 
 import Exception.EinvalidPropertyException;
+import Objetos.Cliente;
 import Validaciones.Validar;
 import Objetos.Concesionario;
 import Objetos.Vendedor;
@@ -25,6 +26,7 @@ public class OperacionesVendedores {
         this.opConcesionario = new OperacionesConcesionario(concesionario);
         this.opVentas = new OperacionesVentas(concesionario);
         this.opCoches = new OperacionesCoches(concesionario);
+        this.opExposicion = new OperacionesExposicion(concesionario);
         this.opReservas = new OperacionesReservas(concesionario);
         this.opClientes = new OperacionesClientes(concesionario);
         this.validar = new Validar(concesionario);
@@ -42,7 +44,7 @@ public class OperacionesVendedores {
             System.out.println("5 - Acceder a consultas clientes.");
             System.out.println("6 - Salir.");
             System.out.println("");
-            System.out.print("Elija una opcion: ");
+            System.out.print("Elija una opción: ");
             try {
                 opcion = scan.nextInt();
                 switch (opcion) {
@@ -82,7 +84,7 @@ public class OperacionesVendedores {
             System.out.println("4 - Listado Vendedores.");
             System.out.println("5 - Salir.");
             System.out.println("");
-            System.out.print("Elija una opcion: ");
+            System.out.print("Elija una opción: ");
             try {
                 opcion = scan.nextInt();
                 switch (opcion) {
@@ -108,57 +110,68 @@ public class OperacionesVendedores {
     }
 
     public void agregar() {
-        opConcesionario = new OperacionesConcesionario(concesionario);
-        Vendedor vendedor = new Vendedor();
-        Scanner scan = new Scanner(System.in);
-
         try {
+            opConcesionario = new OperacionesConcesionario(concesionario);
+            Vendedor vendedor = new Vendedor();
+            Scanner scan = new Scanner(System.in);
+
+            String nombre, direccion, dni, telefonoStr;
+            int telefono;
+
             System.out.print("Introduzca el nombre del vendedor: ");
-            String nombre = scan.nextLine();
-            if (!validar.validateName(nombre)) {
-                throw new EinvalidPropertyException("Nombre incorrecto.");
+            while (true) {
+                nombre = scan.nextLine();
+                if (!validar.validateName(nombre)) {
+                    throw new EinvalidPropertyException("Nombre incorrecto.Ingrese el nombre de nuevo");
+                }else break;
             }
             vendedor.setNombre(nombre);
 
-            System.out.print("Introduzca la dirección del vendedor: ");
-            String direccion = scan.nextLine();
-            if (!validar.validateDireccion(direccion)) {
-                throw new EinvalidPropertyException("Dirección incorrecta.");
+
+            while(true) {
+                System.out.print("Introduzca la dirección del vendedor: ");
+                direccion = scan.nextLine();
+                if (!validar.validateDireccion(direccion)) {
+                    throw new EinvalidPropertyException("Dirección incorrecta.Ingrese la dirección de nuevo.");
+                } else break;
             }
             vendedor.setDireccion(direccion);
 
             System.out.print("Introduzca el DNI del vendedor: ");
-            String dni = scan.nextLine();
-            if (!validar.validateDni(dni)) {
-                throw new EinvalidPropertyException("DNI incorrecto.");
-            }
-            if (validar.verificarDniRep(dni)) {
-                throw new EinvalidPropertyException("DNI duplicado.");
+            while (true) {
+                dni = scan.nextLine();
+                if (!validar.validateDni(dni)) {
+                    System.out.println("DNI incorrecto.Ingrese el DNI de nuevo.");
+                } else if (validar.verificarDniRep(dni)) {
+                    System.out.println("DNI duplicado.Ingrese el DNI de nuevo.");
+                } else {
+                    break;
+                }
             }
             vendedor.setDni(dni);
 
             System.out.print("Introduzca el teléfono del vendedor: ");
-            String telefonoStr = scan.nextLine();
-            if (!validar.validateTelefono(telefonoStr)) {
-                throw new EinvalidPropertyException("Teléfono incorrecto.");
-            }
-            int telefono = Integer.parseInt(telefonoStr);
-            if(validar.verificarTlfRep(telefono)){
-                throw new EinvalidPropertyException("Teléfono duplicado.");
+            while (true) {
+                telefonoStr = scan.nextLine();
+                if (!validar.validateTelefono(telefonoStr)) {
+                    System.out.println("Error: Teléfono incorrecto.Ingrese el teléfono de nuevo.");
+                } else {
+                    telefono = Integer.parseInt(telefonoStr);
+                    if (!validar.verificarTlfRep(telefono)) {
+                        System.out.println("Error: Teléfono duplicado.Ingrese el teléfono de nuevo.");
+                    } else {
+                        break;
+                    }
+                }
             }
             vendedor.setTelefono(telefono);
 
             opConcesionario.agregarVendedor(vendedor);
-            System.out.println("Vendedor añadido correctamente.");
-
-            } catch (EinvalidPropertyException ex) {
-                System.out.println("Error: " + ex.getMessage());
-                agregar();
-            } catch (Exception ex) {
-                System.out.println("Error desconocido: " + ex.getMessage());
-                agregar();
-            }
-
+            System.out.println("Vendedor agregado correctamente.");
+        } catch (EinvalidPropertyException ex) {
+            System.out.println("Error: " + ex.getMessage());
+            agregar();
+        }
     }
 
     public void eliminar() {
@@ -187,7 +200,8 @@ public class OperacionesVendedores {
 
         } catch (Exception ex) {
             System.out.println("Opción incorrecta.");
-            eliminar();
+            //eliminar();
+            menuVendedores();
         }
     }
 
@@ -246,7 +260,7 @@ public class OperacionesVendedores {
                                 throw new Exception("Teléfono incorrecto.");
                             }
                             int telefonoNuevo = Integer.parseInt(nuevoTelefono);
-                            if(validar.verificarTlfRep((telefonoNuevo))){
+                            if(!validar.verificarTlfRep((telefonoNuevo))){
                                 throw new EinvalidPropertyException("Teléfono duplicado.");
                             }
                             vendedor.setTelefono(telefonoNuevo);
@@ -259,7 +273,8 @@ public class OperacionesVendedores {
 
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
-            modificar();
+           // modificar();
+            menuVendedores();
         }
     }
     public void indicesVendedores(ArrayList<Vendedor> lista) {

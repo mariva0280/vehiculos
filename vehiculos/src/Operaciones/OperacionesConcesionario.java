@@ -82,15 +82,12 @@ public class OperacionesConcesionario {
     public HashMap<Integer,Exposicion> listarExposiciones(){
         return concesionario.getExposiciones();
     }
-    //AQUI HE CREADO EL METODO AGREGARVENTA QUE USAMOS EN EL METODO VENDER DE LA CLASE OPERACIONESVENTAS
     public void agregarVenta(Venta venta){
         HashMap<String, Venta> listaVentas = concesionario.getCochesVendidos();
         listaVentas.put(venta.getCoche().getMatricula(), venta);
         concesionario.setCochesVendidos(listaVentas);
     }
-    //EL METODO LISTAR VENTAS QUE USAMOS EN OPERACIONESVENTAS PARA QUE MUESTRE LAS VENTAS DEL CONCESIONARIO
     public HashMap<String, Venta> listarVentas() {return  concesionario.getCochesVendidos();}
-    //AGREGAR,ELIMINAR Y LISTAR RESERVAS METODOS USADOS EN LA CLASE OPERACIONESRESERVAS
     public void agregarReserva(Reserva reserva){
         HashMap<String, Reserva> listaReservas = concesionario.getCochesReservados();
         listaReservas.put(reserva.getCoche().getMatricula(),reserva);

@@ -33,7 +33,7 @@ public class OperacionesExposicion {
             System.out.println("5 - Eliminar coche exposición..");
             System.out.println("6 - Salir.");
             System.out.println("");
-            System.out.print("Elija una opcion: ");
+            System.out.print("Elija una opción: ");
             try {
                 opcion = scan.nextInt();
                 switch (opcion) {
@@ -98,6 +98,8 @@ public class OperacionesExposicion {
             if (!validar.validateTelefono(telefono)) {
                 throw new EinvalidPropertyException("Teléfono incorrecto.");
             }
+            int movil = Integer.parseInt(telefono);
+            if(!validar.verificarTlfRep(movil)) throw new EinvalidPropertyException("El teléfono ya está registrado");
             exposicion.setTelefono(telefono);
 
             System.out.print("Introduzca una ciudad de destino: ");
@@ -176,7 +178,7 @@ public class OperacionesExposicion {
                     System.out.println("3 - Modificar teléfono.");
                     System.out.println("4 - Modificar ciudad.");
                     System.out.println("5 - Guardar cambios.");
-                    System.out.print("Elija una opcion: ");
+                    System.out.print("Elija una opción: ");
                     opcion = scan.nextInt();
                     scan = new Scanner(System.in);
                     switch (opcion) {
@@ -202,6 +204,8 @@ public class OperacionesExposicion {
                             if (!validar.validateTelefono(telefono)) {
                                 throw new EinvalidPropertyException("Teléfono incorrecto.");
                             }
+                            int movil = Integer.parseInt(telefono);
+                            if(!validar.verificarTlfRep(movil)) throw new EinvalidPropertyException("El teléfono ya está registrado");
                             exposicion.setTelefono(telefono);
                             break;
                         case 4:

@@ -115,7 +115,7 @@ public class OperacionesReparacion {
             }
             System.out.println((lista.size()+1) + " - Salir: ");
             System.out.println("");
-            System.out.print("Elija la reparación a la que va a mofificar el estado: ");
+            System.out.print("Elija la reparación a la que va a modificar el estado: ");
             opcion = scan.nextInt();
             if(opcion == lista.size()+1){
                 System.out.println("Volviendo al menú reparaciones.");
@@ -133,7 +133,8 @@ public class OperacionesReparacion {
 
         } catch (Exception ex){
             System.out.println("Error: " + ex.getMessage());
-            modificarEstado();
+            //modificarEstado();
+            menuReparaciones();
         }
     }
     public void consultarReparacionesCoche() {
@@ -193,8 +194,44 @@ public class OperacionesReparacion {
         }
         return coche.getMatricula();
     }
-
     public String verMecanicos(HashMap<String, Mecanico> mecanicos) {
+        Mecanico mecanico = new Mecanico();
+        try {
+            ArrayList<Mecanico> lista = new ArrayList<>();
+            Scanner scan = new Scanner(System.in);
+            for (Mecanico item : mecanicos.values()) {
+                lista.add(item);
+            }
+
+            System.out.println("*****LISTA MECÁNICOS*****");
+            System.out.println("");
+            if (lista.isEmpty()) {
+                System.out.println("No hay mecánicos para realizar la reparación.");
+                return null;
+            }
+            for (int i = 0; i < lista.size(); i++) {
+                mecanico = lista.get(i);
+                System.out.println((i + 1) + " - Nombre: " + mecanico.getNombre() + ", Teléfono: " + mecanico.getTelefono() + ", DNI: " + mecanico.getDni());
+            }
+            System.out.println(lista.size() + 1 + " - Salir.");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
+            System.out.println("");
+            System.out.print("Elija de la lista el mecánico que va a realizar la reparación o pulse " + (lista.size() + 1) + " para salir: ");
+
+
+            int opcion = scan.nextInt();
+            if (opcion == lista.size() + 1) {
+                return null;
+            } else {
+                mecanico = lista.get(opcion - 1);
+            }
+
+        } catch (Exception ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+        return mecanico.getDni();
+    }
+
+    /*public String verMecanicos(HashMap<String, Mecanico> mecanicos) {
         ArrayList<Mecanico> lista = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
         Mecanico mecanico = new Mecanico();
@@ -229,7 +266,7 @@ public class OperacionesReparacion {
             System.out.println("Error: " + ex.getMessage());
         }
         return mecanico.getDni();
-    }
+    }*/
     public void listarReparaciones(){
         HashMap<String,Reparacion> reparaciones = opConcesionario.listarReparaciones();
         if(reparaciones.isEmpty()){

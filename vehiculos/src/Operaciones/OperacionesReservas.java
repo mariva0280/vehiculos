@@ -28,7 +28,7 @@ public class OperacionesReservas {
                 System.out.println("2 - Cancelar reserva.");
                 System.out.println("3 - Lista reservas.");
                 System.out.println("4 - Salir.");
-                System.out.print("Elija una opcion: ");
+                System.out.print("Elija una opción: ");
 
                 opcion = scan.nextInt();
                 switch (opcion) {
@@ -123,7 +123,8 @@ public class OperacionesReservas {
 
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
-            cancelar();
+            //cancelar();
+            menuReservas();
         }
     }
 

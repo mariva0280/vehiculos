@@ -8,12 +8,12 @@ import java.util.HashMap;
 public class Validar {
     private OperacionesConcesionario opConcesionario;
     private Concesionario concesionario;
-    private DirectorComercial director;
+    // DirectorComercial director;
 
     public Validar (Concesionario concesionario) {
         this.concesionario = concesionario;
         this.opConcesionario = new OperacionesConcesionario(this.concesionario);
-        this.director = concesionario.getDirector();
+        //this.director = concesionario.getDirector();
     }
 
 
@@ -49,8 +49,9 @@ public class Validar {
         HashMap<String, Vendedor> vendedores = opConcesionario.listarVendedores();
         HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
         HashMap<String, Mecanico> mecanicos = opConcesionario.listarMecanicos();
+        DirectorComercial director = concesionario.getDirector();
 
-        if(director != null && director.getDni().equals(dni)){
+        if( director.getDni().equals(dni)){
             return true;
         }
         if(vendedores.containsKey(dni) || clientes.containsKey(dni) || mecanicos.containsKey(dni)){
@@ -71,17 +72,44 @@ public class Validar {
         return true;
     }
     public boolean verificarTlfRep(int telefono){
-        HashMap<String,Cliente> clientes = opConcesionario.listarClientes();
-        HashMap<String,Vendedor> vendedores = opConcesionario.listarVendedores();
-        HashMap<String,Mecanico> mecanicos = opConcesionario.listarMecanicos();
+        HashMap<String,Cliente> clientes = concesionario.getClientes();
+        HashMap<String,Vendedor> vendedores = concesionario.getVendedores();
+        HashMap<String,Mecanico> mecanicos = concesionario.getMecanicos();
+        HashMap<Integer, Exposicion> exposiciones = concesionario.getExposiciones();
 
-        if(vendedores.containsKey(telefono) || clientes.containsKey(telefono) || mecanicos.containsKey(telefono)){
-            return true;
+
+        if(concesionario.getDirector() == null) return true;
+        if(concesionario.getDirector().getTelefono() == telefono) return false;
+
+        if(!vendedores.isEmpty()){
+            for(Vendedor vendedor : vendedores.values()){
+                if(vendedor.getTelefono() == telefono) return false;
+            }
         }
-        return false;
+        if(!clientes.isEmpty()){
+            for(Cliente cliente : clientes.values()){
+                if(cliente.getTelefono() == telefono) return false;
+            }
+        }
+        if(!mecanicos.isEmpty()){
+            for(Mecanico mecanico : mecanicos.values()){
+                if(mecanico.getTelefono() == telefono) return false;
+            }
+        }
+        if(!exposiciones.isEmpty()){
+            for(Exposicion exposicion : exposiciones.values()){
+                int numero = Integer.parseInt(exposicion.getTelefono());
+                if(numero == telefono) return false;
+            }
+        }
+        return true;
+
     }
     public  boolean validateMarca(String marca){
         if(marca == null || marca.isEmpty()){
+            return false;
+        }
+        if(marca.matches(".\\d+.*")){
             return false;
         }
         return true;
@@ -99,10 +127,10 @@ public class Validar {
         HashMap<String, Coche> coches = opConcesionario.listarCoches();
         for (Coche coche : coches.values()) {
             if (coche.getMatricula().equalsIgnoreCase(matricula)) {
-                return true; // Matrícula repetida
+                return true;
             }
         }
-        return false; // Matrícula no repetida
+        return false;
     }
     public  boolean validarPrecioCompra(double precioCompra){
         if(precioCompra == 0){

@@ -29,7 +29,7 @@ public class OperacionesVentas {
                 System.out.println("2 - Lista clientes con coches vendidos.");
                 System.out.println("3 - Lista coches vendidos por vendedor.");
                 System.out.println("4 - Salir.");
-                System.out.print("Elija una opcion: ");
+                System.out.print("Elija una opción: ");
 
                 opcion = scan.nextInt();
                 switch (opcion) {
@@ -195,7 +195,7 @@ public class OperacionesVentas {
             System.out.println((i + 1) + " - " + lista.get(i).getCoche().toString());
         }
         System.out.println("");
-        System.out.print("Escoga el coche de la lista o pulse " + (lista.size() + 1) + " para salir: ");
+        System.out.print("Escoja el coche de la lista o pulse " + (lista.size() + 1) + " para salir: ");
 
         Scanner scan = new Scanner(System.in);
 
@@ -219,7 +219,7 @@ public class OperacionesVentas {
             System.out.println((i + 1) + " - " + lista.get(i).getVendedor().toString());
         }
         System.out.println("");
-        System.out.print("Escoga el vendedor de la lista para ver los coches que ha vendido o pulse " + (lista.size() + 1) + " para salir: ");
+        System.out.print("Escoja el vendedor de la lista para ver los coches que ha vendido o pulse " + (lista.size() + 1) + " para salir: ");
 
         try {
             int opcion = scan.nextInt();
