@@ -183,7 +183,10 @@ public class OperacionesVentas {
         }
         return coche.getMatricula();
     }
-
+    /*
+    EN ESTOS DOS METODOS PASABA LO MISMO ERROR POR ESTAR FUERA DEL ARRAY MISMO ERROR QUE EN RESERVA, SOLUCIÓN IGUAL EN EL TRY DE AMBOS METODOS ESTA
+    EL CAMBIO.
+     */
     public void listarClientePorModelo() {
         HashMap<String, Venta> ventas = opConcesionario.listarVentas();
         ArrayList<Venta> lista = new ArrayList<>();
@@ -201,7 +204,14 @@ public class OperacionesVentas {
 
         try {
             int opcion = scan.nextInt();
-            System.out.println("Cliente que ha comprado el coche: " + lista.get(opcion - 1).getCliente().toString());
+            if (opcion == lista.size() + 1) {
+                System.out.println("Saliendo de la lista de coches vendidos por cliente.");
+            } else if (opcion >= 1 && opcion <= lista.size()) {
+                System.out.println("Cliente que ha comprado el coche: " + lista.get(opcion - 1).getCliente().toString());
+            } else {
+                System.out.println("Opción incorrecta, vuelva a intentarlo.");
+            }
+
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
         }
@@ -223,16 +233,22 @@ public class OperacionesVentas {
 
         try {
             int opcion = scan.nextInt();
-            int numCoche = 0;
-            System.out.println("El vendedor ha vendido: ");
-            for (Venta venta : lista) {
-                if (venta.getVendedor().equals(lista.get(opcion - 1).getVendedor())) {
-                    System.out.println(venta.getCoche().toString());
-                    numCoche++;
+            if (opcion == lista.size() + 1) {
+                System.out.println("Saliendo de la lista de coches vendidos por vendedor.");
+            } else if (opcion >= 1 && opcion <= lista.size()) {
+                int numCoche = 0;
+                System.out.println("El vendedor ha vendido: ");
+                for (Venta venta : lista) {
+                    if (venta.getVendedor().equals(lista.get(opcion - 1).getVendedor())) {
+                        System.out.println(venta.getCoche().toString());
+                        numCoche++;
+                    }
                 }
+                System.out.print("El total de ingresos por ventas del vendedor es: " + numCoche * 200 + " €.");
+                System.out.println("");
+            } else {
+                System.out.println("Opción incorrecta, vuelva a intentarlo.");
             }
-            System.out.print("El total de ingresos por ventas del vendedor es: " + numCoche * 200 + " €.");
-            System.out.println("");
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
         }
@@ -241,14 +257,12 @@ public class OperacionesVentas {
     public HashMap<String, Double> calcularTotalVentasPorVendedor() {
         HashMap<String, Double> volumenTotalVentas = new HashMap<>();
 
-        // Obtener todas las ventas
         HashMap<String, Venta> ventas = opConcesionario.listarVentas();
 
-        // Calcular el volumen total de ventas por vendedor
         for (Venta venta : ventas.values()) {
             String dniVendedor = venta.getVendedor().getDni();
             double precioCoche = venta.getCoche().getPrecioVenta();
-            double volumenVenta = 200.0; // Suponiendo que cada venta tiene un volumen de 200€
+            double volumenVenta = 200.0;
 
             if (volumenTotalVentas.containsKey(dniVendedor)) {
                 double volumenTotal = volumenTotalVentas.get(dniVendedor);
@@ -264,20 +278,15 @@ public class OperacionesVentas {
 
     public void totalesVendedores() {
         HashMap<String, Double> volumenTotalVentas = calcularTotalVentasPorVendedor();
-
-        // Crear un TreeSet utilizando un Comparator para ordenar por volumen de ventas
         TreeSet<Map.Entry<String, Double>> treeSet = new TreeSet<>(new Comparator<Map.Entry<String, Double>>() {
-            @Override
+            //@Override
             public int compare(Map.Entry<String, Double> entry1, Map.Entry<String, Double> entry2) {
                 // Ordenar de mayor a menor (reverse order)
                 return entry2.getValue().compareTo(entry1.getValue());
             }
         });
-
-        // Agregar todas las entradas del HashMap al TreeSet
         treeSet.addAll(volumenTotalVentas.entrySet());
 
-        // Imprimir el resultado ordenado
         System.out.println("*****LISTA DE VENDEDORES POR VOLUMEN DE VENTAS*****");
         for (Map.Entry<String, Double> entry : treeSet) {
             String dniVendedor = entry.getKey();
