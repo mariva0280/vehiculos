@@ -228,12 +228,16 @@ public class OperacionesReservas {
         for (Reserva reserva : reservas.values()) {
             lista.add(reserva);
         }
+        if(lista.isEmpty()){
+            System.out.println("No hay reservas realizadas.");
+            return;
+        }
         System.out.println("*****LISTA DE COCHES RESERVADOS*****");
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).getCoche().toString());
         }
         System.out.println("");
-        System.out.print("Escoga el coche de la lista o pulse " + (lista.size() + 1) + " para salir: ");
+        System.out.print("Escoja el coche de la lista o pulse " + (lista.size() + 1) + " para salir: ");
 
         Scanner scan = new Scanner(System.in);
 

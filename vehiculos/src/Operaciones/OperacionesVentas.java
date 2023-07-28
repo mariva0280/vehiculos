@@ -193,6 +193,10 @@ public class OperacionesVentas {
         for (Venta item : ventas.values()) {
             lista.add(item);
         }
+        if(lista.isEmpty()){
+            System.out.println("No hay coches vendidos.");
+            return;
+        }
         System.out.println("*****LISTA DE COCHES VENDIDOS*****");
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).getCoche().toString());
@@ -223,6 +227,10 @@ public class OperacionesVentas {
         Scanner scan = new Scanner(System.in);
         for (Venta item : ventas.values()) {
             lista.add(item);
+        }
+        if(lista.isEmpty()){
+            System.out.println("No hay coches vendidos.");
+            return;
         }
         System.out.println("*****LISTA DE VENDEDORES*****");
         for (int i = 0; i < lista.size(); i++) {
