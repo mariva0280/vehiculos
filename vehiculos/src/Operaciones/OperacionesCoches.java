@@ -67,6 +67,8 @@ public class OperacionesCoches {
             opConcesionario = new OperacionesConcesionario(concesionario);
             Coche coche = new Coche();
             Scanner scan = new Scanner(System.in);
+
+
             System.out.print("Introduzca la marca del coche: ");
             String marca = scan.nextLine();
             if (!validar.validateMarca(marca)) {

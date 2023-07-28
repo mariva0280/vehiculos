@@ -142,7 +142,7 @@ public class OperacionesExposicion {
                 if (tamanio == 0) {
                     opConcesionario.removerExposicion(exposicion);
                     System.out.println("Exposición eliminada correctamente.");
-                } else throw new EinvalidPropertyException("No se puede eliminar la exposción tiene coches agregados.");
+                } else throw new EinvalidPropertyException("No se puede eliminar la exposición tiene coches agregados.");
             }
         } catch (EinvalidPropertyException e) {
             System.out.println(e.getMessage());
