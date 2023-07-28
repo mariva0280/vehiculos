@@ -82,7 +82,7 @@ public class OperacionesMecanicos {
             Mecanico mecanico = new Mecanico();
             Scanner scan = new Scanner(System.in);
 
-            String nombre, direccion, dni, telefonoStr;
+            String nombre, dni, telefonoStr;
             int telefono;
 
             System.out.print("Introduzca el nombre del mecánico: ");

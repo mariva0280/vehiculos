@@ -1,6 +1,4 @@
-/*
-ESTA CLASE FUNCIONAN TODAS MENOS COCHES EN REPARACIÓN PORQUE TODAVIA NO ESTÁ HECHA
- */
+
 package Operaciones;
 
 import Objetos.*;
@@ -43,7 +41,7 @@ public class OperacionesInformes {
                 System.out.println("8 - Totales por vendedor.");
                 System.out.println("9 - Salir.");
                 System.out.println("");
-                System.out.print("Elija una opcion: ");
+                System.out.print("Elija una opción: ");
 
                 opcion = scan.nextInt();
                 switch (opcion) {

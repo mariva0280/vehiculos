@@ -37,6 +37,8 @@ public class OperacionesReparacion {
                     case 3:
                         consultarReparacionesCoche();
                         break;
+                    case 4:
+                        break;
                 }
             }
         }catch (Exception ex) {
@@ -131,7 +133,6 @@ public class OperacionesReparacion {
 
         } catch (Exception ex){
             System.out.println("Error: " + ex.getMessage());
-            //modificarEstado();
             menuReparaciones();
         }
     }
@@ -211,7 +212,7 @@ public class OperacionesReparacion {
                 mecanico = lista.get(i);
                 System.out.println((i + 1) + " - Nombre: " + mecanico.getNombre() + ", Teléfono: " + mecanico.getTelefono() + ", DNI: " + mecanico.getDni());
             }
-            System.out.println(lista.size() + 1 + " - Salir.");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
+            System.out.println(lista.size() + 1 + " - Salir.");
             System.out.println("");
             System.out.print("Elija de la lista el mecánico que va a realizar la reparación o pulse " + (lista.size() + 1) + " para salir: ");
 

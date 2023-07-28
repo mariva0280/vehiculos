@@ -77,9 +77,6 @@ public class OperacionesClientes {
                         break;
                     case (5):
                         break;
-                    /*default:
-                        System.out.println("Opción inválida.");
-                        break;*/
                 }
             }
         } catch (Exception ex) {
@@ -200,7 +197,6 @@ public class OperacionesClientes {
 
         } catch (Exception ex) {
             System.out.println("Opción incorrecta.");
-            //eliminar();
             menuClientes();
         }
     }
@@ -277,7 +273,6 @@ public class OperacionesClientes {
 
         } catch (EinvalidPropertyException ex) {
             System.out.println("Error: " + ex.getMessage());
-            //modificar();
             menuClientes();
         }
     }

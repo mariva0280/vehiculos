@@ -1,6 +1,4 @@
-/*
-ESTA CLASE EN PRINCIPIO FUNCIONA Y NO HAY NADA QUE REVISAR LOS SOUTS ESTÁN BIEN, SOLO FALTA IMPLEMENTAR EL MENÚ DEFINITIVO AL QUE TIENEN ACCESO LOS VENDEDORES
- */
+
 package Operaciones;
 
 import Exception.EinvalidPropertyException;
@@ -200,7 +198,6 @@ public class OperacionesVendedores {
 
         } catch (Exception ex) {
             System.out.println("Opción incorrecta.");
-            //eliminar();
             menuVendedores();
         }
     }
@@ -273,7 +270,6 @@ public class OperacionesVendedores {
 
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
-           // modificar();
             menuVendedores();
         }
     }
@@ -284,7 +280,7 @@ public class OperacionesVendedores {
         for (int i = 0; i < lista.size(); i++) {
             System.out.println((i + 1) + " - " + lista.get(i).toString());
         }
-        System.out.println(lista.size() + 1 + " - Salir.");   // Para que sea dinámico haremos que la opcion salir sea una posicion mas que el tamaño de la lista
+        System.out.println(lista.size() + 1 + " - Salir.");
         System.out.println("");
     }
     public void listarVendedores() {

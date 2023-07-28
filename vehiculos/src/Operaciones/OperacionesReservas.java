@@ -74,17 +74,13 @@ public class OperacionesReservas {
                 System.out.println("No se ha seleccionado ningún coche. Volviendo al menú reservas.");
                 return;
             }
-            // ESTA ES LA MODIFICACION LAS LINEAS COMENTADAS SE PUEDEN BORRAR ES PARA QUE VEAS EL CAMBIO, TAMBIEN HAY CAMBIO EN VERCOCHES Y VERCLIENTES DE ESTA CLASE.
-            // AHHH Y EN EL METODO LISTARRESERVACLIENTES QUE ME SALIA UN ERROR DE FUERA DEL ARRAY TAMBIEN HAY CAMBIOS EN EL TRY AÑADÍ UNOS IFS
+
             Cliente clienteSelecc = clientes.get(dniCliente);
             Coche cocheSelecc = coches.get(matriculaCoche);
 
             Reserva reserva = new Reserva();
             reserva.setCliente(clienteSelecc);
             reserva.setCoche(cocheSelecc);
-            //reserva.setCliente(clientes.get(verClientes(clientes)));
-            //Coche coche = coches.get(verCoches(coches));
-            //reserva.setCoche(coche);
             opConcesionario.agregarReserva(reserva);
             opConcesionario.eliminarCoche(cocheSelecc);
             System.out.println("Reserva realizada correctamente.");
@@ -130,7 +126,6 @@ public class OperacionesReservas {
 
         } catch (Exception ex) {
             System.out.println("Error: " + ex.getMessage());
-            //cancelar();
             menuReservas();
         }
     }
@@ -138,7 +133,6 @@ public class OperacionesReservas {
     public String verCoches(HashMap<String, Coche> coches) {
         ArrayList<Coche> lista = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
-        //Coche coche = new Coche();
 
         for (Coche item : coches.values()) {
             lista.add(item);
@@ -168,13 +162,12 @@ public class OperacionesReservas {
             System.out.println("Error: " + ex.getMessage());
             return null;
         }
-        //return coche.getMatricula();
     }
 
     public String verClientes(HashMap<String, Cliente> clientes) {
         ArrayList<Cliente> lista = new ArrayList<>();
         Scanner scan = new Scanner(System.in);
-        //Cliente cliente = new Cliente();
+
 
         for (Cliente item : clientes.values()) {
             lista.add(item);
@@ -197,7 +190,6 @@ public class OperacionesReservas {
             if (opcion == lista.size() + 1) {
                 return null;
             } else {
-               // cliente = lista.get(opcion - 1);
                 return lista.get(opcion -1).getDni();
             }
 
@@ -255,5 +247,4 @@ public class OperacionesReservas {
             System.out.println("Error: " + ex.getMessage());
         }
     }
-
 }

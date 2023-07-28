@@ -8,14 +8,12 @@ import java.util.HashMap;
 public class Validar {
     private OperacionesConcesionario opConcesionario;
     private Concesionario concesionario;
-    // DirectorComercial director;
+
 
     public Validar (Concesionario concesionario) {
         this.concesionario = concesionario;
         this.opConcesionario = new OperacionesConcesionario(this.concesionario);
-        //this.director = concesionario.getDirector();
     }
-
 
     public boolean validateName(String nombre){
         if(nombre == null || nombre.isEmpty()){

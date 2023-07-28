@@ -79,7 +79,7 @@ public class OperacionesVentas {
                 System.out.println("Venta cancelada, no ha seleccionado ningún coche.");
                 return;
             }
-            //Coche coche = coches.get(verCoches(coches));
+
             Coche coche = coches.get(matriculaCoche);
             venta.setCoche(coche);
             opConcesionario.agregarVenta(venta);
@@ -183,10 +183,7 @@ public class OperacionesVentas {
         }
         return coche.getMatricula();
     }
-    /*
-    EN ESTOS DOS METODOS PASABA LO MISMO ERROR POR ESTAR FUERA DEL ARRAY MISMO ERROR QUE EN RESERVA, SOLUCIÓN IGUAL EN EL TRY DE AMBOS METODOS ESTA
-    EL CAMBIO.
-     */
+
     public void listarClientePorModelo() {
         HashMap<String, Venta> ventas = opConcesionario.listarVentas();
         ArrayList<Venta> lista = new ArrayList<>();

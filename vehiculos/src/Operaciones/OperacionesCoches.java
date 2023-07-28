@@ -34,7 +34,7 @@ public class OperacionesCoches {
                 System.out.println("4 - Listado Coches.");
                 System.out.println("5 - Salir.");
                 System.out.println("");
-                System.out.print("Elija una opcion: ");
+                System.out.print("Elija una opción: ");
 
                 opcion = scan.nextInt();
                 switch (opcion) {
@@ -255,6 +255,8 @@ public class OperacionesCoches {
                                 throw new EinvalidPropertyException("Estado incorrecto.");
                             }
                             coche.setEstado(nuevoEstado);
+                            break;
+                        case 8:
                             break;
                     }
                 }
